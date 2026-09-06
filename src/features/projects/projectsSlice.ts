@@ -132,28 +132,43 @@ const projectsSlice = createSlice({
       state.error = "Failed to fetch projects";
     })
 
+    .addCase(fetchProjectById.pending, (state) => {
+     state.loading = true;
+     state.error = null;
+  })
+
+    .addCase(fetchProjectById.fulfilled, (state, action) => {
+     state.loading = false;
+     state.selectedProject = action.payload;
+  })
+
+    .addCase(fetchProjectById.rejected, (state) => {
+     state.loading = false;
+     state.error = "Failed to fetch project";
+  })
+
     .addCase(createProjectThunk.pending, (state) => {
-  state.loading = true;
-  state.error = null;
+     state.loading = true;
+     state.error = null;
    })
 
     .addCase(createProjectThunk.fulfilled, (state, action) => {
-  state.loading = false;
-  state.projects.push(action.payload);
+     state.loading = false;
+     state.projects.push(action.payload);
    })
 
     .addCase(createProjectThunk.rejected, (state) => {
-  state.loading = false;
-  state.error = "Failed to create project";
+     state.loading = false;
+     state.error = "Failed to create project";
    })
 
     .addCase(updateProjectThunk.pending, (state) => {
-  state.loading = true;
-  state.error = null;
+      state.loading = true;
+      state.error = null;
    })
 
     .addCase(updateProjectThunk.fulfilled, (state, action) => {
-  state.loading = false;
+       state.loading = false;
 
   const index = state.projects.findIndex(
     (project) => project.id === action.payload.id
@@ -165,26 +180,26 @@ const projectsSlice = createSlice({
    })
 
      .addCase(updateProjectThunk.rejected, (state) => {
-  state.loading = false;
-  state.error = "Failed to update project";
+       state.loading = false;
+       state.error = "Failed to update project";
    })
 
      .addCase(deleteProjectThunk.pending, (state) => {
-  state.loading = true;
-  state.error = null;
+        state.loading = true;
+        state.error = null;
   })
 
      .addCase(deleteProjectThunk.fulfilled, (state, action) => {
-  state.loading = false;
+        state.loading = false;
 
-  state.projects = state.projects.filter(
+       state.projects = state.projects.filter(
     (project) => project.id !== action.payload
   );
   })
 
      .addCase(deleteProjectThunk.rejected, (state) => {
-  state.loading = false;
-  state.error = "Failed to delete project";
+        state.loading = false;
+        state.error = "Failed to delete project";
   })
 },
 

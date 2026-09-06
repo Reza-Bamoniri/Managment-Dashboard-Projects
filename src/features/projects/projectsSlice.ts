@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Project } from "../../types/project";
-import { createProject, getProjects, updateProject as updateProjectApi } from "../../services/projectService";
+import { createProject,
+   getProjects,
+   updateProject as updateProjectApi,
+   deleteProject as deleteProjectApi
+
+   } from "../../services/projectService";
 
 
 
@@ -50,6 +55,17 @@ export const updateProjectThunk = createAsyncThunk(
     const updatedProject = await updateProjectApi(id, project);
 
     return updatedProject;
+  }
+);
+
+
+
+export const deleteProjectThunk = createAsyncThunk(
+  "projects/deleteProject",
+  async (id: string) => {
+    await deleteProjectApi(id);
+
+    return id;
   }
 );
 

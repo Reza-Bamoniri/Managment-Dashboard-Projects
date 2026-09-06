@@ -3,7 +3,8 @@ import type { Project } from "../../types/project";
 import { createProject,
    getProjects,
    updateProject as updateProjectApi,
-   deleteProject as deleteProjectApi
+   deleteProject as deleteProjectApi,
+   getProjectById
 
    } from "../../services/projectService";
 
@@ -31,6 +32,19 @@ export const fetchProjects = createAsyncThunk(
     return projects;
   }
 );
+
+
+
+export const fetchProjectById = createAsyncThunk(
+  "projects/fetchProjectById",
+  async (id: string) => {
+    const project = await getProjectById(id);
+
+    return project;
+  }
+);
+
+
 
 
 export const createProjectThunk = createAsyncThunk(

@@ -82,7 +82,22 @@ const projectsSlice = createSlice({
     .addCase(fetchProjects.rejected, (state) => {
       state.loading = false;
       state.error = "Failed to fetch projects";
-    });
+    })
+
+    .addCase(createProjectThunk.pending, (state) => {
+  state.loading = true;
+  state.error = null;
+   })
+
+    .addCase(createProjectThunk.fulfilled, (state, action) => {
+  state.loading = false;
+  state.projects.push(action.payload);
+   })
+
+    .addCase(createProjectThunk.rejected, (state) => {
+  state.loading = false;
+  state.error = "Failed to create project";
+   })
 },
 
 });

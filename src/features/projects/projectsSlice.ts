@@ -1,5 +1,6 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Project } from "../../types/project";
+import { getProjects } from "../../services/projectService";
 
 type ProjectsState = {
   projects: Project[];
@@ -8,6 +9,17 @@ type ProjectsState = {
 const initialState: ProjectsState = {
   projects: [],
 };
+
+
+export const fetchProjects = createAsyncThunk(
+  "projects/fetchProjects",
+  async () => {
+    const projects = await getProjects();
+
+    return projects;
+  }
+);
+
 
 const projectsSlice = createSlice({
   name: "projects",

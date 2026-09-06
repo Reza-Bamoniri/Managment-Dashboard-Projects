@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Project } from "../../types/project";
-import { getProjects } from "../../services/projectService";
+import { createProject, getProjects } from "../../services/projectService";
+
+
+
 
 type ProjectsState = {
   projects: Project[];
@@ -21,6 +24,16 @@ export const fetchProjects = createAsyncThunk(
     const projects = await getProjects();
 
     return projects;
+  }
+);
+
+
+export const createProjectThunk = createAsyncThunk(
+  "projects/createProject",
+  async (project: Omit<Project, "id">) => {
+    const newProject = await createProject(project);
+
+    return newProject;
   }
 );
 

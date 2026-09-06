@@ -4,10 +4,14 @@ import { getProjects } from "../../services/projectService";
 
 type ProjectsState = {
   projects: Project[];
+  loading: boolean;
+  error: string | null;
 };
 
 const initialState: ProjectsState = {
   projects: [],
+  loading: false,
+  error: null,
 };
 
 

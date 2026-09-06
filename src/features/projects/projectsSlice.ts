@@ -13,12 +13,14 @@ import { createProject,
 
 type ProjectsState = {
   projects: Project[];
+  selectedProject: Project | null;
   loading: boolean;
   error: string | null;
 };
 
 const initialState: ProjectsState = {
   projects: [],
+  selectedProject: null,
   loading: false,
   error: null,
 };

@@ -152,6 +152,24 @@ const projectsSlice = createSlice({
   state.loading = false;
   state.error = "Failed to update project";
    })
+
+     .addCase(deleteProjectThunk.pending, (state) => {
+  state.loading = true;
+  state.error = null;
+  })
+
+     .addCase(deleteProjectThunk.fulfilled, (state, action) => {
+  state.loading = false;
+
+  state.projects = state.projects.filter(
+    (project) => project.id !== action.payload
+  );
+  })
+
+     .addCase(deleteProjectThunk.rejected, (state) => {
+  state.loading = false;
+  state.error = "Failed to delete project";
+  })
 },
 
 });

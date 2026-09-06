@@ -114,6 +114,28 @@ const projectsSlice = createSlice({
   state.loading = false;
   state.error = "Failed to create project";
    })
+
+    .addCase(updateProjectThunk.pending, (state) => {
+  state.loading = true;
+  state.error = null;
+   })
+
+    .addCase(updateProjectThunk.fulfilled, (state, action) => {
+  state.loading = false;
+
+  const index = state.projects.findIndex(
+    (project) => project.id === action.payload.id
+  );
+
+  if (index !== -1) {
+    state.projects[index] = action.payload;
+  }
+   })
+
+     .addCase(updateProjectThunk.rejected, (state) => {
+  state.loading = false;
+  state.error = "Failed to update project";
+   })
 },
 
 });

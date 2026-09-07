@@ -28,31 +28,31 @@ function RecentComments() {
     .slice(0, 5);
 
   return (
-    <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
+    <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6 dark:bg-gray-900 dark:shadow-black/40">
       <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-800">
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-green-300">
           Recent Comments
         </h2>
 
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           Latest comments from your team
         </p>
       </div>
 
       {loading && (
-        <div className="py-10 text-center text-sm text-gray-500">
+        <div className="py-10 text-center text-sm text-gray-500 dark:text-gray-400">
           Loading comments...
         </div>
       )}
 
       {error && (
-        <div className="rounded-xl bg-red-50 p-4 text-sm text-red-600">
+        <div className="rounded-xl bg-red-50 p-4 text-sm text-red-600 dark:bg-red-950/40 dark:text-red-400">
           {error}
         </div>
       )}
 
       {!loading && !error && recentComments.length === 0 && (
-        <div className="py-10 text-center text-sm text-gray-500">
+        <div className="py-10 text-center text-sm text-gray-500 dark:text-gray-400">
           No comments found.
         </div>
       )}
@@ -67,23 +67,23 @@ function RecentComments() {
             return (
               <div
                 key={comment.id}
-                className="rounded-xl bg-gray-50 p-4 shadow-2xl hover:bg-green-100 transition delay-100 hover:-translate-y-0.5"
+                className="rounded-xl bg-gray-50 p-4 shadow-2xl hover:bg-green-100 transition delay-100 hover:-translate-y-0.5 dark:bg-gray-950 dark:hover:bg-green-950/70"
               >
                 <div className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100 text-sm font-semibold text-green-700">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100 text-sm font-semibold text-green-700 dark:bg-green-900/60 dark:text-green-300">
                     {user?.name?.charAt(0) ?? "U"}
                   </div>
 
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-gray-800">
+                    <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
                       {user?.name ?? "Unknown User"}
                     </p>
 
-                    <p className="mt-1 text-sm text-gray-600">
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                       {comment.text}
                     </p>
 
-                    <p className="mt-2 text-xs text-gray-400">
+                    <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
                       {comment.createdAt}
                     </p>
                   </div>

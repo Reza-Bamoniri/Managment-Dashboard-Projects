@@ -1,9 +1,18 @@
-import { useState } from "react";
+import type { ProjectStatus } from "../../types/project";
 
-function ProjectFilters() {
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState("all");
+type ProjectFiltersProps = {
+  search: string;
+  status: ProjectStatus | "all";
+  onSearchChange: (value: string) => void;
+  onStatusChange: (value: ProjectStatus | "all") => void;
+};
 
+function ProjectFilters({
+  search,
+  status,
+  onSearchChange,
+  onStatusChange,
+}: ProjectFiltersProps) {
   return (
     <section
       className="
@@ -17,11 +26,10 @@ function ProjectFilters() {
       "
     >
       <div className="flex flex-col gap-4 md:flex-row md:items-center">
-        {/* Search */}
         <div className="flex-1">
           <label
             htmlFor="project-search"
-            className="mb-2 block text-2sm font-bold text-green-700 dark:text-gray-300"
+            className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
           >
             Search Projects
           </label>
@@ -30,33 +38,20 @@ function ProjectFilters() {
             id="project-search"
             type="text"
             value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={(event) => onSearchChange(event.target.value)}
             placeholder="Search by project name..."
             className="
-              w-full
-              rounded-xl
-              border
-              border-gray-200
-              bg-gray-50
-              px-4
-              py-3
-              text-sm
-              text-gray-800
-              outline-none
-              transition
+              w-full rounded-xl border border-gray-200
+              bg-gray-50 px-4 py-3 text-sm text-gray-800
+              outline-none transition
               focus:border-green-500
-              focus:ring-2
-              focus:ring-green-500/20
-              dark:border-gray-700
-              dark:bg-gray-950
-              dark:text-gray-200
-              dark:placeholder:text-gray-500
-              dark:focus:border-green-500
+              focus:ring-2 focus:ring-green-500/20
+              dark:border-gray-700 dark:bg-gray-950
+              dark:text-gray-200 dark:placeholder:text-gray-500
             "
           />
         </div>
 
-        {/* Status Filter */}
         <div className="w-full md:w-56">
           <label
             htmlFor="project-status"
@@ -68,26 +63,19 @@ function ProjectFilters() {
           <select
             id="project-status"
             value={status}
-            onChange={(event) => setStatus(event.target.value)}
+            onChange={(event) =>
+              onStatusChange(
+                event.target.value as ProjectStatus | "all"
+              )
+            }
             className="
-              w-full
-              rounded-xl
-              border
-              border-gray-200
-              bg-gray-50
-              px-4
-              py-3
-              text-sm
-              text-gray-800
-              outline-none
-              transition
+              w-full rounded-xl border border-gray-200
+              bg-gray-50 px-4 py-3 text-sm text-gray-800
+              outline-none transition
               focus:border-green-500
-              focus:ring-2
-              focus:ring-green-500/20
-              dark:border-gray-700
-              dark:bg-gray-950
+              focus:ring-2 focus:ring-green-500/20
+              dark:border-gray-700 dark:bg-gray-950
               dark:text-gray-200
-              dark:focus:border-green-500
             "
           >
             <option value="all">All Statuses</option>

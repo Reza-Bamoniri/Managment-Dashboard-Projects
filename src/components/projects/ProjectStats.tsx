@@ -1,43 +1,33 @@
 import { useAppSelector } from "../../store/hooks";
 
 function ProjectStats() {
-  const { projects } = useAppSelector(
-    (state) => state.projects
-  );
-
-  const totalProjects = projects.length;
-
-  const planningProjects = projects.filter(
-    (project) => project.status === "planning"
-  ).length;
-
-  const inProgressProjects = projects.filter(
-    (project) => project.status === "in-progress"
-  ).length;
-
-  const completedProjects = projects.filter(
-    (project) => project.status === "completed"
-  ).length;
+  const { projects } = useAppSelector((state) => state.projects);
 
   const stats = [
     {
       title: "Total Projects",
-      value: totalProjects,
+      value: projects.length,
       description: "All projects",
     },
     {
       title: "Planning",
-      value: planningProjects,
+      value: projects.filter(
+        (project) => project.status === "planning"
+      ).length,
       description: "Projects in planning",
     },
     {
       title: "In Progress",
-      value: inProgressProjects,
+      value: projects.filter(
+        (project) => project.status === "in-progress"
+      ).length,
       description: "Currently active",
     },
     {
       title: "Completed",
-      value: completedProjects,
+      value: projects.filter(
+        (project) => project.status === "completed"
+      ).length,
       description: "Successfully completed",
     },
   ];

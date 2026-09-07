@@ -11,6 +11,7 @@ import {
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchProjects } from "../features/projects/projectsSlice";
+import { fetchTasks } from "../features/tasks/tasksSlice";
 
 const chartData = [
   { name: "Mon", tasks: 4 },
@@ -23,33 +24,6 @@ const chartData = [
 ];
 
 
-
-const recentTasks = [
-  {
-    id: "1",
-    title: "Create Navbar",
-    project: "Website Redesign",
-    status: "To Do",
-    priority: "High",
-    deadline: "Sep 12, 2026",
-  },
-  {
-    id: "2",
-    title: "Design Dashboard",
-    project: "Website Redesign",
-    status: "In Progress",
-    priority: "High",
-    deadline: "Sep 14, 2026",
-  },
-  {
-    id: "3",
-    title: "Implement Authentication",
-    project: "Mobile Application",
-    status: "To Do",
-    priority: "Medium",
-    deadline: "Sep 20, 2026",
-  },
-];
 
 const upcomingDeadlines = [
   {
@@ -104,8 +78,12 @@ function Home() {
     (state) => state.projects
   );
 
+  const { tasks, loading: tasksLoading, error: tasksError } =
+  useAppSelector((state) => state.tasks);
+
   useEffect(() => {
     dispatch(fetchProjects());
+    dispatch(fetchTasks());
   }, [dispatch]);
 
 
@@ -335,8 +313,30 @@ function Home() {
           </button>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-175 text-left">
+
+           {tasksLoading && (
+             <p className="text-sm text-gray-500">
+               Loading tasks...
+             </p>
+           )}
+           
+           {tasksError && (
+             <p className="text-sm text-red-500">
+               {tasksError}
+             </p>
+           )}
+           
+           {!tasksLoading && !tasksError && tasks.length === 0 && (
+             <p className="text-sm text-gray-500">
+               No tasks found.
+             </p>
+           )}
+
+
+           {!tasksLoading && !tasksError && tasks.length > 0 && (
+              <div className="overflow-x-auto">
+                {
+                    <table className="w-full min-w-175 text-left">
             <thead>
               <tr className="text-sm text-gray-400">
                 <th className="pb-3 font-medium">Task</th>
@@ -348,7 +348,10 @@ function Home() {
             </thead>
 
             <tbody>
-              {recentTasks.map((task) => (
+
+                
+
+              {tasks.map((task) => (
                 <tr
                   key={task.id}
                   className="transition hover:bg-green-50/50"
@@ -358,7 +361,7 @@ function Home() {
                   </td>
 
                   <td className="py-4 text-sm text-gray-600">
-                    {task.project}
+                    {task.projectId}
                   </td>
 
                   <td className="py-4">
@@ -380,7 +383,12 @@ function Home() {
               ))}
             </tbody>
           </table>
-        </div>
+                }
+              </div>
+          )}
+
+
+        
       </section>
 
       {/* Upcoming Deadlines + Recent Comments */}

@@ -1,18 +1,19 @@
 import { PROJECTS_PER_PAGE } from "./ProjectsGrid";
-import { useAppSelector } from "../../store/hooks";
 
 type ProjectsPaginationProps = {
   currentPage: number;
+  totalItems: number;
   onPageChange: (page: number) => void;
 };
 
 function ProjectsPagination({
   currentPage,
+  totalItems,
   onPageChange,
 }: ProjectsPaginationProps) {
-  const { projects } = useAppSelector((state) => state.projects);
-
-  const totalPages = Math.ceil(projects.length / PROJECTS_PER_PAGE);
+  const totalPages = Math.ceil(
+    totalItems / PROJECTS_PER_PAGE
+  );
 
   if (totalPages <= 1) {
     return null;
@@ -34,30 +35,31 @@ function ProjectsPagination({
           Previous
         </button>
 
-        {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-          (page) => (
-            <button
-              key={page}
-              type="button"
-              onClick={() => onPageChange(page)}
-              className={`
-                h-9
-                w-9
-                rounded-xl
-                text-sm
-                font-medium
-                transition
-                ${
-                  currentPage === page
-                    ? "bg-green-600 text-white shadow-lg dark:bg-green-700"
-                    : "bg-gray-50 text-gray-600 hover:bg-green-100 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-green-950"
-                }
-              `}
-            >
-              {page}
-            </button>
-          )
-        )}
+        {Array.from(
+          { length: totalPages },
+          (_, index) => index + 1
+        ).map((page) => (
+          <button
+            key={page}
+            type="button"
+            onClick={() => onPageChange(page)}
+            className={`
+              h-9
+              w-9
+              rounded-xl
+              text-sm
+              font-medium
+              transition
+              ${
+                currentPage === page
+                  ? "bg-green-600 text-white shadow-lg dark:bg-green-700"
+                  : "bg-gray-50 text-gray-600 hover:bg-green-100 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-green-950"
+              }
+            `}
+          >
+            {page}
+          </button>
+        ))}
 
         <button
           type="button"

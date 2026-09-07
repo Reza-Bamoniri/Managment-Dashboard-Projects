@@ -36,64 +36,108 @@ function SummaryCards() {
   ).length;
 
   return (
-    <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-2">
-        <p className="text-sm text-gray-500">
-          Total Projects
-        </p>
+  <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div
+      className="
+        rounded-2xl
+        bg-white
+        p-5
+        shadow-2xl
+        transition
+        hover:-translate-y-0.5
+        dark:bg-gray-900
+        dark:shadow-black/40
+      "
+    >
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        Total Projects
+      </p>
 
-        <p className="mt-2 text-3xl font-bold text-green-800">
-          {totalProjects}
-        </p>
+      <p className="mt-2 text-3xl font-bold text-green-800 dark:text-green-400">
+        {totalProjects}
+      </p>
 
-        <p className="mt-1 text-xs text-green-600">
-          Active projects
-        </p>
-      </div>
+      <p className="mt-1 text-xs text-green-600 dark:text-green-500">
+        Active projects
+      </p>
+    </div>
 
-      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-2">
-        <p className="text-sm text-gray-500">
-          Active Tasks
-        </p>
+    <div
+      className="
+        rounded-2xl
+        bg-white
+        p-5
+        shadow-2xl
+        transition
+        hover:-translate-y-0.5
+        dark:bg-gray-900
+        dark:shadow-black/40
+      "
+    >
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        Active Tasks
+      </p>
 
-        <p className="mt-2 text-3xl font-bold text-green-800">
-          {activeTasks}
-        </p>
+      <p className="mt-2 text-3xl font-bold text-green-800 dark:text-green-400">
+        {activeTasks}
+      </p>
 
-        <p className="mt-1 text-xs text-green-600">
-          Currently in progress
-        </p>
-      </div>
+      <p className="mt-1 text-xs text-green-600 dark:text-green-500">
+        Currently in progress
+      </p>
+    </div>
 
-      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-2">
-        <p className="text-sm text-gray-500">
-          Completed Tasks
-        </p>
+    <div
+      className="
+        rounded-2xl
+        bg-white
+        p-5
+        shadow-2xl
+        transition
+        hover:-translate-y-0.5
+        dark:bg-gray-900
+        dark:shadow-black/40
+      "
+    >
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        Completed Tasks
+      </p>
 
-        <p className="mt-2 text-3xl font-bold text-green-800">
-          {completedTasks}
-        </p>
+      <p className="mt-2 text-3xl font-bold text-green-800 dark:text-green-400">
+        {completedTasks}
+      </p>
 
-        <p className="mt-1 text-xs text-green-600">
-          Successfully completed
-        </p>
-      </div>
+      <p className="mt-1 text-xs text-green-600 dark:text-green-500">
+        Successfully completed
+      </p>
+    </div>
 
-      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-2">
-        <p className="text-sm text-gray-500">
-          Team Members
-        </p>
+    <div
+      className="
+        rounded-2xl
+        bg-white
+        p-5
+        shadow-2xl
+        transition
+        hover:-translate-y-0.5
+        dark:bg-gray-900
+        dark:shadow-black/40
+      "
+    >
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        Team Members
+      </p>
 
-        <p className="mt-2 text-3xl font-bold text-green-800">
-          {teamMembers}
-        </p>
+      <p className="mt-2 text-3xl font-bold text-green-800 dark:text-green-400">
+        {teamMembers}
+      </p>
 
-        <p className="mt-1 text-xs text-green-600">
-          Active team members
-        </p>
-      </div>
-    </section>
-  );
+      <p className="mt-1 text-xs text-green-600 dark:text-green-500">
+        Active team members
+      </p>
+    </div>
+  </section>
+);
 }
 
 export default SummaryCards;

@@ -8,6 +8,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { fetchProjects } from "../features/projects/projectsSlice";
+
 const chartData = [
   { name: "Mon", tasks: 4 },
   { name: "Tue", tasks: 7 },
@@ -18,22 +22,7 @@ const chartData = [
   { name: "Sun", tasks: 10 },
 ];
 
-const projects = [
-  {
-    id: "1",
-    name: "Website Redesign",
-    status: "In Progress",
-    progress: 75,
-    deadline: "Sep 20, 2026",
-  },
-  {
-    id: "2",
-    name: "Mobile Application",
-    status: "Planning",
-    progress: 20,
-    deadline: "Oct 15, 2026",
-  },
-];
+
 
 const recentTasks = [
   {
@@ -108,6 +97,20 @@ const recentComments = [
 ];
 
 function Home() {
+
+    const dispatch = useAppDispatch();
+
+  const { projects, loading, error } = useAppSelector(
+    (state) => state.projects
+  );
+
+  useEffect(() => {
+    dispatch(fetchProjects());
+  }, [dispatch]);
+
+
+
+
   return (
     <div className="min-h-full space-y-6 bg-linear-to-br from-green-50/70 via-white to-lime-50/40">
       {/* Welcome */}
@@ -247,46 +250,68 @@ function Home() {
         </div>
 
         <div className="space-y-4">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="rounded-2xl bg-green-50/50 p-4 shadow-sm transition hover:bg-green-50"
-            >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h3 className="font-medium text-green-950">
-                    {project.name}
-                  </h3>
+  {loading && (
+    <p className="text-sm text-gray-500">
+      Loading projects...
+    </p>
+  )}
 
-                  <p className="mt-1 text-sm text-gray-500">
-                    Deadline: {project.deadline}
-                  </p>
-                </div>
+  {error && (
+    <p className="text-sm text-red-500">
+      {error}
+    </p>
+  )}
 
-                <span className="w-fit rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                  {project.status}
-                </span>
-              </div>
+  {!loading && !error && projects.length === 0 && (
+    <p className="text-sm text-gray-500">
+      No projects found.
+    </p>
+  )}
 
-              <div className="mt-4">
-                <div className="mb-2 flex justify-between text-xs">
-                  <span className="text-gray-500">Progress</span>
+  {!loading &&
+    !error &&
+    projects.map((project) => (
+      <div
+        key={project.id}
+        className="rounded-2xl bg-green-50/50 p-4 shadow-2xl transition hover:bg-green-50"
+      >
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 className="font-medium text-green-950">
+              {project.name}
+            </h3>
 
-                  <span className="font-semibold text-green-700">
-                    {project.progress}%
-                  </span>
-                </div>
+            <p className="mt-1 text-sm text-gray-500">
+              Deadline: {project.deadline}
+            </p>
+          </div>
 
-                <div className="h-2 overflow-hidden rounded-full bg-green-100">
-                  <div
-                    className="h-full rounded-full bg-linear-to-r from-lime-400 to-green-600"
-                    style={{ width: `${project.progress}%` }}
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
+          <span className="w-fit rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+            {project.status}
+          </span>
         </div>
+
+        <div className="mt-4">
+          <div className="mb-2 flex justify-between text-xs">
+            <span className="text-gray-500">
+              Progress
+            </span>
+
+            <span className="font-semibold text-green-700">
+              {project.progress}%
+            </span>
+          </div>
+
+          <div className="h-2 overflow-hidden rounded-full bg-green-100">
+            <div
+              className="h-full rounded-full bg-linear-to-r from-lime-400 to-green-600"
+              style={{ width: `${project.progress}%` }}
+            />
+          </div>
+        </div>
+      </div>
+    ))}
+</div>
       </section>
 
       {/* Recent Tasks */}

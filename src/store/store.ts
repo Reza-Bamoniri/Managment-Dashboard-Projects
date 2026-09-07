@@ -4,6 +4,7 @@ import projectsReducer from "../features/projects/projectsSlice";
 import tasksReducer from "../features/tasks/tasksSlice";
 import usersReducer from "../features/users/usersSlice";
 import notificationsReducer from "../features/notifications/notificationsSlice";
+import commentsReducer from "../features/comments/commentsSlice";
 
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
         tasks: tasksReducer,
         users: usersReducer,
         notifications: notificationsReducer,
+        comments: commentsReducer,
     },
 });
 

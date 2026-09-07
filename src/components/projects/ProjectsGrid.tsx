@@ -7,9 +7,16 @@ import type { ProjectStatus } from "../../types/project";
 type ProjectsGridProps = {
   search: string;
   status: ProjectStatus | "all";
+  currentPage: number;
 };
 
-function ProjectsGrid({ search, status }: ProjectsGridProps) {
+const PROJECTS_PER_PAGE = 6;
+
+function ProjectsGrid({
+  search,
+  status,
+  currentPage,
+}: ProjectsGridProps) {
   const dispatch = useAppDispatch();
 
   const { projects, loading, error } = useAppSelector(
@@ -30,6 +37,12 @@ function ProjectsGrid({ search, status }: ProjectsGridProps) {
 
     return matchesSearch && matchesStatus;
   });
+
+  const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
+  const paginatedProjects = filteredProjects.slice(
+    startIndex,
+    startIndex + PROJECTS_PER_PAGE
+  );
 
   if (loading) {
     return (
@@ -63,11 +76,12 @@ function ProjectsGrid({ search, status }: ProjectsGridProps) {
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-      {filteredProjects.map((project) => (
+      {paginatedProjects.map((project) => (
         <ProjectCard key={project.id} project={project} />
       ))}
     </section>
   );
 }
 
+export { PROJECTS_PER_PAGE };
 export default ProjectsGrid;

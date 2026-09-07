@@ -9,6 +9,7 @@ import type { ProjectStatus } from "../types/project";
 function Projects() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<ProjectStatus | "all">("all");
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <div className="space-y-6">
@@ -19,13 +20,26 @@ function Projects() {
       <ProjectFilters
         search={search}
         status={status}
-        onSearchChange={setSearch}
-        onStatusChange={setStatus}
+        onSearchChange={(value) => {
+          setSearch(value);
+          setCurrentPage(1);
+        }}
+        onStatusChange={(value) => {
+          setStatus(value);
+          setCurrentPage(1);
+        }}
       />
 
-      <ProjectsGrid search={search} status={status} />
+      <ProjectsGrid
+        search={search}
+        status={status}
+        currentPage={currentPage}
+      />
 
-      <ProjectsPagination />
+      <ProjectsPagination
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }

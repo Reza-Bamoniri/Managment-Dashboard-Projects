@@ -182,6 +182,66 @@ function Home() {
   </div>
 </div>
 
+<section className="rounded-xl border bg-white p-6">
+  <div className="mb-5 flex items-center justify-between">
+    <h2 className="text-lg font-semibold">Recent Notifications</h2>
+
+    <button
+      type="button"
+      className="text-sm font-medium text-gray-600 hover:text-gray-900"
+    >
+      View All
+    </button>
+  </div>
+
+  <div className="space-y-4">
+    <div className="flex items-start justify-between gap-4 rounded-lg border p-4">
+      <div>
+        <p className="text-sm font-medium text-gray-900">
+          You have been assigned a new task
+        </p>
+        <p className="mt-1 text-xs text-gray-500">
+          10 minutes ago
+        </p>
+      </div>
+
+      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+        Task
+      </span>
+    </div>
+
+    <div className="flex items-start justify-between gap-4 rounded-lg border p-4">
+      <div>
+        <p className="text-sm font-medium text-gray-900">
+          The Website Redesign project deadline is approaching
+        </p>
+        <p className="mt-1 text-xs text-gray-500">
+          1 hour ago
+        </p>
+      </div>
+
+      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+        Deadline
+      </span>
+    </div>
+
+    <div className="flex items-start justify-between gap-4 rounded-lg border p-4">
+      <div>
+        <p className="text-sm font-medium text-gray-900">
+          A new comment was added to your task
+        </p>
+        <p className="mt-1 text-xs text-gray-500">
+          Yesterday
+        </p>
+      </div>
+
+      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+        Comment
+      </span>
+    </div>
+  </div>
+</section>
+
       {/* Projects Overview */}
       <div className="rounded-xl border bg-white p-5 shadow-sm">
         <div className="mb-5 flex items-center justify-between">

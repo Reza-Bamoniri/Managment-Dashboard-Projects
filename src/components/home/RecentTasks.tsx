@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchTasks } from "../../features/tasks/tasksSlice";
+import { fetchProjects } from "../../features/projects/projectsSlice";
 
 function RecentTasks() {
   const dispatch = useAppDispatch();
@@ -9,8 +10,13 @@ function RecentTasks() {
     (state) => state.tasks
   );
 
+  const { projects } = useAppSelector(
+    (state) => state.projects
+  );
+
   useEffect(() => {
     dispatch(fetchTasks());
+    dispatch(fetchProjects());
   }, [dispatch]);
 
   return (
@@ -71,42 +77,48 @@ function RecentTasks() {
             </thead>
 
             <tbody>
-              {tasks.map((task) => (
-                <tr
-                  key={task.id}
-                  className="border-b border-gray-100 last:border-0"
-                >
-                  <td className="px-4 py-4">
-                    <p className="font-medium text-gray-800">
-                      {task.title}
-                    </p>
+              {tasks.map((task) => {
+                const project = projects.find(
+                  (project) => project.id === task.projectId
+                );
 
-                    <p className="mt-1 text-xs text-gray-500">
-                      {task.description}
-                    </p>
-                  </td>
+                return (
+                  <tr
+                    key={task.id}
+                    className="border-b border-gray-100 last:border-0"
+                  >
+                    <td className="px-4 py-4">
+                      <p className="font-medium text-gray-800">
+                        {task.title}
+                      </p>
 
-                  <td className="px-4 py-4 text-sm text-gray-600">
-                    {task.projectId}
-                  </td>
+                      <p className="mt-1 text-xs text-gray-500">
+                        {task.description}
+                      </p>
+                    </td>
 
-                  <td className="px-4 py-4">
-                    <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
-                      {task.status}
-                    </span>
-                  </td>
+                    <td className="px-4 py-4 text-sm text-gray-600">
+                      {project?.name ?? "Unknown Project"}
+                    </td>
 
-                  <td className="px-4 py-4">
-                    <span className="text-sm font-medium text-gray-700">
-                      {task.priority}
-                    </span>
-                  </td>
+                    <td className="px-4 py-4">
+                      <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+                        {task.status}
+                      </span>
+                    </td>
 
-                  <td className="px-4 py-4 text-sm text-gray-600">
-                    {task.deadline}
-                  </td>
-                </tr>
-              ))}
+                    <td className="px-4 py-4">
+                      <span className="text-sm font-medium text-gray-700">
+                        {task.priority}
+                      </span>
+                    </td>
+
+                    <td className="px-4 py-4 text-sm text-gray-600">
+                      {task.deadline}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

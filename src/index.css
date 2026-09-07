@@ -16,3 +16,12 @@ body,
 body {
   font-family: Arial, sans-serif;
 }
+
+
+.recharts-wrapper .recharts-cartesian-axis-tick-value {
+  fill: #6b7280;
+}
+
+.dark .recharts-wrapper .recharts-cartesian-axis-tick-value {
+  fill: #9ca3af;
+}

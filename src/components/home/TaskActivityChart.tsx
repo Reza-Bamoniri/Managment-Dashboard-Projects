@@ -46,13 +46,21 @@ function TaskActivityChart() {
   }, [tasks]);
 
   return (
-    <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
+    <section className="
+    rounded-2xl
+    bg-white
+    p-5
+    shadow-2xl
+    sm:p-6
+    dark:bg-gray-900
+    dark:shadow-black/40
+  ">
       <div className="mb-5">
-        <h2 className="text-lg font-semibold text-green-950">
+        <h2 className="text-lg font-semibold text-green-950 dark:text-green-300">
           Task Activity
         </h2>
 
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           Tasks completed during the week
         </p>
       </div>

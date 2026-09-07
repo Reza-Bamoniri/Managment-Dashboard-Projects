@@ -37,7 +37,7 @@ function SummaryCards() {
 
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-0.5">
+      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-2">
         <p className="text-sm text-gray-500">
           Total Projects
         </p>
@@ -51,7 +51,7 @@ function SummaryCards() {
         </p>
       </div>
 
-      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-0.5">
+      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-2">
         <p className="text-sm text-gray-500">
           Active Tasks
         </p>
@@ -65,7 +65,7 @@ function SummaryCards() {
         </p>
       </div>
 
-      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-0.5">
+      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-2">
         <p className="text-sm text-gray-500">
           Completed Tasks
         </p>
@@ -79,7 +79,7 @@ function SummaryCards() {
         </p>
       </div>
 
-      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-0.5">
+      <div className="rounded-2xl bg-white p-5 shadow-2xl transition hover:-translate-y-2">
         <p className="text-sm text-gray-500">
           Team Members
         </p>

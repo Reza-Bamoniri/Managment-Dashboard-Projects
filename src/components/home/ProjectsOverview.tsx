@@ -48,7 +48,7 @@ function ProjectsOverview() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="rounded-2xl border border-gray-100 bg-gray-50 p-5 shadow-2xl"
+              className="rounded-2xl border border-gray-100 bg-gray-50 p-5 shadow-2xl hover:bg-green-100 transition delay-100 hover:-translate-y-0.5"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>

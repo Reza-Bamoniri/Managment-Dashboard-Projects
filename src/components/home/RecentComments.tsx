@@ -67,7 +67,7 @@ function RecentComments() {
             return (
               <div
                 key={comment.id}
-                className="rounded-xl bg-gray-50 p-4 shadow-2xl"
+                className="rounded-xl bg-gray-50 p-4 shadow-2xl hover:bg-green-100 transition delay-100 hover:-translate-y-0.5"
               >
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100 text-sm font-semibold text-green-700">

@@ -63,7 +63,7 @@ function UpcomingDeadlines() {
           {upcomingDeadlines.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-between gap-4 rounded-xl bg-gray-50 p-4 shadow-2xl"
+              className="flex items-center justify-between gap-4 rounded-xl bg-gray-50 p-4 shadow-2xl hover:bg-green-100 transition delay-100 hover:-translate-y-0.5"
             >
               <div className="min-w-0">
                 <h3 className="truncate text-sm font-medium text-gray-800">

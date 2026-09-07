@@ -83,167 +83,103 @@ const upcomingDeadlines = [
   },
 ];
 
-function Home() {
-  const stats = [
-    { title: "Total Projects", value: 12 },
-    { title: "Active Tasks", value: 24 },
-    { title: "Team Members", value: 8 },
-    { title: "Completed Tasks", value: 36 },
-  ];
+const recentComments = [
+  {
+    id: "1",
+    user: "Emma Wilson",
+    comment: "The new design looks great.",
+    project: "Website Redesign",
+    time: "1 hour ago",
+  },
+  {
+    id: "2",
+    user: "Sophia Miller",
+    comment: "I have finished the initial layout.",
+    project: "Website Redesign",
+    time: "2 hours ago",
+  },
+  {
+    id: "3",
+    user: "James Anderson",
+    comment: "Can we review the navbar before Friday?",
+    project: "Website Redesign",
+    time: "3 hours ago",
+  },
+];
 
+function Home() {
   return (
-    <section className="space-y-6">
+    <div className="space-y-6">
       {/* Welcome */}
-      <div>
+      <section>
         <h1 className="text-2xl font-bold text-gray-900">
-          Welcome back, James
+          Welcome back, James!
         </h1>
 
         <p className="mt-1 text-sm text-gray-500">
-          Here's what's happening with your projects today.
+          Here is what's happening with your projects today.
         </p>
-      </div>
+      </section>
 
-      {/* Statistics */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
-          <div
-            key={stat.title}
-            className="rounded-xl border bg-white p-5 shadow-sm"
-          >
-            <p className="text-sm text-gray-500">
-              {stat.title}
-            </p>
+      {/* Summary Cards */}
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-xl border bg-white p-5">
+          <p className="text-sm text-gray-500">Total Projects</p>
+          <p className="mt-2 text-2xl font-bold text-gray-900">12</p>
+        </div>
 
-            <p className="mt-2 text-2xl font-bold text-gray-900">
-              {stat.value}
-            </p>
-          </div>
-        ))}
-      </div>
+        <div className="rounded-xl border bg-white p-5">
+          <p className="text-sm text-gray-500">Active Tasks</p>
+          <p className="mt-2 text-2xl font-bold text-gray-900">28</p>
+        </div>
 
-      {/* Chart */}
-      <div className="rounded-xl border bg-white p-5 shadow-sm">
-        <h2 className="mb-6 text-lg font-semibold text-gray-900">
-          Weekly Task Activity
-        </h2>
+        <div className="rounded-xl border bg-white p-5">
+          <p className="text-sm text-gray-500">Completed Tasks</p>
+          <p className="mt-2 text-2xl font-bold text-gray-900">64</p>
+        </div>
 
-        <div className="h-80 w-full">
+        <div className="rounded-xl border bg-white p-5">
+          <p className="text-sm text-gray-500">Team Members</p>
+          <p className="mt-2 text-2xl font-bold text-gray-900">8</p>
+        </div>
+      </section>
+
+      {/* Task Activity */}
+      <section className="rounded-xl border bg-white p-6">
+        <div className="mb-5">
+          <h2 className="text-lg font-semibold text-gray-900">
+            Task Activity
+          </h2>
+
+          <p className="mt-1 text-sm text-gray-500">
+            Tasks completed during the week
+          </p>
+        </div>
+
+        <div className="h-72 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
+
               <XAxis dataKey="name" />
+
               <YAxis />
+
               <Tooltip />
 
               <Line
                 type="monotone"
                 dataKey="tasks"
+                stroke="currentColor"
                 strokeWidth={2}
               />
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </div>
-
-      {/* Upcoming Deadlines */}
-<div className="rounded-xl border bg-white p-5 shadow-sm">
-  <div className="mb-5 flex items-center justify-between">
-    <h2 className="text-lg font-semibold text-gray-900">
-      Upcoming Deadlines
-    </h2>
-
-    <span className="text-sm text-gray-500">
-      Next deadlines
-    </span>
-  </div>
-
-  <div className="space-y-4">
-    {upcomingDeadlines.map((item) => (
-      <div
-        key={item.id}
-        className="flex flex-col gap-2 rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between"
-      >
-        <div>
-          <h3 className="font-medium text-gray-900">
-            {item.title}
-          </h3>
-
-          <p className="mt-1 text-sm text-gray-500">
-            {item.type}
-          </p>
-        </div>
-
-        <div className="text-sm font-medium text-gray-700">
-          {item.deadline}
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-
-<section className="rounded-xl border bg-white p-6">
-  <div className="mb-5 flex items-center justify-between">
-    <h2 className="text-lg font-semibold">Recent Notifications</h2>
-
-    <button
-      type="button"
-      className="text-sm font-medium text-gray-600 hover:text-gray-900"
-    >
-      View All
-    </button>
-  </div>
-
-  <div className="space-y-4">
-    <div className="flex items-start justify-between gap-4 rounded-lg border p-4">
-      <div>
-        <p className="text-sm font-medium text-gray-900">
-          You have been assigned a new task
-        </p>
-        <p className="mt-1 text-xs text-gray-500">
-          10 minutes ago
-        </p>
-      </div>
-
-      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-        Task
-      </span>
-    </div>
-
-    <div className="flex items-start justify-between gap-4 rounded-lg border p-4">
-      <div>
-        <p className="text-sm font-medium text-gray-900">
-          The Website Redesign project deadline is approaching
-        </p>
-        <p className="mt-1 text-xs text-gray-500">
-          1 hour ago
-        </p>
-      </div>
-
-      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-        Deadline
-      </span>
-    </div>
-
-    <div className="flex items-start justify-between gap-4 rounded-lg border p-4">
-      <div>
-        <p className="text-sm font-medium text-gray-900">
-          A new comment was added to your task
-        </p>
-        <p className="mt-1 text-xs text-gray-500">
-          Yesterday
-        </p>
-      </div>
-
-      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-        Comment
-      </span>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Projects Overview */}
-      <div className="rounded-xl border bg-white p-5 shadow-sm">
+      <section className="rounded-xl border bg-white p-6">
         <div className="mb-5 flex items-center justify-between">
           <h2 className="text-lg font-semibold text-gray-900">
             Projects Overview
@@ -257,7 +193,7 @@ function Home() {
           </button>
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-4">
           {projects.map((project) => (
             <div
               key={project.id}
@@ -280,10 +216,8 @@ function Home() {
               </div>
 
               <div className="mt-4">
-                <div className="mb-2 flex justify-between text-sm">
-                  <span className="text-gray-500">
-                    Progress
-                  </span>
+                <div className="mb-2 flex justify-between text-xs">
+                  <span className="text-gray-500">Progress</span>
 
                   <span className="font-medium text-gray-700">
                     {project.progress}%
@@ -300,71 +234,153 @@ function Home() {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Recent Tasks */}
-<div className="rounded-xl border bg-white p-5 shadow-sm">
-  <div className="mb-5 flex items-center justify-between">
-    <h2 className="text-lg font-semibold text-gray-900">
-      Recent Tasks
-    </h2>
+      <section className="rounded-xl border bg-white p-6">
+        <div className="mb-5 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-gray-900">
+            Recent Tasks
+          </h2>
 
-    <button
-      type="button"
-      className="text-sm font-medium text-gray-600 hover:text-gray-900"
-    >
-      View All
-    </button>
-  </div>
-
-  <div className="overflow-x-auto">
-    <table className="w-full min-w-[700px] text-left">
-      <thead>
-        <tr className="border-b text-sm text-gray-500">
-          <th className="pb-3 font-medium">Task</th>
-          <th className="pb-3 font-medium">Project</th>
-          <th className="pb-3 font-medium">Status</th>
-          <th className="pb-3 font-medium">Priority</th>
-          <th className="pb-3 font-medium">Deadline</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {recentTasks.map((task) => (
-          <tr
-            key={task.id}
-            className="border-b last:border-0"
+          <button
+            type="button"
+            className="text-sm font-medium text-gray-600 hover:text-gray-900"
           >
-            <td className="py-4 font-medium text-gray-900">
-              {task.title}
-            </td>
+            View All
+          </button>
+        </div>
 
-            <td className="py-4 text-sm text-gray-500">
-              {task.project}
-            </td>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[700px] text-left">
+            <thead>
+              <tr className="border-b text-sm text-gray-500">
+                <th className="pb-3 font-medium">Task</th>
+                <th className="pb-3 font-medium">Project</th>
+                <th className="pb-3 font-medium">Status</th>
+                <th className="pb-3 font-medium">Priority</th>
+                <th className="pb-3 font-medium">Deadline</th>
+              </tr>
+            </thead>
 
-            <td className="py-4">
-              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-                {task.status}
-              </span>
-            </td>
+            <tbody>
+              {recentTasks.map((task) => (
+                <tr key={task.id} className="border-b last:border-0">
+                  <td className="py-4 text-sm font-medium text-gray-900">
+                    {task.title}
+                  </td>
 
-            <td className="py-4">
-              <span className="text-sm font-medium text-gray-700">
-                {task.priority}
-              </span>
-            </td>
+                  <td className="py-4 text-sm text-gray-600">
+                    {task.project}
+                  </td>
 
-            <td className="py-4 text-sm text-gray-500">
-              {task.deadline}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
-    </section>
+                  <td className="py-4">
+                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+                      {task.status}
+                    </span>
+                  </td>
+
+                  <td className="py-4">
+                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+                      {task.priority}
+                    </span>
+                  </td>
+
+                  <td className="py-4 text-sm text-gray-600">
+                    {task.deadline}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Upcoming Deadlines + Recent Comments */}
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* Upcoming Deadlines */}
+        <div className="rounded-xl border bg-white p-6">
+          <div className="mb-5 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Upcoming Deadlines
+            </h2>
+
+            <button
+              type="button"
+              className="text-sm font-medium text-gray-600 hover:text-gray-900"
+            >
+              View All
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            {upcomingDeadlines.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center justify-between gap-4 rounded-lg border p-4"
+              >
+                <div>
+                  <p className="text-sm font-medium text-gray-900">
+                    {item.title}
+                  </p>
+
+                  <p className="mt-1 text-xs text-gray-500">
+                    {item.type}
+                  </p>
+                </div>
+
+                <span className="whitespace-nowrap text-sm font-medium text-gray-700">
+                  {item.deadline}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Recent Comments */}
+        <div className="rounded-xl border bg-white p-6">
+          <div className="mb-5 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Recent Comments
+            </h2>
+
+            <button
+              type="button"
+              className="text-sm font-medium text-gray-600 hover:text-gray-900"
+            >
+              View All
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            {recentComments.map((comment) => (
+              <div
+                key={comment.id}
+                className="rounded-lg border p-4"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <p className="text-sm font-medium text-gray-900">
+                    {comment.user}
+                  </p>
+
+                  <span className="whitespace-nowrap text-xs text-gray-500">
+                    {comment.time}
+                  </span>
+                </div>
+
+                <p className="mt-2 text-sm text-gray-600">
+                  {comment.comment}
+                </p>
+
+                <p className="mt-2 text-xs text-gray-500">
+                  {comment.project}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 

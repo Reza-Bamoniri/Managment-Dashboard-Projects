@@ -11,4 +11,5 @@ export type Task = {
   projectId: string;
   assignedTo: string;
   deadline: string;
+  completedAt: string | null;
 };

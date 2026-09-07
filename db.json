@@ -30,7 +30,8 @@
     "priority": "high",
     "projectId": "1",
     "assignedTo": "2",
-    "deadline": "2026-09-12"
+    "deadline": "2026-09-12",
+    "completedAt": null
   },
   {
     "id": "2",
@@ -40,17 +41,29 @@
     "priority": "high",
     "projectId": "1",
     "assignedTo": "4",
-    "deadline": "2026-09-14"
+    "deadline": "2026-09-14",
+    "completedAt": null
   },
   {
     "id": "3",
+    "title": "Design Header",
+    "description": "Create the Header UI and layout",
+    "status": "completed",
+    "priority": "high",
+    "projectId": "1",
+    "assignedTo": "4",
+    "deadline": "2026-09-14",
+    "completedAt": "2026-09-03T14:30:00"
+  },
+  {
+    "id": "4",
     "title": "Implement Authentication",
     "description": "Build the login flow and protected routes",
     "status": "todo",
     "priority": "medium",
     "projectId": "2",
     "assignedTo": "2",
-    "deadline": "2026-09-20"
+    "deadline": null
   }
   ],
   "users": [

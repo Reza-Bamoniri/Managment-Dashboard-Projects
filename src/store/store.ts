@@ -3,6 +3,7 @@ import authReducer from "../features/auth/authSlice";
 import projectsReducer from "../features/projects/projectsSlice";
 import tasksReducer from "../features/tasks/tasksSlice";
 import usersReducer from "../features/users/usersSlice";
+import notificationsReducer from "../features/notifications/notificationsSlice";
 
 
 export const store = configureStore({
@@ -11,6 +12,7 @@ export const store = configureStore({
         projects: projectsReducer,
         tasks: tasksReducer,
         users: usersReducer,
+        notifications: notificationsReducer,
     },
 });
 

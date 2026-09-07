@@ -1,0 +1,84 @@
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { fetchComments } from "../../features/comments/commentsSlice";
+
+function RecentComments() {
+  const dispatch = useAppDispatch();
+
+  const { comments } = useAppSelector(
+    (state) => state.comments
+  );
+
+  const { users } = useAppSelector(
+    (state) => state.users
+  );
+
+  useEffect(() => {
+    dispatch(fetchComments());
+  }, [dispatch]);
+
+  const recentComments = [...comments]
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    )
+    .slice(0, 5);
+
+  return (
+    <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold text-gray-800">
+          Recent Comments
+        </h2>
+
+        <p className="mt-1 text-sm text-gray-500">
+          Latest comments from your team
+        </p>
+      </div>
+
+      {recentComments.length === 0 ? (
+        <div className="py-10 text-center text-sm text-gray-500">
+          No comments found.
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {recentComments.map((comment) => {
+            const user = users.find(
+              (user) => user.id === comment.userId
+            );
+
+            return (
+              <div
+                key={comment.id}
+                className="rounded-xl bg-gray-50 p-4 shadow-2xl"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100 text-sm font-semibold text-green-700">
+                    {user?.name?.charAt(0) ?? "U"}
+                  </div>
+
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-gray-800">
+                      {user?.name ?? "Unknown User"}
+                    </p>
+
+                    <p className="mt-1 text-sm text-gray-600">
+                      {comment.text}
+                    </p>
+
+                    <p className="mt-2 text-xs text-gray-400">
+                      {comment.createdAt}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
+export default RecentComments;

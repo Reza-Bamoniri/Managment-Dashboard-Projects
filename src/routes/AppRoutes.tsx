@@ -1,10 +1,9 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router";
 
 import DashboardLayout from "../layouts/DashboardLayout";
+import Home from "../pages/Home";
+
+
 
 function AppRoutes() {
   return (
@@ -13,7 +12,7 @@ function AppRoutes() {
         <Route element={<DashboardLayout />}>
           <Route
             path="/"
-            element={<div>Home</div>}
+            element={<Home/>}
           />
 
           <Route

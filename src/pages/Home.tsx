@@ -35,6 +35,33 @@ const projects = [
   },
 ];
 
+const recentTasks = [
+  {
+    id: "1",
+    title: "Create Navbar",
+    project: "Website Redesign",
+    status: "To Do",
+    priority: "High",
+    deadline: "Sep 12, 2026",
+  },
+  {
+    id: "2",
+    title: "Design Dashboard",
+    project: "Website Redesign",
+    status: "In Progress",
+    priority: "High",
+    deadline: "Sep 14, 2026",
+  },
+  {
+    id: "3",
+    title: "Implement Authentication",
+    project: "Mobile Application",
+    status: "To Do",
+    priority: "Medium",
+    deadline: "Sep 20, 2026",
+  },
+];
+
 function Home() {
   const stats = [
     { title: "Total Projects", value: 12 },
@@ -157,6 +184,69 @@ function Home() {
           ))}
         </div>
       </div>
+
+      {/* Recent Tasks */}
+<div className="rounded-xl border bg-white p-5 shadow-sm">
+  <div className="mb-5 flex items-center justify-between">
+    <h2 className="text-lg font-semibold text-gray-900">
+      Recent Tasks
+    </h2>
+
+    <button
+      type="button"
+      className="text-sm font-medium text-gray-600 hover:text-gray-900"
+    >
+      View All
+    </button>
+  </div>
+
+  <div className="overflow-x-auto">
+    <table className="w-full min-w-[700px] text-left">
+      <thead>
+        <tr className="border-b text-sm text-gray-500">
+          <th className="pb-3 font-medium">Task</th>
+          <th className="pb-3 font-medium">Project</th>
+          <th className="pb-3 font-medium">Status</th>
+          <th className="pb-3 font-medium">Priority</th>
+          <th className="pb-3 font-medium">Deadline</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {recentTasks.map((task) => (
+          <tr
+            key={task.id}
+            className="border-b last:border-0"
+          >
+            <td className="py-4 font-medium text-gray-900">
+              {task.title}
+            </td>
+
+            <td className="py-4 text-sm text-gray-500">
+              {task.project}
+            </td>
+
+            <td className="py-4">
+              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
+                {task.status}
+              </span>
+            </td>
+
+            <td className="py-4">
+              <span className="text-sm font-medium text-gray-700">
+                {task.priority}
+              </span>
+            </td>
+
+            <td className="py-4 text-sm text-gray-500">
+              {task.deadline}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
     </section>
   );
 }

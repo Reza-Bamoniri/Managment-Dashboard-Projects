@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchComments } from "../../features/comments/commentsSlice";
+import { fetchUsers } from "../../features/users/usersSlice";
 
 function RecentComments() {
   const dispatch = useAppDispatch();
 
-  const { comments } = useAppSelector(
+  const { comments, loading, error } = useAppSelector(
     (state) => state.comments
   );
 
@@ -15,6 +16,7 @@ function RecentComments() {
 
   useEffect(() => {
     dispatch(fetchComments());
+    dispatch(fetchUsers());
   }, [dispatch]);
 
   const recentComments = [...comments]
@@ -37,11 +39,25 @@ function RecentComments() {
         </p>
       </div>
 
-      {recentComments.length === 0 ? (
+      {loading && (
+        <div className="py-10 text-center text-sm text-gray-500">
+          Loading comments...
+        </div>
+      )}
+
+      {error && (
+        <div className="rounded-xl bg-red-50 p-4 text-sm text-red-600">
+          {error}
+        </div>
+      )}
+
+      {!loading && !error && recentComments.length === 0 && (
         <div className="py-10 text-center text-sm text-gray-500">
           No comments found.
         </div>
-      ) : (
+      )}
+
+      {!loading && !error && recentComments.length > 0 && (
         <div className="space-y-4">
           {recentComments.map((comment) => {
             const user = users.find(

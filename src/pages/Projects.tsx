@@ -7,7 +7,7 @@ import ProjectsPagination from "../components/projects/ProjectsPagination";
 import ProjectModal from "../components/projects/ProjectModal";
 import type { ProjectStatus } from "../types/project";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { fetchProjects } from "../features/projects/projectsSlice";
+import { createProjectThunk, fetchProjects } from "../features/projects/projectsSlice";
 import type { ProjectFormData } from "../components/projects/ProjectForm";
 
 function Projects() {
@@ -45,10 +45,17 @@ function Projects() {
     setIsModalOpen(false);
   };
 
-  const handleCreateProject = (data: ProjectFormData) => {
-    console.log(data);
-    setIsModalOpen(false);
-  };
+  const handleCreateProject = async (data: ProjectFormData) => {
+  await dispatch(
+    createProjectThunk({
+      ...data,
+      managerId: "1",
+      memberIds: [],
+    })
+  );
+
+  setIsModalOpen(false);
+};
 
   return (
     <div className="space-y-6">

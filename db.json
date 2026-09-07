@@ -8,7 +8,11 @@
       "progress": 75,
       "deadline": "2026-09-20",
       "managerId": "1",
-      "memberIds": ["1", "2", "5"]
+      "memberIds": [
+        "1",
+        "2",
+        "5"
+      ]
     },
     {
       "id": "2",
@@ -18,157 +22,171 @@
       "progress": 20,
       "deadline": "2026-10-15",
       "managerId": "2",
-      "memberIds": ["2", "3"]
+      "memberIds": [
+        "2",
+        "3"
+      ]
+    },
+    {
+      "name": "Windows Application",
+      "description": "Develop a mobile application.",
+      "status": "planning",
+      "progress": 10,
+      "deadline": "2026-09-07",
+      "managerId": "1",
+      "memberIds": [],
+      "id": "ZutRflQZT6M"
     }
   ],
   "tasks": [
     {
-    "id": "1",
-    "title": "Create Navbar",
-    "description": "Design and implement the main navigation",
-    "status": "todo",
-    "priority": "high",
-    "projectId": "1",
-    "assignedTo": "2",
-    "deadline": "2026-09-12",
-    "completedAt": null
-  },
-  {
-    "id": "2",
-    "title": "Design Dashboard",
-    "description": "Create the dashboard UI and layout",
-    "status": "in-progress",
-    "priority": "high",
-    "projectId": "1",
-    "assignedTo": "4",
-    "deadline": "2026-09-14",
-    "completedAt": null
-  },
-  {
-    "id": "3",
-    "title": "Design Header",
-    "description": "Create the Header UI and layout",
-    "status": "completed",
-    "priority": "high",
-    "projectId": "1",
-    "assignedTo": "4",
-    "deadline": "2026-09-14",
-    "completedAt": "2026-09-03T14:30:00"
-  },
-  {
-    "id": "4",
-    "title": "Implement Authentication",
-    "description": "Build the login flow and protected routes",
-    "status": "todo",
-    "priority": "medium",
-    "projectId": "2",
-    "assignedTo": "2",
-    "deadline": "2026-10-11"
-  }
+      "id": "1",
+      "title": "Create Navbar",
+      "description": "Design and implement the main navigation",
+      "status": "todo",
+      "priority": "high",
+      "projectId": "1",
+      "assignedTo": "2",
+      "deadline": "2026-09-12",
+      "completedAt": null
+    },
+    {
+      "id": "2",
+      "title": "Design Dashboard",
+      "description": "Create the dashboard UI and layout",
+      "status": "in-progress",
+      "priority": "high",
+      "projectId": "1",
+      "assignedTo": "4",
+      "deadline": "2026-09-14",
+      "completedAt": null
+    },
+    {
+      "id": "3",
+      "title": "Design Header",
+      "description": "Create the Header UI and layout",
+      "status": "completed",
+      "priority": "high",
+      "projectId": "1",
+      "assignedTo": "4",
+      "deadline": "2026-09-14",
+      "completedAt": "2026-09-03T14:30:00"
+    },
+    {
+      "id": "4",
+      "title": "Implement Authentication",
+      "description": "Build the login flow and protected routes",
+      "status": "todo",
+      "priority": "medium",
+      "projectId": "2",
+      "assignedTo": "2",
+      "deadline": "2026-10-11"
+    }
   ],
   "users": [
     {
-    "id": "1",
-    "name": "James Anderson",
-    "email": "james@example.com",
-    "role": "Project Manager",
-    "avatar": "",
-    "status": "active"
-  },
-  {
-    "id": "2",
-    "name": "Emma Wilson",
-    "email": "emma@example.com",
-    "role": "Frontend Developer",
-    "avatar": "",
-    "status": "active"
-  },
-  {
-    "id": "3",
-    "name": "Daniel Brown",
-    "email": "daniel@example.com",
-    "role": "Backend Developer",
-    "avatar": "",
-    "status": "active"
-  },
-  {
-    "id": "4",
-    "name": "Sophia Miller",
-    "email": "sophia@example.com",
-    "role": "UI/UX Designer",
-    "avatar": "",
-    "status": "inactive"
-  },
-  {
-    "id": "5",
-    "name": "Olivia Davis",
-    "email": "olivia@example.com",
-    "role": "Frontend Developer",
-    "avatar": "",
-    "status": "active"
-  }
+      "id": "1",
+      "name": "James Anderson",
+      "email": "james@example.com",
+      "role": "Project Manager",
+      "avatar": "",
+      "status": "active"
+    },
+    {
+      "id": "2",
+      "name": "Emma Wilson",
+      "email": "emma@example.com",
+      "role": "Frontend Developer",
+      "avatar": "",
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "name": "Daniel Brown",
+      "email": "daniel@example.com",
+      "role": "Backend Developer",
+      "avatar": "",
+      "status": "active"
+    },
+    {
+      "id": "4",
+      "name": "Sophia Miller",
+      "email": "sophia@example.com",
+      "role": "UI/UX Designer",
+      "avatar": "",
+      "status": "inactive"
+    },
+    {
+      "id": "5",
+      "name": "Olivia Davis",
+      "email": "olivia@example.com",
+      "role": "Frontend Developer",
+      "avatar": "",
+      "status": "active"
+    }
   ],
   "notifications": [
     {
-    "id": "1",
-    "message": "You have been assigned a new task",
-    "type": "task-assigned",
-    "userId": "2",
-    "isRead": false,
-    "createdAt": "2026-09-06T10:30:00"
-  },
-  {
-    "id": "2",
-    "message": "The Website Redesign project deadline is approaching",
-    "type": "deadline",
-    "userId": "1",
-    "isRead": false,
-    "createdAt": "2026-09-06T09:15:00"
-  },
-  {
-    "id": "3",
-    "message": "A new comment was added to your task",
-    "type": "comment",
-    "userId": "2",
-    "isRead": true,
-    "createdAt": "2026-09-05T16:45:00"
-  }
+      "id": "1",
+      "message": "You have been assigned a new task",
+      "type": "task-assigned",
+      "userId": "2",
+      "isRead": false,
+      "createdAt": "2026-09-06T10:30:00"
+    },
+    {
+      "id": "2",
+      "message": "The Website Redesign project deadline is approaching",
+      "type": "deadline",
+      "userId": "1",
+      "isRead": false,
+      "createdAt": "2026-09-06T09:15:00"
+    },
+    {
+      "id": "3",
+      "message": "A new comment was added to your task",
+      "type": "comment",
+      "userId": "2",
+      "isRead": true,
+      "createdAt": "2026-09-05T16:45:00"
+    }
   ],
   "comments": [
     {
-    "id": "1",
-    "text": "The new design looks great.",
-    "userId": "2",
-    "projectId": "1",
-    "createdAt": "2026-09-06T11:00:00"
-  },
-  {
-    "id": "2",
-    "text": "I have finished the initial layout.",
-    "userId": "4",
-    "projectId": "1",
-    "createdAt": "2026-09-06T10:30:00"
-  },
-  {
-    "id": "3",
-    "text": "Can we review the navbar before Friday?",
-    "userId": "1",
-    "projectId": "1",
-    "createdAt": "2026-09-06T09:45:00"
-  },
-  {
-    "id": "4",
-    "text": "Authentication flow is ready for testing.",
-    "userId": "2",
-    "projectId": "2",
-    "createdAt": "2026-09-05T16:20:00"
-  },
-  {
-    "id": "5",
-    "text": "The API integration is going well.",
-    "userId": "3",
-    "projectId": "2",
-    "createdAt": "2026-09-05T14:10:00"
-  }
-  ]
+      "id": "1",
+      "text": "The new design looks great.",
+      "userId": "2",
+      "projectId": "1",
+      "createdAt": "2026-09-06T11:00:00"
+    },
+    {
+      "id": "2",
+      "text": "I have finished the initial layout.",
+      "userId": "4",
+      "projectId": "1",
+      "createdAt": "2026-09-06T10:30:00"
+    },
+    {
+      "id": "3",
+      "text": "Can we review the navbar before Friday?",
+      "userId": "1",
+      "projectId": "1",
+      "createdAt": "2026-09-06T09:45:00"
+    },
+    {
+      "id": "4",
+      "text": "Authentication flow is ready for testing.",
+      "userId": "2",
+      "projectId": "2",
+      "createdAt": "2026-09-05T16:20:00"
+    },
+    {
+      "id": "5",
+      "text": "The API integration is going well.",
+      "userId": "3",
+      "projectId": "2",
+      "createdAt": "2026-09-05T14:10:00"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

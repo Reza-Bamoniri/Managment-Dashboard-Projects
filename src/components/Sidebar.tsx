@@ -20,7 +20,7 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm dark:bg-black/60 lg:hidden"
           onClick={onClose}
         />
       )}
@@ -28,6 +28,7 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
       <aside
         className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col
         bg-linear-to-b from-lime-400 via-green-500 to-green-950
+        dark:from-gray-900 dark:via-green-950 dark:to-black
         shadow-2xl transition-transform duration-300
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0`}
@@ -58,8 +59,12 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
                     transition-all duration-200
                     ${
                       isActive
-                        ? "bg-white/20 text-white shadow-lg backdrop-blur-sm"
-                        : "text-white/75 hover:bg-white/10 hover:text-white"
+                        ? `bg-white/20 text-white shadow-lg backdrop-blur-sm
+                           dark:bg-green-500/20 dark:text-green-200
+                           dark:shadow-green-950/40`
+                        : `text-white/75 hover:bg-white/10 hover:text-white
+                           dark:text-gray-400 dark:hover:bg-green-900/30
+                           dark:hover:text-green-200`
                     }`
                   }
                 >
@@ -72,12 +77,22 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* Bottom */}
         <div className="p-4">
-          <div className="rounded-2xl bg-black/10 p-4 backdrop-blur-sm">
-            <p className="text-xs text-white/60">
+          <div
+            className="
+              rounded-2xl
+              bg-black/10
+              p-4
+              backdrop-blur-sm
+              dark:border
+              dark:border-green-800/40
+              dark:bg-gray-900/70
+            "
+          >
+            <p className="text-xs text-white/60 dark:text-gray-500">
               Workspace
             </p>
 
-            <p className="mt-1 text-sm font-medium text-white">
+            <p className="mt-1 text-sm font-medium text-white dark:text-gray-200">
               My Workspace
             </p>
           </div>

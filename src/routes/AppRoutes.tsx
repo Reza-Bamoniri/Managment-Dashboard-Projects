@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 import Home from "../pages/Home";
+import Projects from "../pages/Projects";
 
 
 
@@ -17,7 +18,7 @@ function AppRoutes() {
 
           <Route
             path="/projects"
-            element={<div>Projects</div>}
+            element={<Projects />}
           />
 
           <Route

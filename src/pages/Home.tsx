@@ -62,6 +62,27 @@ const recentTasks = [
   },
 ];
 
+const upcomingDeadlines = [
+  {
+    id: "1",
+    title: "Create Navbar",
+    type: "Task",
+    deadline: "Sep 12, 2026",
+  },
+  {
+    id: "2",
+    title: "Design Dashboard",
+    type: "Task",
+    deadline: "Sep 14, 2026",
+  },
+  {
+    id: "3",
+    title: "Website Redesign",
+    type: "Project",
+    deadline: "Sep 20, 2026",
+  },
+];
+
 function Home() {
   const stats = [
     { title: "Total Projects", value: 12 },
@@ -124,6 +145,42 @@ function Home() {
           </ResponsiveContainer>
         </div>
       </div>
+
+      {/* Upcoming Deadlines */}
+<div className="rounded-xl border bg-white p-5 shadow-sm">
+  <div className="mb-5 flex items-center justify-between">
+    <h2 className="text-lg font-semibold text-gray-900">
+      Upcoming Deadlines
+    </h2>
+
+    <span className="text-sm text-gray-500">
+      Next deadlines
+    </span>
+  </div>
+
+  <div className="space-y-4">
+    {upcomingDeadlines.map((item) => (
+      <div
+        key={item.id}
+        className="flex flex-col gap-2 rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div>
+          <h3 className="font-medium text-gray-900">
+            {item.title}
+          </h3>
+
+          <p className="mt-1 text-sm text-gray-500">
+            {item.type}
+          </p>
+        </div>
+
+        <div className="text-sm font-medium text-gray-700">
+          {item.deadline}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
 
       {/* Projects Overview */}
       <div className="rounded-xl border bg-white p-5 shadow-sm">

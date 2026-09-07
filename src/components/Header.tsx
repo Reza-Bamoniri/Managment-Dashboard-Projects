@@ -1,12 +1,34 @@
+import { useState } from "react";
+
 type HeaderProps = {
   onMenuClick: () => void;
 };
 
+const notifications = [
+  {
+    id: "1",
+    message: "You have been assigned a new task",
+    time: "10 minutes ago",
+  },
+  {
+    id: "2",
+    message: "The Website Redesign deadline is approaching",
+    time: "1 hour ago",
+  },
+  {
+    id: "3",
+    message: "A new comment was added to your task",
+    time: "Yesterday",
+  },
+];
+
 function Header({ onMenuClick }: HeaderProps) {
+  const [showNotifications, setShowNotifications] = useState(false);
+
   return (
-    <header className="flex h-20 items-center justify-between bg-green-100/40 px-4 shadow-2xl backdrop-blur-md sm:px-6">
+    <header className="flex h-20 items-center justify-between bg-white/90 px-4 shadow-sm backdrop-blur-md sm:px-6">
+      {/* Left */}
       <div className="flex items-center gap-4">
-        {/* Hamburger */}
         <button
           type="button"
           onClick={onMenuClick}
@@ -23,8 +45,8 @@ function Header({ onMenuClick }: HeaderProps) {
         </button>
 
         <div>
-          <h2 className="inline-block text-2xl font-bold bg-linear-to-r from-green-800 to-green-400 bg-clip-text text-transparent">
-            DASHBOARD
+          <h2 className="text-lg font-semibold text-gray-900">
+            Home
           </h2>
 
           <p className="hidden text-xs text-gray-500 sm:block">
@@ -33,19 +55,80 @@ function Header({ onMenuClick }: HeaderProps) {
         </div>
       </div>
 
+      {/* Right */}
       <div className="flex items-center gap-3 sm:gap-5">
         {/* Notifications */}
-        <button
-          type="button"
-          className="relative flex h-10 w-10 items-center justify-center
-          rounded-xl bg-green-50 text-green-700
-          shadow-sm transition hover:bg-green-100"
-          aria-label="Notifications"
-        >
-          <span className="text-lg">🔔</span>
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() =>
+              setShowNotifications((prev) => !prev)
+            }
+            className="relative flex h-10 w-10 items-center justify-center
+            rounded-xl bg-green-50 text-green-700
+            shadow-sm transition hover:bg-green-100"
+            aria-label="Notifications"
+          >
+            <span className="text-lg">🔔</span>
 
-          <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-lime-400 ring-2 ring-white" />
-        </button>
+            <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-lime-400 ring-2 ring-white" />
+          </button>
+
+          {/* Notification Dropdown */}
+          {showNotifications && (
+            <div className="absolute right-0 top-14 z-50 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-black/5">
+              <div className="bg-linear-to-r from-lime-400 to-green-600 px-5 py-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-semibold text-white">
+                      Notifications
+                    </h3>
+
+                    <p className="mt-0.5 text-xs text-white/75">
+                      You have 3 new notifications
+                    </p>
+                  </div>
+
+                  <span className="flex h-7 min-w-7 items-center justify-center rounded-full bg-white/20 px-2 text-xs font-semibold text-white">
+                    3
+                  </span>
+                </div>
+              </div>
+
+              <div className="max-h-80 overflow-y-auto p-2">
+                {notifications.map((notification) => (
+                  <button
+                    key={notification.id}
+                    type="button"
+                    className="flex w-full gap-3 rounded-xl p-3 text-left transition hover:bg-green-50"
+                  >
+                    <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-lime-400" />
+
+                    <div>
+                      <p className="text-sm font-medium text-gray-800">
+                        {notification.message}
+                      </p>
+
+                      <p className="mt-1 text-xs text-gray-400">
+                        {notification.time}
+                      </p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              <div className="p-3">
+                <button
+                  type="button"
+                  className="w-full rounded-xl bg-green-50 py-2.5 text-sm font-medium text-green-700 transition hover:bg-green-100"
+                  onClick={() => setShowNotifications(false)}
+                >
+                  View All Notifications
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* User */}
         <div className="flex items-center gap-3">

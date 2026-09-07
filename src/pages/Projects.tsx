@@ -1,6 +1,6 @@
 import ProjectsHeader from "../components/projects/ProjectsHeader";
 import ProjectStats from "../components/projects/ProjectStats";
-//import ProjectFilters from "../components/projects/ProjectFilters";
+import ProjectFilters from "../components/projects/ProjectFilters";
 //import ProjectsGrid from "../components/projects/ProjectsGrid";
 //import ProjectsPagination from "../components/projects/ProjectsPagination";
 
@@ -11,7 +11,7 @@ function Projects() {
 
       <ProjectStats />
 
-      {/* <ProjectFilters /> */}
+      <ProjectFilters />
 
       {/* <ProjectsGrid /> */}
 

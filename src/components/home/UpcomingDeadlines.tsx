@@ -43,19 +43,19 @@ function UpcomingDeadlines() {
     .slice(0, 5);
 
   return (
-    <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
+    <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6 dark:bg-gray-900 dark:shadow-black/40">
       <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-800">
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-green-300">
           Upcoming Deadlines
         </h2>
 
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           Projects and tasks with upcoming deadlines
         </p>
       </div>
 
       {upcomingDeadlines.length === 0 ? (
-        <div className="py-10 text-center text-sm text-gray-500">
+        <div className="py-10 text-center text-sm text-gray-500 dark:text-gray-400">
           No upcoming deadlines.
         </div>
       ) : (
@@ -63,19 +63,19 @@ function UpcomingDeadlines() {
           {upcomingDeadlines.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-between gap-4 rounded-xl bg-gray-50 p-4 shadow-2xl hover:bg-green-100 transition delay-100 hover:-translate-y-0.5"
+              className="flex items-center justify-between gap-4 rounded-xl bg-gray-50 p-4 shadow-2xl hover:bg-green-100 transition delay-100 hover:-translate-y-0.5 dark:bg-gray-950 dark:hover:bg-green-950/70"
             >
               <div className="min-w-0">
-                <h3 className="truncate text-sm font-medium text-gray-800">
+                <h3 className="truncate text-sm font-medium text-gray-800 dark:text-gray-200">
                   {item.title}
                 </h3>
 
-                <p className="mt-1 text-xs text-gray-500">
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                   {item.type}
                 </p>
               </div>
 
-              <span className="shrink-0 rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 shadow-2xl">
+              <span className="shrink-0 rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 shadow-2xl dark:bg-green-900/60 dark:text-green-300">
                 {item.deadline}
               </span>
             </div>

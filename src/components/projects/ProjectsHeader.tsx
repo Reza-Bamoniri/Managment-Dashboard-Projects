@@ -1,4 +1,10 @@
-function ProjectsHeader() {
+type ProjectsHeaderProps = {
+  onAddProject: () => void;
+};
+
+function ProjectsHeader({
+  onAddProject,
+}: ProjectsHeaderProps) {
   return (
     <section
       className="
@@ -33,6 +39,7 @@ function ProjectsHeader() {
 
       <button
         type="button"
+        onClick={onAddProject}
         className="
           w-full
           rounded-xl
@@ -40,7 +47,6 @@ function ProjectsHeader() {
           px-5
           py-3
           text-sm
-          cursor-pointer
           font-semibold
           text-green-700
           shadow-lg

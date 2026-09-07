@@ -36,7 +36,7 @@ function Projects() {
 
   return (
     <div className="space-y-6">
-      <ProjectsHeader />
+      <ProjectsHeader onAddProject={() => {}} />
 
       <ProjectStats />
 

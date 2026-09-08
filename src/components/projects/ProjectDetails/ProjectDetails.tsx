@@ -1,9 +1,16 @@
 import useProjectDetails from "../../../hooks/useProjectDetails";
 import ProjectDetailsHeader from "./ProjectDetailsHeader";
 import ProjectInfo from "./ProjectInfo";
+import ProjectMembers from "./ProjectMembers";
 
 const ProjectDetails = () => {
-  const { project, loading, error } = useProjectDetails();
+  const {
+  project,
+  projectMembers,
+  projectManager,
+  loading,
+  error,
+} = useProjectDetails();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -22,6 +29,8 @@ const ProjectDetails = () => {
       <ProjectDetailsHeader project={project} />
 
       <ProjectInfo project={project} />
+
+      <ProjectMembers users={projectMembers} manager={projectManager}/>
     </div>
   );
 };

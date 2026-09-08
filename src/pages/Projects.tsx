@@ -5,9 +5,9 @@ import ProjectFilters from "../components/projects/ProjectFilters";
 import ProjectsGrid from "../components/projects/ProjectsGrid";
 import ProjectsPagination from "../components/projects/ProjectsPagination";
 import ProjectModal from "../components/projects/ProjectModal";
-import type { ProjectStatus } from "../types/project";
+import type { Project, ProjectStatus } from "../types/project";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { createProjectThunk, fetchProjects } from "../features/projects/projectsSlice";
+import { createProjectThunk, fetchProjects, updateProjectThunk } from "../features/projects/projectsSlice";
 import type { ProjectFormData } from "../components/projects/ProjectForm";
 import { toast } from "sonner";
 
@@ -21,6 +21,8 @@ function Projects() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
+
   
 
   useEffect(() => {
@@ -28,7 +30,10 @@ function Projects() {
   }, [dispatch]);
 
 
-
+const handleEditProject = (project: Project) => {
+  setEditingProject(project);
+  setIsModalOpen(true);
+};
   
 
 
@@ -52,6 +57,7 @@ function Projects() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setEditingProject(null);
   };
 
   const handleCreateProject = async (data: ProjectFormData) => {
@@ -71,6 +77,38 @@ function Projects() {
     toast.error("Failed to create project.");
   }
 };
+
+
+
+const handleUpdateProject = async (data: ProjectFormData) => {
+  if (!editingProject) return;
+
+  try {
+    await dispatch(
+      updateProjectThunk({
+        id: editingProject.id,
+        project: {
+          ...data,
+          managerId: editingProject.managerId,
+          memberIds: editingProject.memberIds,
+        },
+      })
+    ).unwrap();
+
+    handleCloseModal();
+
+    toast.success("Project updated successfully.");
+  } catch {
+    toast.error("Failed to update project.");
+  }
+};
+
+
+
+
+
+
+
 
   return (
     <div className="space-y-6">
@@ -103,10 +141,10 @@ function Projects() {
       />
 
       {isModalOpen && (
-        <ProjectModal
-          onClose={handleCloseModal}
-          onSubmit={handleCreateProject}
-        />
+            <ProjectModal
+                project={editingProject}
+                onClose={handleCloseModal}
+                onSubmit={editingProject ? handleUpdateProject : handleCreateProject}/>
       )}
     </div>
   );

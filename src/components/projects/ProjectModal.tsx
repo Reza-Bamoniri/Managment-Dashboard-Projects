@@ -1,15 +1,30 @@
+import type { Project } from "../../types/project";
 import type { ProjectFormData } from "./ProjectForm";
 import ProjectForm from "./ProjectForm";
 
 type ProjectModalProps = {
   onClose: () => void;
   onSubmit: (data: ProjectFormData) => void;
+  project?: Project | null;
 };
 
 function ProjectModal({
   onClose,
   onSubmit,
+  project,
 }: ProjectModalProps) {
+  const initialData: ProjectFormData | undefined = project
+    ? {
+        name: project.name,
+        description: project.description,
+        status: project.status,
+        progress: project.progress,
+        deadline: project.deadline,
+      }
+    : undefined;
+
+  const isEditMode = Boolean(project);
+
   return (
     <div
       className="
@@ -43,11 +58,13 @@ function ProjectModal({
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
-              Add New Project
+              {isEditMode ? "Edit Project" : "Add New Project"}
             </h2>
 
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              Create a new project and start tracking its progress.
+              {isEditMode
+                ? "Update project information and save your changes."
+                : "Create a new project and start tracking its progress."}
             </p>
           </div>
 
@@ -60,6 +77,7 @@ function ProjectModal({
               h-9
               w-9
               shrink-0
+              cursor-pointer
               items-center
               justify-center
               rounded-xl
@@ -79,6 +97,8 @@ function ProjectModal({
         </div>
 
         <ProjectForm
+          initialData={initialData}
+          submitText={isEditMode ? "Update Project" : "Create Project"}
           onSubmit={onSubmit}
           onCancel={onClose}
         />

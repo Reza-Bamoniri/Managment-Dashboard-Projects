@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -26,6 +27,8 @@ type ProjectFormData = z.infer<typeof projectSchema>;
 type ProjectFormProps = {
   onSubmit: (data: ProjectFormData) => void;
   onCancel: () => void;
+  initialData?: ProjectFormData;
+  submitText?: string;
 };
 
 function ProjectForm({
@@ -33,19 +36,29 @@ function ProjectForm({
   onCancel,
 }: ProjectFormProps) {
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ProjectFormData>({
-    resolver: zodResolver(projectSchema),
-    defaultValues: {
-      name: "",
-      description: "",
-      status: "planning",
-      progress: 0,
-      deadline: "",
-    },
-  });
+  register,
+  handleSubmit,
+  reset,
+  formState: { errors },
+} = useForm<ProjectFormData>({
+  resolver: zodResolver(projectSchema),
+  defaultValues: initialData ?? {
+    name: "",
+    description: "",
+    status: "planning",
+    progress: 0,
+    deadline: "",
+  },
+});
+
+
+
+useEffect(() => {
+  if (initialData) {
+    reset(initialData);
+  }
+}, [initialData, reset]);
+
 
   return (
     <form
@@ -236,7 +249,7 @@ function ProjectForm({
             dark:hover:bg-green-600
           "
         >
-          Create Project
+          {submitText ?? "Create Project"}
         </button>
       </div>
     </form>

@@ -3,43 +3,26 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Home from "../pages/Home";
 import Projects from "../pages/Projects";
-
-
+import ProjectDetails from "../components/projects/ProjectDetails/ProjectDetails";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<DashboardLayout />}>
-          <Route
-            path="/"
-            element={<Home/>}
-          />
+          <Route path="/" element={<Home />} />
 
-          <Route
-            path="/projects"
-            element={<Projects />}
-          />
+          <Route path="/projects/:id" element={<ProjectDetails />} />
 
-          <Route
-            path="/tasks"
-            element={<div>Tasks</div>}
-          />
+          <Route path="/projects" element={<Projects />} />
 
-          <Route
-            path="/users"
-            element={<div>Users</div>}
-          />
+          <Route path="/tasks" element={<div>Tasks</div>} />
 
-          <Route
-            path="/notifications"
-            element={<div>Notifications</div>}
-          />
+          <Route path="/users" element={<div>Users</div>} />
 
-          <Route
-            path="/settings"
-            element={<div>Settings</div>}
-          />
+          <Route path="/notifications" element={<div>Notifications</div>} />
+
+          <Route path="/settings" element={<div>Settings</div>} />
         </Route>
       </Routes>
     </BrowserRouter>

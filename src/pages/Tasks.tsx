@@ -7,7 +7,7 @@ import TasksTable from "../components/tasks/table/TasksTable";
 import TasksPagination from "../components/tasks/TasksPagination";
 
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { createTaskThunk, fetchTasks, updateTaskThunk } from "../features/tasks/tasksSlice";
+import { createTaskThunk, deleteTaskThunk, fetchTasks, updateTaskThunk } from "../features/tasks/tasksSlice";
 import { fetchProjects } from "../features/projects/projectsSlice";
 import { fetchUsers } from "../features/users/usersSlice";
 
@@ -16,6 +16,7 @@ import usePagination from "../hooks/usePagination";
 import type { TaskFormData } from "../components/tasks/TaskForm";
 import { toast } from "sonner";
 import TaskModal from "../components/tasks/TaskModal";
+import Swal from "sweetalert2";
 
 function Tasks() {
   const dispatch = useAppDispatch();
@@ -86,9 +87,29 @@ function Tasks() {
     setIsModalOpen(true);
   };
 
-  const handleDeleteTask = (task: Task) => {
-    console.log("Delete task:", task.id);
-  };
+  const handleDeleteTask = async (task: Task) => {
+  const result = await Swal.fire({
+    title: "Delete task?",
+    text: `Are you sure you want to delete "${task.title}"?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete it",
+    cancelButtonText: "Cancel",
+    reverseButtons: true,
+  });
+
+  if (!result.isConfirmed) {
+    return;
+  }
+
+  try {
+    await dispatch(deleteTaskThunk(task.id)).unwrap();
+
+    toast.success("Task deleted successfully.");
+  } catch {
+    toast.error("Failed to delete task.");
+  }
+};
 
 
   const handleTaskSubmit = async (data: TaskFormData) => {

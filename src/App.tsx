@@ -7,8 +7,7 @@ function App() {
     <>
     <AppRoutes />
 
-    <Toaster position="top-center" richColors closeButton
-      />
+    <Toaster position="top-center" richColors closeButton/>
     </>
 
 ) 

@@ -9,6 +9,7 @@ import type { ProjectStatus } from "../types/project";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { createProjectThunk, fetchProjects } from "../features/projects/projectsSlice";
 import type { ProjectFormData } from "../components/projects/ProjectForm";
+import { toast } from "sonner";
 
 function Projects() {
   const dispatch = useAppDispatch();
@@ -20,9 +21,17 @@ function Projects() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  
+
   useEffect(() => {
     dispatch(fetchProjects());
   }, [dispatch]);
+
+
+
+  
+
+
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -46,15 +55,21 @@ function Projects() {
   };
 
   const handleCreateProject = async (data: ProjectFormData) => {
-  await dispatch(
-    createProjectThunk({
-      ...data,
-      managerId: "1",
-      memberIds: [],
-    })
-  );
+  try {
+    await dispatch(
+      createProjectThunk({
+        ...data,
+        managerId: "1",
+        memberIds: [],
+      })
+    ).unwrap();
 
-  setIsModalOpen(false);
+    setIsModalOpen(false);
+
+    toast.success("Project created successfully.");
+  } catch {
+    toast.error("Failed to create project.");
+  }
 };
 
   return (

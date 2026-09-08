@@ -14,36 +14,6 @@
       ]
     },
     {
-      "name": "Pharmacy website ",
-      "description": "develop Pharmacy website.",
-      "status": "planning",
-      "progress": 20,
-      "deadline": "2026-09-08",
-      "managerId": "1",
-      "memberIds": [],
-      "id": "SvNzKzDPG0c"
-    },
-    {
-      "name": "Payment Application",
-      "description": "develop Payment Application.",
-      "status": "in-progress",
-      "progress": 35,
-      "deadline": "2026-09-08",
-      "managerId": "1",
-      "memberIds": [],
-      "id": "yDtsoRtd0dM"
-    },
-    {
-      "name": "Shopping Website",
-      "description": "develop Shopping Website.",
-      "status": "planning",
-      "progress": 5,
-      "deadline": "2026-09-08",
-      "managerId": "1",
-      "memberIds": [],
-      "id": "Lr03oncuG1A"
-    },
-    {
       "name": "Accounting Application",
       "description": "develop Accounting Application.",
       "status": "in-progress",

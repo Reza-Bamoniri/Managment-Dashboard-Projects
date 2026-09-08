@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Project } from "../../types/project";
 
 type ProjectCardProps = {
@@ -88,25 +89,13 @@ function ProjectCard({ project }: ProjectCardProps) {
           </p>
         </div>
 
-        <button
-          type="button"
-          className="
-            rounded-xl
-            bg-green-50
-            px-4
-            py-2
-            text-sm
-            font-medium
-            text-green-700
-            transition
-            hover:bg-green-200
-            dark:bg-green-950/70
-            dark:text-green-300
-            dark:hover:bg-green-900
-          "
-        >
-          View
-        </button>
+        <Link to={`/projects/${project.id}`}
+          className=" cursor-pointer rounded-xl bg-green-50 px-4 py-2 text-sm
+                    font-medium  text-green-700  transition  delay-100  hover:-translate-y-0.5  hover:bg-green-200  dark:bg-green-950/70
+                   dark:text-green-300 dark:hover:bg-green-900"
+              >
+              View
+         </Link>
       </div>
     </article>
   );

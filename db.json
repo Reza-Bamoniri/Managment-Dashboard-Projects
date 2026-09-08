@@ -14,16 +14,6 @@
       ]
     },
     {
-      "name": "Windows Application",
-      "description": "Develop a mobile application.",
-      "status": "planning",
-      "progress": 10,
-      "deadline": "2026-09-07",
-      "managerId": "1",
-      "memberIds": [],
-      "id": "ZutRflQZT6M"
-    },
-    {
       "name": "Pharmacy website ",
       "description": "develop Pharmacy website.",
       "status": "planning",

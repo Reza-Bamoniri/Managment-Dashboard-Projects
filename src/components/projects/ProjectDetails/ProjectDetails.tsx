@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 import { deleteProjectThunk } from "../../../features/projects/projectsSlice";
 import useProjectDetails from "../../../hooks/useProjectDetails";
 import { useAppDispatch } from "../../../store/hooks";
@@ -9,9 +10,11 @@ import ProjectInfo from "./ProjectInfo";
 import ProjectMembers from "./ProjectMembers";
 import ProjectTasks from "./ProjectTasks";
 
+
 const ProjectDetails = () => {
 
 const dispatch = useAppDispatch();
+const navigate = useNavigate();
 
 const handleDelete = async () => {
   const isDarkMode =
@@ -51,6 +54,7 @@ const handleDelete = async () => {
     ).unwrap();
 
     toast.success("Project deleted successfully.");
+    navigate("/projects");
   } catch {
     toast.error("Failed to delete project.");
   }

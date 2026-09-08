@@ -2,19 +2,15 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 type TasksPaginationProps = {
   currentPage: number;
-  totalItems: number;
+  totalPages: number;
   onPageChange: (page: number) => void;
 };
 
-const ITEMS_PER_PAGE = 5;
-
 function TasksPagination({
   currentPage,
-  totalItems,
+  totalPages,
   onPageChange,
 }: TasksPaginationProps) {
-  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-
   if (totalPages <= 1) {
     return null;
   }

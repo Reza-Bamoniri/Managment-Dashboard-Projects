@@ -12,6 +12,7 @@ import { fetchProjects } from "../features/projects/projectsSlice";
 import { fetchUsers } from "../features/users/usersSlice";
 
 import type { Task, TaskPriority, TaskStatus } from "../types/task";
+import usePagination from "../hooks/usePagination";
 
 function Tasks() {
   const dispatch = useAppDispatch();
@@ -24,7 +25,7 @@ function Tasks() {
   const [status, setStatus] = useState<TaskStatus | "all">("all");
   const [priority, setPriority] = useState<TaskPriority | "all">("all");
   const [projectId, setProjectId] = useState("all");
-  const [currentPage, setCurrentPage] = useState(1);
+  
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
@@ -58,6 +59,19 @@ function Tasks() {
       );
     });
   }, [tasks, search, status, priority, projectId]);
+
+
+
+  const {
+  currentPage,
+  totalPages,
+  paginatedItems: paginatedTasks,
+  setCurrentPage,
+} = usePagination(filteredTasks, 5);
+
+
+
+
 
   const handleAddTask = () => {
     setEditingTask(null);
@@ -109,7 +123,7 @@ function Tasks() {
       />
 
       <TasksTable
-        tasks={filteredTasks}
+        tasks={paginatedTasks}
         projects={projects}
         users={users}
         onEdit={handleEditTask}
@@ -117,10 +131,10 @@ function Tasks() {
       />
 
       <TasksPagination
-        currentPage={currentPage}
-        totalItems={filteredTasks.length}
-        onPageChange={setCurrentPage}
-      />
+           currentPage={currentPage}
+           totalPages={totalPages}
+           onPageChange={setCurrentPage}
+       />
 
       {isModalOpen && (
         <div>

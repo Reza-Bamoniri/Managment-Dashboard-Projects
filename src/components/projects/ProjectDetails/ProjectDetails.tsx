@@ -11,6 +11,8 @@ import ProjectDetailsHeader from "./ProjectDetailsHeader";
 import ProjectInfo from "./ProjectInfo";
 import ProjectMembers from "./ProjectMembers";
 import ProjectTasks from "./ProjectTasks";
+import useProjectEdit from "../../../hooks/useProjectEdit";
+import ProjectModal from "../ProjectModal";
 
 const ProjectDetails = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +27,18 @@ const ProjectDetails = () => {
     loading,
     error,
   } = useProjectDetails();
+
+
+
+  const {
+  isEditModalOpen,
+  openEditModal,
+  closeEditModal,
+  updateProject,
+} = useProjectEdit(project);
+
+
+
 
   const handleDelete = async () => {
     if (!project) return;
@@ -92,7 +106,7 @@ const ProjectDetails = () => {
     <div className="space-y-6 rounded-3xl bg-linear-to-r from-green-300 via-green-500 to-green-700 p-6 shadow-2xl dark:to-gray-700 dark:via-green-950  dark:from-green-400">
       <ProjectDetailsHeader
         project={project}
-        onEdit={() => console.log("Edit", project.id)}
+        onEdit={openEditModal}
         onDelete={handleDelete}
       />
 
@@ -106,6 +120,10 @@ const ProjectDetails = () => {
       <ProjectTasks tasks={projectTasks} />
 
       <ProjectComments comments={projectComments} />
+
+      {isEditModalOpen && (<ProjectModal project={project} onClose={closeEditModal} onSubmit={updateProject}/>)}
+
+
     </div>
   );
 };

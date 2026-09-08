@@ -177,6 +177,11 @@ const projectsSlice = createSlice({
   if (index !== -1) {
     state.projects[index] = action.payload;
   }
+
+  if (state.selectedProject?.id === action.payload.id) {
+    state.selectedProject = action.payload;}
+
+
    })
 
      .addCase(updateProjectThunk.rejected, (state) => {

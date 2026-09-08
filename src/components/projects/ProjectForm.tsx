@@ -34,6 +34,8 @@ type ProjectFormProps = {
 function ProjectForm({
   onSubmit,
   onCancel,
+  initialData,
+  submitText,
 }: ProjectFormProps) {
   const {
   register,

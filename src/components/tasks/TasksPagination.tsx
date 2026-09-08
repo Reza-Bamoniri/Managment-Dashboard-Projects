@@ -16,10 +16,8 @@ function TasksPagination({
   }
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <p className="text-sm text-gray-500 dark:text-gray-400">
-        Showing page {currentPage} of {totalPages}
-      </p>
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+      
 
       <div className="flex items-center gap-2">
         <button

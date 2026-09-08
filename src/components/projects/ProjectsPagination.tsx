@@ -16,7 +16,7 @@ function ProjectsPagination({
   return (
     <div className="flex flex-col items-center justify-center gap-4 rounded-2xl bg-white p-4 shadow-2xl sm:flex-row dark:bg-gray-900 dark:shadow-black/40">
       <p className="text-sm text-gray-500 dark:text-gray-400">
-        Page {currentPage} of {totalPages}
+        
       </p>
 
       <div className="flex items-center gap-2">

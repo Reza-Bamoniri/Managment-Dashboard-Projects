@@ -19,6 +19,9 @@ function RecentTasks() {
     dispatch(fetchProjects());
   }, [dispatch]);
 
+
+  const latestTasks = tasks.slice(-5).reverse();
+
   return (
     <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6 dark:bg-gray-900 dark:shadow-black/40">
       <div className="mb-6">
@@ -77,7 +80,7 @@ function RecentTasks() {
             </thead>
 
             <tbody>
-              {tasks.map((task) => {
+              {latestTasks.map((task) => {
                 const project = projects.find(
                   (project) => project.id === task.projectId
                 );

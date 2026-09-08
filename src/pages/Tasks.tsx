@@ -7,12 +7,15 @@ import TasksTable from "../components/tasks/table/TasksTable";
 import TasksPagination from "../components/tasks/TasksPagination";
 
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { fetchTasks } from "../features/tasks/tasksSlice";
+import { createTaskThunk, fetchTasks, updateTaskThunk } from "../features/tasks/tasksSlice";
 import { fetchProjects } from "../features/projects/projectsSlice";
 import { fetchUsers } from "../features/users/usersSlice";
 
 import type { Task, TaskPriority, TaskStatus } from "../types/task";
 import usePagination from "../hooks/usePagination";
+import type { TaskFormData } from "../components/tasks/TaskForm";
+import { toast } from "sonner";
+import TaskModal from "../components/tasks/TaskModal";
 
 function Tasks() {
   const dispatch = useAppDispatch();
@@ -87,6 +90,47 @@ function Tasks() {
     console.log("Delete task:", task.id);
   };
 
+
+  const handleTaskSubmit = async (data: TaskFormData) => {
+  try {
+    if (editingTask) {
+      await dispatch(
+        updateTaskThunk({
+          id: editingTask.id,
+          task: {
+            ...data,
+            completedAt: editingTask.completedAt,
+          },
+        })
+      ).unwrap();
+
+      toast.success("Task updated successfully.");
+    } else {
+      await dispatch(
+        createTaskThunk({
+          ...data,
+          completedAt: data.status === "completed"
+            ? new Date().toISOString()
+            : null,
+        }),
+      ).unwrap();
+
+      toast.success("Task created successfully.");
+    }
+
+    handleCloseModal();
+  } catch {
+    toast.error(
+      editingTask
+        ? "Failed to update task."
+        : "Failed to create task."
+    );
+  }
+};
+
+
+
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setEditingTask(null);
@@ -138,7 +182,15 @@ function Tasks() {
 
       {isModalOpen && (
         <div>
-          {/* TaskModal will be added here */}
+          {isModalOpen && (
+                <TaskModal
+                  task={editingTask}
+                  projects={projects}
+                  users={users}
+                  onSubmit={handleTaskSubmit}
+                  onClose={handleCloseModal}
+                />
+)}
         </div>
       )}
     </div>

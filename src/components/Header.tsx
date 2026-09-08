@@ -107,6 +107,7 @@ function Header({ onMenuClick }: HeaderProps) {
               relative flex h-10 w-10 items-center justify-center
               rounded-xl
               bg-white
+              cursor-pointer
               text-green-700
               shadow-sm
               transition
@@ -227,7 +228,7 @@ function Header({ onMenuClick }: HeaderProps) {
               setShowNotifications(false);
             }}
             className="
-              flex items-center gap-3 rounded-xl p-1.5
+              flex items-center cursor-pointer gap-3 rounded-xl p-1.5
               transition
               hover:bg-green-50
               dark:hover:bg-green-950/50
@@ -286,6 +287,7 @@ function Header({ onMenuClick }: HeaderProps) {
                   w-full rounded-xl px-3 py-3
                   text-left text-sm font-medium
                   text-gray-700
+                  cursor-pointer
                   transition
                   hover:bg-green-50
                   hover:text-green-700
@@ -305,6 +307,7 @@ function Header({ onMenuClick }: HeaderProps) {
                   text-left text-sm font-medium
                   text-gray-700
                   transition
+                  cursor-pointer
                   hover:bg-green-50
                   hover:text-green-700
                   dark:text-gray-300
@@ -323,6 +326,7 @@ function Header({ onMenuClick }: HeaderProps) {
                   w-full rounded-xl px-3 py-3
                   text-left text-sm font-medium
                   text-red-500
+                  cursor-pointer
                   transition
                   hover:bg-red-50
                   dark:text-red-400

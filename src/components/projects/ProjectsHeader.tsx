@@ -51,6 +51,7 @@ function ProjectsHeader({
           text-green-700
           shadow-lg
           transition
+          cursor-pointer
           delay-100
           hover:-translate-y-0.5
           hover:bg-green-50

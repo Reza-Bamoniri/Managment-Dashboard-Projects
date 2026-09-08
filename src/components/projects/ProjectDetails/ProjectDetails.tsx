@@ -89,7 +89,7 @@ const ProjectDetails = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 rounded-3xl bg-linear-to-r from-green-300 via-green-500 to-green-700 p-6 shadow-2xl dark:to-gray-700 dark:via-green-950  dark:from-green-400">
       <ProjectDetailsHeader
         project={project}
         onEdit={() => console.log("Edit", project.id)}

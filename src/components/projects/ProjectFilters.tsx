@@ -72,6 +72,7 @@ function ProjectFilters({
               w-full rounded-xl border border-gray-200
               bg-gray-50 px-4 py-3 text-sm text-gray-800
               outline-none transition
+              cursor-pointer
               focus:border-green-500
               focus:ring-2 focus:ring-green-500/20
               dark:border-gray-700 dark:bg-gray-950

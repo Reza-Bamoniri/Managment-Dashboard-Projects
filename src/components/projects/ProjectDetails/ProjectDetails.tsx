@@ -1,5 +1,6 @@
 import useProjectDetails from "../../../hooks/useProjectDetails";
 import ProjectDetailsHeader from "./ProjectDetailsHeader";
+import ProjectInfo from "./ProjectInfo";
 
 const ProjectDetails = () => {
   const { project, loading, error } = useProjectDetails();
@@ -17,8 +18,10 @@ const ProjectDetails = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div>
       <ProjectDetailsHeader project={project} />
+
+      <ProjectInfo project={project} />
     </div>
   );
 };

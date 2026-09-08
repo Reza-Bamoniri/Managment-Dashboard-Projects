@@ -13,6 +13,8 @@ function ProjectsOverview() {
     dispatch(fetchProjects());
   }, [dispatch]);
 
+  const latestProjects = projects.slice(0, 4);
+
   return (
     <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6 dark:bg-gray-900 dark:shadow-black/40">
       <div className="mb-6">
@@ -45,7 +47,7 @@ function ProjectsOverview() {
 
       {!loading && !error && projects.length > 0 && (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {projects.map((project) => (
+          {latestProjects.map((project) => (
             <div
               key={project.id}
               className="

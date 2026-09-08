@@ -154,7 +154,7 @@ const projectsSlice = createSlice({
 
     .addCase(createProjectThunk.fulfilled, (state, action) => {
      state.loading = false;
-     state.projects.push(action.payload);
+     state.projects.unshift(action.payload);
    })
 
     .addCase(createProjectThunk.rejected, (state) => {

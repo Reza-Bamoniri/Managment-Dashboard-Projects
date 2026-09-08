@@ -1,20 +1,6 @@
 {
   "projects": [
     {
-      "id": "1",
-      "name": "Website Redesign",
-      "description": "Redesign company website",
-      "status": "in-progress",
-      "progress": 75,
-      "deadline": "2026-09-20",
-      "managerId": "1",
-      "memberIds": [
-        "1",
-        "2",
-        "5"
-      ]
-    },
-    {
       "id": "2",
       "name": "Mobile Application",
       "description": "Develop a mobile application",
@@ -85,7 +71,7 @@
       "description": "Design and implement the main navigation",
       "status": "todo",
       "priority": "high",
-      "projectId": "1",
+      "projectId": null,
       "assignedTo": "2",
       "deadline": "2026-09-12",
       "completedAt": null
@@ -96,7 +82,7 @@
       "description": "Create the dashboard UI and layout",
       "status": "in-progress",
       "priority": "high",
-      "projectId": "1",
+      "projectId": null,
       "assignedTo": "4",
       "deadline": "2026-09-14",
       "completedAt": null
@@ -107,7 +93,7 @@
       "description": "Create the Header UI and layout",
       "status": "completed",
       "priority": "high",
-      "projectId": "1",
+      "projectId": null,
       "assignedTo": "4",
       "deadline": "2026-09-14",
       "completedAt": "2026-09-03T14:30:00"
@@ -196,21 +182,21 @@
       "id": "1",
       "text": "The new design looks great.",
       "userId": "2",
-      "projectId": "1",
+      "projectId": null,
       "createdAt": "2026-09-06T11:00:00"
     },
     {
       "id": "2",
       "text": "I have finished the initial layout.",
       "userId": "4",
-      "projectId": "1",
+      "projectId": null,
       "createdAt": "2026-09-06T10:30:00"
     },
     {
       "id": "3",
       "text": "Can we review the navbar before Friday?",
       "userId": "1",
-      "projectId": "1",
+      "projectId": null,
       "createdAt": "2026-09-06T09:45:00"
     },
     {

@@ -59,7 +59,7 @@ function Projects() {
 
   return (
     <div className="space-y-6">
-      <ProjectsHeader onAddProject={handleAddProject} />
+      <ProjectsHeader onAddProject={handleAddProject}  />
 
       <ProjectStats />
 

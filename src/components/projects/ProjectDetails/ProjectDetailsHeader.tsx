@@ -3,11 +3,11 @@ import type { Project } from "../../../types/project";
 
 type ProjectDetailsHeaderProps = {
   project: Project;
+  onEdit: () => void;
+  onDelete: () => void;
 };
 
-function ProjectDetailsHeader({
-  project,
-}: ProjectDetailsHeaderProps) {
+function ProjectDetailsHeader({ project, onEdit, onDelete,}: ProjectDetailsHeaderProps) {
   return (
     <section
       className="
@@ -80,8 +80,32 @@ function ProjectDetailsHeader({
           >
             {project.status}
           </span>
+            
+            
+
         </div>
+        
       </div>
+
+         <div className="flex flex-wrap items-center mt-4 gap-2">
+  <button
+    type="button"
+    onClick={onEdit}
+    className=" cursor-pointer rounded-xl bg-white px-4 py-2 text-sm font-semibold text-green-700 shadow-lg transition  delay-100 hover:-translate-y-0.5  hover:bg-green-100 dark:bg-gray-900  dark:text-green-300  dark:hover:bg-green-950"
+  >
+    Edit
+  </button>
+
+  <button
+    type="button"
+    onClick={onDelete}
+    className="cursor-pointer rounded-xl bg-red-500/90 px-4 py-2 text-sm font-semibold text-white shadow-lg  transition
+      delay-100  hover:-translate-y-0.5  hover:bg-red-600 dark:bg-pink-600/70 dark:text-red-300 dark:hover:bg-pink-700"
+  >
+    Delete
+  </button>
+</div>
+      
     </section>
   );
 }

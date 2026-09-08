@@ -1,4 +1,5 @@
 import useProjectDetails from "../../../hooks/useProjectDetails";
+import ProjectComments from "./ProjectComments";
 import ProjectDetailsHeader from "./ProjectDetailsHeader";
 import ProjectInfo from "./ProjectInfo";
 import ProjectMembers from "./ProjectMembers";
@@ -10,6 +11,7 @@ const ProjectDetails = () => {
   projectMembers,
   projectManager,
   projectTasks,
+  projectComments,
   loading,
   error,
 } = useProjectDetails();
@@ -35,6 +37,8 @@ const ProjectDetails = () => {
       <ProjectMembers users={projectMembers} manager={projectManager}/>
 
       <ProjectTasks tasks={projectTasks} />
+
+      <ProjectComments comments={projectComments} />
     </div>
   );
 };

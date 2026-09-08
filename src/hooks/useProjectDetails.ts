@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchProjectById } from "../features/projects/projectsSlice";
 import { fetchUsers } from "../features/users/usersSlice";
 import { fetchTasks } from "../features/tasks/tasksSlice";
+import { fetchComments } from "../features/comments/commentsSlice";
 
 function useProjectDetails() {
   const { id } = useParams<{ id: string }>();
@@ -30,13 +31,51 @@ const projectTasks = selectedProject
 
 
 
+
+  const comments = useAppSelector(
+  (state) => state.comments.comments
+);
+
+
+const usersById = new Map(
+  users.map((user) => [user.id, user])
+);
+
+
+const projectComments = selectedProject
+  ? comments
+      .filter(
+        (comment) => comment.projectId === selectedProject.id
+      )
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() -
+          new Date(a.createdAt).getTime()
+      )
+      .map((comment) => ({
+        ...comment,
+        user: usersById.get(comment.userId),
+      }))
+  : [];
+
+
+
+
+
   useEffect(() => {
     if (id) {
       dispatch(fetchProjectById(id));
       dispatch(fetchUsers());
       dispatch(fetchTasks());
+      dispatch(fetchComments());
     }
   }, [dispatch, id]);
+
+
+  
+
+
+
 
   const projectMembers = selectedProject
     ? users.filter((user) =>
@@ -55,6 +94,7 @@ const projectTasks = selectedProject
   projectMembers,
   projectManager,
   projectTasks,
+  projectComments,
   loading,
   error,
 };

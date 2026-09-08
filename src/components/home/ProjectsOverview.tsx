@@ -13,7 +13,7 @@ function ProjectsOverview() {
     dispatch(fetchProjects());
   }, [dispatch]);
 
-  const latestProjects = projects.slice(0, 4);
+  const latestProjects = projects.slice(-4).reverse();
 
   return (
     <section className="rounded-2xl bg-white p-5 shadow-2xl sm:p-6 dark:bg-gray-900 dark:shadow-black/40">

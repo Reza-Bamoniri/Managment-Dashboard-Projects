@@ -5,18 +5,28 @@ function usePagination<T>(items: T[], itemsPerPage: number) {
 
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
+  const validPage = Math.min(
+    currentPage,
+    Math.max(totalPages, 1)
+  );
+
   const paginatedItems = useMemo(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
+    const startIndex = (validPage - 1) * itemsPerPage;
 
     return items.slice(startIndex, startIndex + itemsPerPage);
-  }, [items, currentPage, itemsPerPage]);
+  }, [items, validPage, itemsPerPage]);
 
   const changePage = (page: number) => {
-    setCurrentPage(page);
+    setCurrentPage(
+      Math.min(
+        Math.max(page, 1),
+        Math.max(totalPages, 1)
+      )
+    );
   };
 
   return {
-    currentPage,
+    currentPage: validPage,
     totalPages,
     paginatedItems,
     setCurrentPage: changePage,

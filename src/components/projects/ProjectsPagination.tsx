@@ -1,20 +1,14 @@
-import { PROJECTS_PER_PAGE } from "./ProjectsGrid";
-
 type ProjectsPaginationProps = {
   currentPage: number;
-  totalItems: number;
+  totalPages: number;
   onPageChange: (page: number) => void;
 };
 
 function ProjectsPagination({
   currentPage,
-  totalItems,
+  totalPages,
   onPageChange,
 }: ProjectsPaginationProps) {
-  const totalPages = Math.ceil(
-    totalItems / PROJECTS_PER_PAGE
-  );
-
   if (totalPages <= 1) {
     return null;
   }
@@ -22,7 +16,7 @@ function ProjectsPagination({
   return (
     <div className="flex flex-col items-center justify-center gap-4 rounded-2xl bg-white p-4 shadow-2xl sm:flex-row dark:bg-gray-900 dark:shadow-black/40">
       <p className="text-sm text-gray-500 dark:text-gray-400">
-        
+        Page {currentPage} of {totalPages}
       </p>
 
       <div className="flex items-center gap-2">
@@ -30,7 +24,7 @@ function ProjectsPagination({
           type="button"
           disabled={currentPage === 1}
           onClick={() => onPageChange(currentPage - 1)}
-          className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-green-950"
+          className="cursor-pointer rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-green-950"
         >
           Prev
         </button>
@@ -46,6 +40,7 @@ function ProjectsPagination({
             className={`
               h-9
               w-9
+              cursor-pointer
               rounded-xl
               text-sm
               font-medium
@@ -65,7 +60,7 @@ function ProjectsPagination({
           type="button"
           disabled={currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
-          className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-green-950"
+          className="cursor-pointer rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-green-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-green-950"
         >
           Next
         </button>

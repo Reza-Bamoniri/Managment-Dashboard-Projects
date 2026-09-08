@@ -1,14 +1,23 @@
 import { useEffect, useMemo, useState } from "react";
+
 import ProjectsHeader from "../components/projects/ProjectsHeader";
 import ProjectStats from "../components/projects/ProjectStats";
 import ProjectFilters from "../components/projects/ProjectFilters";
 import ProjectsGrid from "../components/projects/ProjectsGrid";
 import ProjectsPagination from "../components/projects/ProjectsPagination";
 import ProjectModal from "../components/projects/ProjectModal";
+
 import type { ProjectStatus } from "../types/project";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { createProjectThunk, fetchProjects } from "../features/projects/projectsSlice";
 import type { ProjectFormData } from "../components/projects/ProjectForm";
+
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import {
+  createProjectThunk,
+  fetchProjects,
+} from "../features/projects/projectsSlice";
+
+import usePagination from "../hooks/usePagination";
+
 import { toast } from "sonner";
 
 function Projects() {
@@ -18,25 +27,14 @@ function Projects() {
 
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<ProjectStatus | "all">("all");
-  const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  
-
-  
 
   useEffect(() => {
     dispatch(fetchProjects());
   }, [dispatch]);
 
-
-
-  
-
-
-
   const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
+    return [...projects].reverse().filter((project) => {
       const matchesSearch = project.name
         .toLowerCase()
         .includes(search.toLowerCase());
@@ -48,6 +46,13 @@ function Projects() {
     });
   }, [projects, search, status]);
 
+  const {
+  currentPage,
+  totalPages,
+  paginatedItems: paginatedProjects,
+  setCurrentPage,
+} = usePagination(filteredProjects, 6);
+
   const handleAddProject = () => {
     setIsModalOpen(true);
   };
@@ -57,63 +62,52 @@ function Projects() {
   };
 
   const handleCreateProject = async (data: ProjectFormData) => {
-  try {
-    await dispatch(
-      createProjectThunk({
-        ...data,
-        managerId: "1",
-        memberIds: [],
-      })
-    ).unwrap();
+    try {
+      await dispatch(
+        createProjectThunk({
+          ...data,
+          managerId: "1",
+          memberIds: [],
+        })
+      ).unwrap();
 
-    setIsModalOpen(false);
+      setIsModalOpen(false);
 
-    toast.success("Project created successfully.");
-  } catch {
-    toast.error("Failed to create project.");
-  }
-};
-
-
-
-
-
+      toast.success("Project created successfully.");
+    } catch {
+      toast.error("Failed to create project.");
+    }
+  };
 
   return (
     <div className="space-y-6">
-      <ProjectsHeader onAddProject={handleAddProject}  />
+      <ProjectsHeader onAddProject={handleAddProject} />
 
       <ProjectStats />
 
       <ProjectFilters
         search={search}
         status={status}
-        onSearchChange={(value) => {
-          setSearch(value);
-          setCurrentPage(1);
-        }}
-        onStatusChange={(value) => {
-          setStatus(value);
-          setCurrentPage(1);
-        }}
+        onSearchChange={setSearch}
+        onStatusChange={setStatus}
       />
 
       <ProjectsGrid
-        projects={filteredProjects}
-        currentPage={currentPage}
+        projects={paginatedProjects}
+        
       />
 
       <ProjectsPagination
-        currentPage={currentPage}
-        totalItems={filteredProjects.length}
-        onPageChange={setCurrentPage}
-      />
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+/>
 
       {isModalOpen && (
-            <ProjectModal
-           onClose={handleCloseModal}
-           onSubmit={handleCreateProject}
-/>
+        <ProjectModal
+          onClose={handleCloseModal}
+          onSubmit={handleCreateProject}
+        />
       )}
     </div>
   );

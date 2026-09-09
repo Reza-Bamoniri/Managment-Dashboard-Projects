@@ -8,11 +8,15 @@ import Tasks from "../pages/Tasks";
 import Users from "../pages/Users";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
+import ProtectedRoute from "./ProtectedRoute";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+
+        <Route element={<ProtectedRoute />}>
+
         <Route element={<DashboardLayout />}>
           <Route path="/" element={<Home />} />
 
@@ -27,6 +31,8 @@ function AppRoutes() {
           <Route path="/comment" element={<div>Notifications</div>} />
 
           <Route path="/profile" element={<Profile />} />
+        </Route>
+
         </Route>
 
 

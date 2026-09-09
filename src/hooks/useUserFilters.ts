@@ -1,16 +1,14 @@
 import { useMemo, useState } from "react";
 
-import type { User } from "../types/user";
-
-export type UserStatus = "all" | "active" | "inactive";
+import type { User, UserStatus } from "../types/user";
 
 function useUserFilters(users: User[]) {
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<UserStatus>("all");
+  const [status, setStatus] = useState<UserStatus | "all">("all");
 
   const filteredUsers = useMemo(() => {
     return users.filter((user) => {
-      const searchValue = search.toLowerCase();
+      const searchValue = search.toLowerCase().trim();
 
       const matchesSearch =
         user.name.toLowerCase().includes(searchValue) ||

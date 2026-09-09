@@ -1,12 +1,12 @@
 import { FiSearch } from "react-icons/fi";
 
-import type { UserStatus } from "../../hooks/useUserFilters";
+import type { UserStatus } from "../../types/user";
 
 type UserFiltersProps = {
   search: string;
-  status: UserStatus;
+  status: UserStatus | "all";
   onSearchChange: (value: string) => void;
-  onStatusChange: (value: UserStatus) => void;
+  onStatusChange: (value: UserStatus | "all") => void;
 };
 
 function UserFilters({

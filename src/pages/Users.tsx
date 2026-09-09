@@ -15,9 +15,11 @@ import usePagination from "../hooks/usePagination";
 function Users() {
   const dispatch = useAppDispatch();
 
-  const users = useAppSelector(
-    (state) => state.users.users
-  );
+  const {
+  users,
+  loading,
+  error,
+} = useAppSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -55,6 +57,63 @@ function Users() {
     clearFilters();
     setCurrentPage(1);
   };
+
+  if (loading && users.length === 0) {
+  return (
+    <div className="flex min-h-100 items-center justify-center">
+      <div className="text-center">
+        <div
+          className="
+            mx-auto h-10 w-10 animate-spin rounded-full
+            border-4 border-gray-200 border-t-green-600
+            dark:border-gray-700 dark:border-t-green-500
+          "
+        />
+
+        <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+          Loading users...
+        </p>
+      </div>
+    </div>
+  );
+}
+
+if (error && users.length === 0) {
+  return (
+    <div
+      className="
+        flex min-h-100 items-center justify-center
+        rounded-2xl bg-white p-8 shadow-2xl
+        dark:bg-gray-900 dark:shadow-black/40
+      "
+    >
+      <div className="text-center">
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+          Failed to load users
+        </h2>
+
+        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+          Something went wrong while loading the users.
+        </p>
+
+        <button
+          type="button"
+          onClick={() => dispatch(fetchUsers())}
+          className="
+            mt-5 cursor-pointer rounded-xl
+            bg-green-600 px-5 py-2.5
+            text-sm font-semibold text-white
+            transition hover:bg-green-700
+            dark:bg-green-500 dark:hover:bg-green-600
+          "
+        >
+          Try Again
+        </button>
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <div className="space-y-6">

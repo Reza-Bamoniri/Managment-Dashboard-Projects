@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAppDispatch } from "../store/hooks";
 import {
   createUserThunk,
+  deleteUserThunk,
   updateUserThunk,
 } from "../features/users/usersSlice";
 
@@ -49,6 +50,18 @@ function useUserManagement() {
     }
   };
 
+
+  const handleDelete = async (user: User) => {
+  try {
+    await dispatch(deleteUserThunk(user.id)).unwrap();
+  } catch (error) {
+    console.error("Failed to delete user:", error);
+  }
+};
+
+
+
+
   return {
     isModalOpen,
     selectedUser,
@@ -56,6 +69,7 @@ function useUserManagement() {
     openEditModal,
     closeModal,
     handleSubmit,
+    handleDelete
   };
 }
 

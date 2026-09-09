@@ -127,61 +127,58 @@ if (error && users.length === 0) {
         onSearchChange={handleSearchChange}
         onStatusChange={handleStatusChange}
       />
+            
+          {users.length === 0 ? (
+  <section className="rounded-2xl bg-white p-10 text-center shadow-2xl dark:bg-gray-900 dark:shadow-black/40">
+    <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+      No users yet
+    </h2>
 
-      {filteredUsers.length === 0 ? (
-        <section
-          className="
-            rounded-2xl bg-white p-10 text-center shadow-2xl
-            dark:bg-gray-900 dark:shadow-black/40
-          "
-        >
-          <h2
-            className="
-              text-lg font-semibold
-              text-gray-800 dark:text-gray-200
-            "
-          >
-            No users found
-          </h2>
+    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+      Add your first user to get started.
+    </p>
 
-          <p
-            className="
-              mt-2 text-sm
-              text-gray-500 dark:text-gray-400
-            "
-          >
-            No users match your current search or filter.
-          </p>
+    <button
+      type="button"
+      className="mt-5 cursor-pointer rounded-xl bg-green-600 px-5 py-2.5
+        text-sm font-semibold text-white transition hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600"
+    >
+      Add User
+    </button>
 
-          <button
-            type="button"
-            onClick={handleClearFilters}
-            className="
-              mt-5 cursor-pointer rounded-xl
-              border border-gray-200 bg-white
-              px-5 py-2.5 text-sm font-medium
-              text-gray-600 transition
-              hover:bg-gray-100
-              dark:border-gray-700
-              dark:bg-gray-950
-              dark:text-gray-300
-              dark:hover:bg-gray-800
-            "
-          >
-            Clear Filters
-          </button>
-        </section>
-      ) : (
-        <>
-          <UsersTable users={paginatedUsers} />
+  </section>
 
-          <UsersPagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
-        </>
-      )}
+  ) : filteredUsers.length === 0 ? (
+  
+  <section className="rounded-2xl bg-white p-10 text-center shadow-2xl dark:bg-gray-900 dark:shadow-black/40">
+    <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+      No users found
+    </h2>
+
+    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+      No users match your current search or filter.
+    </p>
+
+    <button
+      type="button"
+      onClick={handleClearFilters}
+      className="mt-5 cursor-pointer rounded-xl border border-gray-200 bg-white
+        px-5 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100
+        dark:border-gray-700 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-gray-800"
+    >
+      Clear Filters
+    </button>
+
+  </section>
+) : (
+  <>
+    <UsersTable users={paginatedUsers} />
+
+    <UsersPagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage}/>
+  </>
+)}
+            
+      
     </div>
   );
 }

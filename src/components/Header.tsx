@@ -276,7 +276,7 @@ useEffect(() => {
             "
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-lime-400 to-green-700 text-sm font-bold text-white shadow-md dark:from-green-500 dark:to-green-900">
-              {user?.avatar ? (<img src={user.avatar}alt={user.name} className="h-full w-full object-cover"/>
+              {user?.avatar ? (<img src={user.avatar}alt={user.name}  className="h-full w-full object-cover rounded-full"/>
                  ) : ( user?.name ?.split(" ").map((name) => name[0]).join("").slice(0, 2))}
             </div>
 

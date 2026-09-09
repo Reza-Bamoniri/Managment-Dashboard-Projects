@@ -76,8 +76,14 @@ function useUserManagement() {
   };
 
   const handleDelete = async (user: User) => {
-    const isDarkMode =
-      document.documentElement.classList.contains("dark");
+
+    if (user.id === "1") {
+    toast.error("This user cannot be deleted");
+    return;
+  }
+
+
+    const isDarkMode = document.documentElement.classList.contains("dark");
 
     const result = await Swal.fire({
       title: "Delete user?",

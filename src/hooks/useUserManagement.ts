@@ -38,13 +38,16 @@ function useUserManagement() {
             user: data,
           })
         ).unwrap();
+        toast.success("User updated successfully");
       } else {
         await dispatch(createUserThunk(data)).unwrap();
+        toast.success("User created successfully");
       }
 
       closeModal();
     } catch (error) {
       console.error("Failed to save user:", error);
+      toast.error(selectedUser ? "Failed to update user" : "Failed to create user");
     }
   };
 

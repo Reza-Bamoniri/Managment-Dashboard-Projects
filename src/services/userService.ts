@@ -1,5 +1,5 @@
 import api from "./api";
-import type { User } from "../types/user";
+import type { User, CreateUser, UpdateUser } from "../types/user";
 
 export const getUsers = async (): Promise<User[]> => {
   const response = await api.get<User[]>("/users");
@@ -14,7 +14,7 @@ export const getUserById = async (id: string): Promise<User> => {
 };
 
 export const createUser = async (
-  user: Omit<User, "id">
+  user: CreateUser
 ): Promise<User> => {
   const response = await api.post<User>("/users", user);
 
@@ -23,7 +23,7 @@ export const createUser = async (
 
 export const updateUser = async (
   id: string,
-  user: Omit<User, "id">
+  user: UpdateUser
 ): Promise<User> => {
   const response = await api.put<User>(`/users/${id}`, user);
 
@@ -32,4 +32,11 @@ export const updateUser = async (
 
 export const deleteUser = async (id: string): Promise<void> => {
   await api.delete(`/users/${id}`);
+};
+
+
+export const loginUser = async ( email: string, password: string): Promise<User | null> => {
+  const response = await api.get<User[]>("/users", {params: {email, password,},});
+
+  return response.data[0] ?? null;
 };

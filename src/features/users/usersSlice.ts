@@ -4,7 +4,7 @@ import {
   type PayloadAction,
 } from "@reduxjs/toolkit";
 
-import type { User } from "../../types/user";
+import type { User, CreateUser, UpdateUser,} from "../../types/user";
 
 import {
   getUsers,
@@ -61,7 +61,7 @@ export const fetchUserById = createAsyncThunk(
 // POST /users
 export const createUserThunk = createAsyncThunk(
   "users/createUser",
-  async (user: Omit<User, "id">) => {
+  async (user: CreateUser) => {
     const newUser = await createUser(user);
 
     return newUser;
@@ -76,7 +76,7 @@ export const updateUserThunk = createAsyncThunk(
     user,
   }: {
     id: string;
-    user: Omit<User, "id">;
+    user: UpdateUser;
   }) => {
     const updatedUser = await updateUserApi(id, user);
 

@@ -19,3 +19,7 @@ export type User = {
   avatar: string;
   status: UserStatus;
 };
+
+export type CreateUser = Omit<User, "id" | "password">;
+
+export type UpdateUser = Omit<User, "id" | "password">;

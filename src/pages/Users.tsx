@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import UsersHeader from "../components/users/UsersHeader";
 import UserStats from "../components/users/UserStats";
 import UserFilters from "../components/users/UserFilters";
-import UsersTable from "../components/users/UsersTable";
+import UsersTable from "../components/users/table/UsersTable";
 import UsersPagination from "../components/users/UsersPagination";
 
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchUsers } from "../features/users/usersSlice";
 
 import useUserFilters from "../hooks/useUserFilters";
+import usePagination from "../hooks/usePagination";
 
 function Users() {
   const dispatch = useAppDispatch();
@@ -30,6 +31,17 @@ function Users() {
     setStatus,
     clearFilters,
   } = useUserFilters(users);
+
+
+  const {
+  currentPage,
+  totalPages,
+  paginatedItems: paginatedUsers,
+  setCurrentPage,
+} = usePagination(filteredUsers, 5);
+
+
+
 
   return (
     <div className="space-y-6">
@@ -89,9 +101,9 @@ function Users() {
         </section>
       ) : (
         <>
-          <UsersTable users={filteredUsers} />
+          <UsersTable users={paginatedUsers} />
 
-          <UsersPagination />
+          <UsersPagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </>
       )}
     </div>

@@ -4,12 +4,10 @@ import type { User } from "../../../types/user";
 type UsersTableProps = {
   users: User[];
   onEdit: (user: User) => void;
+  onDelete: (user: User) => void;
 };
 
-function UsersTable({
-  users,
-  onEdit,
-}: UsersTableProps) {
+function UsersTable({ users, onEdit, onDelete }: UsersTableProps) {
   return (
     <section
       className="
@@ -45,13 +43,7 @@ function UsersTable({
           </thead>
 
           <tbody>
-            {users.map((user) => (
-              <UserRow
-                key={user.id}
-                user={user}
-                onEdit={onEdit}
-              />
-            ))}
+             {users.map((user) => (<UserRow key={user.id} user={user} onEdit={onEdit} onDelete={onDelete}/>))}
           </tbody>
         </table>
       </div>

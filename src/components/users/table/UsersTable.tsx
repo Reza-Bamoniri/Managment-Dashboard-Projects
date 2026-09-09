@@ -1,19 +1,20 @@
 import UserRow from "./UserRow";
-
 import type { User } from "../../../types/user";
 
 type UsersTableProps = {
   users: User[];
+  onEdit: (user: User) => void;
 };
 
-function UsersTable({ users }: UsersTableProps) {
+function UsersTable({
+  users,
+  onEdit,
+}: UsersTableProps) {
   return (
     <section
       className="
-        overflow-hidden rounded-2xl
-        bg-white shadow-2xl
-        dark:bg-gray-900
-        dark:shadow-black/40
+        overflow-hidden rounded-2xl bg-white shadow-2xl
+        dark:bg-gray-900 dark:shadow-black/40
       "
     >
       <div className="overflow-x-auto">
@@ -21,53 +22,23 @@ function UsersTable({ users }: UsersTableProps) {
           <thead>
             <tr
               className="
-                border-b border-gray-100
-                bg-gray-50
-                dark:border-gray-800
-                dark:bg-gray-950
+                border-b border-gray-100 bg-gray-50
+                dark:border-gray-800 dark:bg-gray-950
               "
             >
-              <th
-                className="
-                  px-5 py-4 text-xs font-semibold
-                  uppercase tracking-wide
-                  text-gray-500
-                  dark:text-gray-400
-                "
-              >
+              <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                 User
               </th>
 
-              <th
-                className="
-                  px-5 py-4 text-xs font-semibold
-                  uppercase tracking-wide
-                  text-gray-500
-                  dark:text-gray-400
-                "
-              >
+              <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                 Role
               </th>
 
-              <th
-                className="
-                  px-5 py-4 text-xs font-semibold
-                  uppercase tracking-wide
-                  text-gray-500
-                  dark:text-gray-400
-                "
-              >
+              <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                 Status
               </th>
 
-              <th
-                className="
-                  px-5 py-4 text-xs font-semibold
-                  uppercase tracking-wide
-                  text-gray-500
-                  dark:text-gray-400
-                "
-              >
+              <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                 Operations
               </th>
             </tr>
@@ -78,6 +49,7 @@ function UsersTable({ users }: UsersTableProps) {
               <UserRow
                 key={user.id}
                 user={user}
+                onEdit={onEdit}
               />
             ))}
           </tbody>

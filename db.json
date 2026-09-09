@@ -183,12 +183,12 @@
   ],
   "users": [
     {
-      "id": "1",
       "name": "James Anderson",
       "email": "james@example.com",
       "role": "Project Manager",
-      "avatar": "",
-      "status": "active"
+      "status": "active",
+      "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToc06tSdqW9c6FoZVElOwxF20850MN4MO-4XkxoPEmdL6G2w0EcSSgUhU&s=10",
+      "id": "1"
     },
     {
       "id": "2",
@@ -199,12 +199,12 @@
       "status": "active"
     },
     {
-      "id": "3",
       "name": "Daniel Brown",
-      "email": "daniel@example.com",
+      "email": "danielBrown@example.com",
       "role": "Backend Developer",
-      "avatar": "",
-      "status": "active"
+      "status": "inactive",
+      "avatar": "https://img.favpng.com/2/16/10/3d-male-avatar-3d-animated-man-TrbRrLzV_t.jpg",
+      "id": "3"
     },
     {
       "id": "4",
@@ -215,12 +215,28 @@
       "status": "inactive"
     },
     {
-      "id": "5",
       "name": "Olivia Davis",
       "email": "olivia@example.com",
       "role": "Frontend Developer",
-      "avatar": "",
-      "status": "active"
+      "status": "active",
+      "avatar": "https://play-lh.googleusercontent.com/2SL3gubcMu57VsxUCBQX5unIzAkm2kdTB8aZwPoxu39u02dxIwxlYGwlfu8gimNWrE3HzzavYcggk89rwYZp0bg",
+      "id": "5"
+    },
+    {
+      "name": "Alex Patrik",
+      "email": "Alex@gmail.com",
+      "role": "UI/UX Designer",
+      "status": "inactive",
+      "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV3eyfScMlMK9Z-Hl51HgutZOHgfrUz_RvL2H7nccfcrjyf2NF9fEhSnZN&s=10",
+      "id": "Y_PLq0pApBU"
+    },
+    {
+      "name": "Nick Patinson",
+      "email": "nickPatinson@gmail.com",
+      "role": "Business Analyst",
+      "status": "active",
+      "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXARYWTjrVIHDnsAN9b2Qxo0dTsnlQZ8ZNaQ7LUJJMp7zmlcX3GCye0Eo0&s=10",
+      "id": "wdwJ_ZKm7DQ"
     }
   ],
   "notifications": [

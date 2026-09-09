@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import UsersHeader from "../components/users/UsersHeader";
 import UserStats from "../components/users/UserStats";
@@ -12,6 +12,7 @@ import { fetchUsers } from "../features/users/usersSlice";
 import useUserFilters from "../hooks/useUserFilters";
 import usePagination from "../hooks/usePagination";
 import UserModal from "../components/users/UserModal";
+import useUserManagement from "../hooks/useUserManagement";
 
 
 
@@ -21,11 +22,25 @@ function Users() {
 
   const {users, loading, error,} = useAppSelector((state) => state.users);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
+
+
+
+  const {
+  isModalOpen,
+  selectedUser,
+  openCreateModal,
+  openEditModal,
+  closeModal,
+  handleSubmit,
+} = useUserManagement();
+
+
+
 
   const {
     search,
@@ -61,12 +76,7 @@ function Users() {
   };
 
 
-  const handleAddUser = () => {
-  setIsModalOpen(true);
-};
-
-
-
+  
 
   if (loading && users.length === 0) {
   return (
@@ -127,7 +137,7 @@ if (error && users.length === 0) {
 
   return (
     <div className="space-y-6">
-       <UsersHeader onAddUser={handleAddUser} /> 
+       <UsersHeader onAddUser={openCreateModal} /> 
 
       <UserStats />
 
@@ -182,14 +192,14 @@ if (error && users.length === 0) {
   </section>
 ) : (
   <>
-    <UsersTable users={paginatedUsers} />
+    <UsersTable users={paginatedUsers} onEdit={openEditModal} />
 
     <UsersPagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage}/>
   </>
 )}
 
 
-{isModalOpen && (<UserModal onSubmit={() => {}} onClose={() => setIsModalOpen(false)}/>)}
+{isModalOpen && (<UserModal user={selectedUser} onSubmit={handleSubmit} onClose={closeModal}/>)}
 
 
       

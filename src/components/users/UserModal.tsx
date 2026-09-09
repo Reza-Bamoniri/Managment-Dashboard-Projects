@@ -10,11 +10,12 @@ type UserModalProps = {
   onSubmit: (data: UserFormData) => void;
   onClose: () => void;
   isSubmitting: boolean;
+  mode?: "create" | "edit-user" | "edit-profile";
 };
 
-function UserModal({ user, onSubmit, onClose, isSubmitting }: UserModalProps) {
+function UserModal({ user, onSubmit, onClose, isSubmitting, mode = user ? "edit-user" : "create", }: UserModalProps) {
   
-    const isEditMode = Boolean(user);
+    
 
   return (
     <div
@@ -36,13 +37,12 @@ function UserModal({ user, onSubmit, onClose, isSubmitting }: UserModalProps) {
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
-              {isEditMode ? "Edit User" : "Create User"}
+              {mode === "create" ? "Create User" : mode === "edit-profile" ? "Edit Profile" : "Edit User"}
             </h2>
 
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {isEditMode
-                ? "Update user information"
-                : "Create a new user"}
+              {mode === "create" ? "Create a new user" : mode === "edit-profile"
+                ? "Update your profile information": "Update user information"}
             </p>
           </div>
 
@@ -63,7 +63,7 @@ function UserModal({ user, onSubmit, onClose, isSubmitting }: UserModalProps) {
         </div>
 
         {/* Form */}
-        <UserForm user={user} onSubmit={onSubmit} onCancel={onClose} isSubmitting={isSubmitting}/>
+        <UserForm mode={mode} user={user} onSubmit={onSubmit} onCancel={onClose} isSubmitting={isSubmitting}/>
       </div>
     </div>
   );

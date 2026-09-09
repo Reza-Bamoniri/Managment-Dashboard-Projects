@@ -1,6 +1,22 @@
 import { FiEdit2, FiLogOut, FiMail, FiUser } from "react-icons/fi";
+import useProfile from "../hooks/useProfile";
+import UserModal from "../components/users/UserModal";
 
 function Profile() {
+
+
+    const {
+  user,
+  isEditModalOpen,
+  openEditModal,
+  closeEditModal,
+  handleEditProfile,
+  isUpdating,
+} = useProfile();
+
+
+
+
   return (
     <main className="min-h-fit dark:bg-gray-950 sm:p-6 lg:p-8">
       <div className="mx-auto max-w-6xl">
@@ -26,17 +42,23 @@ function Profile() {
             {/* Profile information */}
             <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
               {/* Avatar */}
-              <div
-                className="
-                  flex h-32 w-32 shrink-0 items-center justify-center
-                  rounded-full border-4 border-white/80
-                  bg-white text-3xl font-bold text-green-600
-                  shadow-xl
-                  sm:h-36 sm:w-36
-                "
-              >
-                JA
-              </div>
+              {user?.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="h-32 w-32 shrink-0 rounded-full border-4 border-white/80 object-cover shadow-xl sm:h-36 sm:w-36"/>
+                  ) : (
+                    <div
+                      className="flex h-32 w-32 shrink-0 items-center justify-center rounded-full border-4 border-white/80
+                        bg-white text-3xl font-bold text-green-600 shadow-xl sm:h-36 sm:w-36"
+                    >
+                        {user?.name
+                          ?.split(" ")
+                          .map((word) => word[0])
+                          .join("")
+                          .toUpperCase()}
+                     </div>
+                    )}
 
               {/* User information */}
               <div className="text-center sm:text-left">
@@ -45,24 +67,24 @@ function Profile() {
                 </p>
 
                 <h2 className="text-3xl font-bold text-white sm:text-4xl">
-                  James Anderson
+                  {user?.name}
                 </h2>
 
                 <div className="mt-4 space-y-2 text-sm text-white/90 sm:text-base">
                   <div className="flex items-center justify-center gap-2 sm:justify-start">
                     <FiUser size={17} />
-                    <span>Project Manager</span>
+                    <span>{user?.role}</span>
                   </div>
 
                   <div className="flex items-center justify-center gap-2 sm:justify-start">
                     <FiMail size={17} />
-                    <span>james@example.com</span>
+                    <span>{user?.email}</span>
                   </div>
                 </div>
 
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
                   <span className="h-2.5 w-2.5 rounded-full bg-white" />
-                  Active
+                  {user?.status === "active" ? "Active" : "Inactive"}
                 </div>
               </div>
             </div>
@@ -71,6 +93,7 @@ function Profile() {
             <div className="flex flex-col gap-3 lg:items-end">
               <button
                 type="button"
+                onClick={openEditModal}
                 className="
                   flex cursor-pointer items-center justify-center gap-2
                   rounded-xl bg-white px-6 py-3
@@ -101,6 +124,17 @@ function Profile() {
           </div>
         </section>
       </div>
+
+
+      {isEditModalOpen && (
+         <UserModal
+               user={user}
+               onSubmit={handleEditProfile}
+               onClose={closeEditModal}
+               isSubmitting={isUpdating}
+               mode="edit-profile"
+         />
+)}
     </main>
   );
 }

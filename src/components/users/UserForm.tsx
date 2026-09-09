@@ -40,6 +40,7 @@ type UserFormProps = {
   onSubmit: (data: UserFormData) => void;
   onCancel: () => void;
   isSubmitting: boolean;
+  mode?: "create" | "edit-user" | "edit-profile";
 };
 
 const roles: UserRole[] = [
@@ -54,7 +55,7 @@ const roles: UserRole[] = [
   "Business Analyst",
 ];
 
-function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
+function UserForm({ user, onSubmit, onCancel, isSubmitting, mode = user ? "edit-user" : "create",}: UserFormProps) {
 
     const {preview, handleImageChange, removeImage} = useImageUpload(user?.avatar ?? "");
 
@@ -245,7 +246,9 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
             cursor-pointer rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white
             transition hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
           >
-          {isSubmitting ? user ? "Updating..." : "Creating..." : user ? "Update User" : "Create User"}
+          {isSubmitting ? mode === "create" ? "Creating..." : mode === "edit-profile"
+              ? "Saving..." : "Updating..." : mode === "create" ? "Create User" : mode === "edit-profile"
+                  ? "Save Changes" : "Update User"}
        </button>
       </div>
     </form>

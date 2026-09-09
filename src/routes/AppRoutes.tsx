@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Projects from "../pages/Projects";
 import ProjectDetails from "../components/projects/ProjectDetails/ProjectDetails";
 import Tasks from "../pages/Tasks";
+import Users from "../pages/Users";
 
 function AppRoutes() {
   return (
@@ -19,7 +20,7 @@ function AppRoutes() {
 
           <Route path="/tasks" element={<Tasks />} />
 
-          <Route path="/users" element={<div>Users</div>} />
+          <Route path="/users" element={<Users />} />
 
           <Route path="/notifications" element={<div>Notifications</div>} />
 

@@ -6,6 +6,7 @@ import Projects from "../pages/Projects";
 import ProjectDetails from "../components/projects/ProjectDetails/ProjectDetails";
 import Tasks from "../pages/Tasks";
 import Users from "../pages/Users";
+import Profile from "../pages/Profile";
 
 function AppRoutes() {
   return (
@@ -22,9 +23,9 @@ function AppRoutes() {
 
           <Route path="/users" element={<Users />} />
 
-          <Route path="/notifications" element={<div>Notifications</div>} />
+          <Route path="/comment" element={<div>Notifications</div>} />
 
-          <Route path="/settings" element={<div>Settings</div>} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>

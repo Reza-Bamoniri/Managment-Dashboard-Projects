@@ -336,24 +336,7 @@ useEffect(() => {
                 My Profile
               </button>
 
-              <button
-                type="button"
-                onClick={() => navigate("/settings")}
-                className="
-                  w-full rounded-xl px-3 py-3
-                  text-left text-sm font-medium
-                  text-gray-700
-                  transition
-                  cursor-pointer
-                  hover:bg-green-50
-                  hover:text-green-700
-                  dark:text-gray-300
-                  dark:hover:bg-green-950/60
-                  dark:hover:text-green-300
-                "
-              >
-                Settings
-              </button>
+              
 
               <div className="my-1 h-px bg-gray-100 dark:bg-gray-800" />
 

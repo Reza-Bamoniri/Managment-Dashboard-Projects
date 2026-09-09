@@ -10,8 +10,8 @@ const navigationItems = [
   { name: "Projects", path: "/projects" },
   { name: "Tasks", path: "/tasks" },
   { name: "Users", path: "/users" },
-  { name: "Notifications", path: "/notifications" },
-  { name: "Settings", path: "/settings" },
+  { name: "New Comment", path: "/comment" },
+  { name: "Account", path: "/profile" },
 ];
 
 function Sidebar({ isOpen, onClose }: SidebarProps) {

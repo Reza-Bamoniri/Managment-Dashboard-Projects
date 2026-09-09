@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 type HeaderProps = {
@@ -29,6 +29,40 @@ function Header({ onMenuClick }: HeaderProps) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
+  const notificationRef = useRef<HTMLDivElement>(null);
+const profileRef = useRef<HTMLDivElement>(null);
+
+
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    const target = event.target as Node;
+
+    if (
+      notificationRef.current &&
+      !notificationRef.current.contains(target)
+    ) {
+      setShowNotifications(false);
+    }
+
+    if (
+      profileRef.current &&
+      !profileRef.current.contains(target)
+    ) {
+      setShowProfile(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+
+
+
+
   return (
     <header
       className="
@@ -40,6 +74,8 @@ function Header({ onMenuClick }: HeaderProps) {
         dark:bg-gray-950/80
         dark:shadow-black/30
         sm:px-6
+        relative
+        z-50
       "
     >
       {/* Left */}
@@ -96,7 +132,7 @@ function Header({ onMenuClick }: HeaderProps) {
       {/* Right */}
       <div className="flex items-center gap-3 sm:gap-5">
         {/* Notifications */}
-        <div className="relative">
+        <div ref={notificationRef} className="relative">
           <button
             type="button"
             onClick={() => {
@@ -136,9 +172,10 @@ function Header({ onMenuClick }: HeaderProps) {
           {showNotifications && (
             <div
               className="
-                absolute right-0 top-14 z-50
+                absolute -right-13 top-14 z-50
                 w-[calc(100vw-2rem)]
                 max-w-sm
+                sm:w-96
                 overflow-hidden
                 rounded-2xl
                 bg-white
@@ -220,7 +257,7 @@ function Header({ onMenuClick }: HeaderProps) {
         </div>
 
         {/* Profile */}
-        <div className="relative">
+        <div ref={profileRef} className="relative">
           <button
             type="button"
             onClick={() => {

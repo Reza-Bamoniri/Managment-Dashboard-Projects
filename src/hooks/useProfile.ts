@@ -51,6 +51,9 @@ function useProfile() {
 
 
   const handleLogout = () => {
+  localStorage.removeItem("userId");
+  localStorage.removeItem("loginTime");
+
   dispatch(logout());
   navigate("/login", { replace: true });
 };

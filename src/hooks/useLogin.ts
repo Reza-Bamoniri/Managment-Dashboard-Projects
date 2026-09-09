@@ -37,7 +37,10 @@ function useLogin() {
 
   const handleLogin = async (data: LoginFormData) => {
   try {
-    await dispatch(loginUserThunk(data)).unwrap();
+    const user = await dispatch(loginUserThunk(data)).unwrap();
+
+    localStorage.setItem("userId", user.id);
+    localStorage.setItem("loginTime", Date.now().toString());
 
     navigate("/");
   } catch (error) {

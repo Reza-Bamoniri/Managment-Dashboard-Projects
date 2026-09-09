@@ -7,6 +7,7 @@ type AuthState = {
   userId: string | null;
   loading: boolean;
   error: string | null;
+  initializing: boolean;
 };
 
 const initialState: AuthState = {
@@ -14,6 +15,7 @@ const initialState: AuthState = {
   userId: null,
   loading: false,
   error: null,
+  initializing: true,
 };
 
 export const loginUserThunk = createAsyncThunk(
@@ -47,11 +49,18 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.userId = action.payload;
     },
+    restoreSession: (state, action: PayloadAction<string>) => {
+    state.isAuthenticated = true;
+    state.userId = action.payload;
+    state.error = null;
+    state.initializing = false;
+  },
 
     logout: (state) => {
       state.isAuthenticated = false;
       state.userId = null;
       state.error = null;
+      state.initializing = false;
     },
   },
 
@@ -79,6 +88,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, restoreSession, logout } = authSlice.actions;
 
 export default authSlice.reducer;

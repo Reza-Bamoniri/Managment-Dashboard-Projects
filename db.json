@@ -204,9 +204,8 @@
       "name": "Daniel Brown",
       "email": "danielBrown@example.com",
       "role": "Backend Developer",
-      "password": "123456",
       "status": "inactive",
-      "avatar": "https://img.favpng.com/2/16/10/3d-male-avatar-3d-animated-man-TrbRrLzV_t.jpg",
+      "avatar": "",
       "id": "3"
     },
     {

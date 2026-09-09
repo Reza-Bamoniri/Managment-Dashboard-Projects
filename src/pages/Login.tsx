@@ -8,6 +8,8 @@ function Login() {
   handleSubmit,
   errors,
   handleLogin,
+  loading,
+  error,
 } = useLogin();
 
 
@@ -142,12 +144,15 @@ function Login() {
             </div>
 
             {/* Login */}
+
+            {error && (<p className="text-center text-sm text-red-400">{error}</p>)}
             <button
               type="submit"
+              disabled={loading}
               className="w-full cursor-pointer rounded-xl bg-white px-5 py-3 text-sm font-semibold
                 text-gray-900 shadow-lg transition hover:bg-gray-100 active:scale-[0.98]"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
         </div>

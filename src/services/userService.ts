@@ -35,8 +35,11 @@ export const deleteUser = async (id: string): Promise<void> => {
 };
 
 
-export const loginUser = async ( email: string, password: string): Promise<User | null> => {
-  const response = await api.get<User[]>("/users", {params: {email, password,},});
-
-  return response.data[0] ?? null;
+export const loginUser = async (email: string,password: string): Promise<User | null> => {
+  const response = await api.get<User[]>("/users", {params: { email },});
+  const user = response.data[0];
+  if (!user || user.password !== password) {
+    return null;
+  }
+  return user;
 };

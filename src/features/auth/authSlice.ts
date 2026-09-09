@@ -66,6 +66,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.isAuthenticated = true;
         state.userId = action.payload.id;
+        state.error = null;
       })
 
       .addCase(loginUserThunk.rejected, (state, action) => {

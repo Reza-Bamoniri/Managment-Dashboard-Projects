@@ -12,6 +12,7 @@ function Profile() {
   closeEditModal,
   handleEditProfile,
   isUpdating,
+  handleLogout,
 } = useProfile();
 
 
@@ -107,6 +108,7 @@ function Profile() {
               </button>
 
               <button
+              onClick={handleLogout}
                 type="button"
                 className="
                   flex cursor-pointer items-center justify-center gap-2

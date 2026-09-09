@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { updateUserThunk } from "../features/users/usersSlice";
-
 import type { UserFormData } from "../components/users/UserForm";
+import { logout } from "../features/auth/authSlice";
 
 function useProfile() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -47,6 +49,12 @@ function useProfile() {
     }
   };
 
+
+  const handleLogout = () => {
+  dispatch(logout());
+  navigate("/login", { replace: true });
+};
+
   return {
     user,
     isEditModalOpen,
@@ -54,6 +62,7 @@ function useProfile() {
     closeEditModal,
     handleEditProfile,
     isUpdating: updating,
+    handleLogout,
   };
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
+import useProfile from "../hooks/useProfile";
 
 type HeaderProps = {
   onMenuClick: () => void;
@@ -31,6 +32,9 @@ function Header({ onMenuClick }: HeaderProps) {
 
   const notificationRef = useRef<HTMLDivElement>(null);
 const profileRef = useRef<HTMLDivElement>(null);
+
+
+const {handleLogout} = useProfile();
 
 
 useEffect(() => {
@@ -340,7 +344,8 @@ useEffect(() => {
 
               <div className="my-1 h-px bg-gray-100 dark:bg-gray-800" />
 
-              <button
+              <button 
+              onClick={handleLogout}
                 type="button"
                 className="
                   w-full rounded-xl px-3 py-3

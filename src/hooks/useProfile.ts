@@ -13,9 +13,11 @@ function useProfile() {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const user = useAppSelector((state) =>
-    state.users.users.find((user) => user.id === "1")
-  );
+  const userId = useAppSelector((state) => state.auth.userId);
+
+const user = useAppSelector((state) =>
+  state.users.users.find((user) => user.id === userId)
+);
 
   const updating = useAppSelector(
     (state) => state.users.updating

@@ -34,7 +34,7 @@ function Header({ onMenuClick }: HeaderProps) {
 const profileRef = useRef<HTMLDivElement>(null);
 
 
-const {handleLogout} = useProfile();
+const { user, handleLogout } = useProfile();
 
 
 useEffect(() => {
@@ -276,16 +276,17 @@ useEffect(() => {
             "
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-lime-400 to-green-700 text-sm font-bold text-white shadow-md dark:from-green-500 dark:to-green-900">
-              JA
+              {user?.avatar ? (<img src={user.avatar}alt={user.name} className="h-full w-full object-cover"/>
+                 ) : ( user?.name ?.split(" ").map((name) => name[0]).join("").slice(0, 2))}
             </div>
 
             <div className="hidden text-left sm:block">
               <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                James Anderson
+                {user?.name}
               </p>
 
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Project Manager
+                {user?.role}
               </p>
             </div>
 

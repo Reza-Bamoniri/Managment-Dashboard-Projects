@@ -3,6 +3,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import type { UserRole, User } from "../../types/user";
+import useImageUpload from "../../hooks/useImageUpload";
+import { useEffect } from "react";
 
 const userSchema = z.object({
   name: z
@@ -53,11 +55,11 @@ const roles: UserRole[] = [
 ];
 
 function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserFormData>({
+
+    const {preview, handleImageChange, removeImage} = useImageUpload(user?.avatar ?? "");
+
+
+  const {register, handleSubmit, formState: { errors }, setValue,} = useForm<UserFormData>({
     resolver: zodResolver(userSchema),
     defaultValues: {
       name: user?.name ?? "",
@@ -68,6 +70,11 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
     },
   });
 
+
+  useEffect(() => {
+  setValue("avatar", preview);
+}, [preview, setValue]);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -77,11 +84,7 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
       <div>
         <label
           htmlFor="name"
-          className="
-            mb-2 block text-sm font-medium
-            text-gray-700 dark:text-gray-300
-          "
-        >
+          className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
           Name
         </label>
 
@@ -89,18 +92,8 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
           id="name"
           type="text"
           {...register("name")}
-          className="
-            w-full rounded-xl border
-            border-gray-200 bg-white
-            px-4 py-2.5 text-sm
-            text-gray-800 outline-none
-            transition
-            focus:border-green-500
-            focus:ring-2 focus:ring-green-500/20
-            dark:border-gray-700
-            dark:bg-gray-950
-            dark:text-gray-200
-          "
+          className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-800 outline-none transition
+            focus:border-green-500 focus:ring-2 focus:ring-green-500/20 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-200"
           placeholder="Enter user name"
         />
 
@@ -115,11 +108,7 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
       <div>
         <label
           htmlFor="email"
-          className="
-            mb-2 block text-sm font-medium
-            text-gray-700 dark:text-gray-300
-          "
-        >
+          className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
           Email
         </label>
 
@@ -127,18 +116,8 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
           id="email"
           type="email"
           {...register("email")}
-          className="
-            w-full rounded-xl border
-            border-gray-200 bg-white
-            px-4 py-2.5 text-sm
-            text-gray-800 outline-none
-            transition
-            focus:border-green-500
-            focus:ring-2 focus:ring-green-500/20
-            dark:border-gray-700
-            dark:bg-gray-950
-            dark:text-gray-200
-          "
+          className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-800 outline-none transition focus:border-green-500
+            focus:ring-2 focus:ring-green-500/20 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-200"
           placeholder="Enter email address"
         />
 
@@ -153,10 +132,7 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
       <div>
         <label
           htmlFor="role"
-          className="
-            mb-2 block text-sm font-medium
-            text-gray-700 dark:text-gray-300
-          "
+          className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
         >
           Role
         </label>
@@ -164,18 +140,9 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
         <select
           id="role"
           {...register("role")}
-          className="
-            w-full cursor-pointer rounded-xl border
-            border-gray-200 bg-white
-            px-4 py-2.5 text-sm
-            text-gray-800 outline-none
-            transition
-            focus:border-green-500
-            focus:ring-2 focus:ring-green-500/20
-            dark:border-gray-700
-            dark:bg-gray-950
-            dark:text-gray-200
-          "
+          className="w-full cursor-pointer rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm
+            text-gray-800 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-500/20
+             dark:border-gray-700 dark:bg-gray-950 dark:text-gray-200"
         >
           {roles.map((role) => (
             <option key={role} value={role}>
@@ -189,10 +156,7 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
       <div>
         <label
           htmlFor="status"
-          className="
-            mb-2 block text-sm font-medium
-            text-gray-700 dark:text-gray-300
-          "
+          className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
         >
           Status
         </label>
@@ -200,63 +164,66 @@ function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
         <select
           id="status"
           {...register("status")}
-          className="
-            w-full cursor-pointer rounded-xl border
-            border-gray-200 bg-white
-            px-4 py-2.5 text-sm
-            text-gray-800 outline-none
-            transition
-            focus:border-green-500
-            focus:ring-2 focus:ring-green-500/20
-            dark:border-gray-700
-            dark:bg-gray-950
-            dark:text-gray-200
-          "
+          className="w-full cursor-pointer rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-800 outline-none
+            transition focus:border-green-500 focus:ring-2 focus:ring-green-500/20 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-200"
         >
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
         </select>
       </div>
 
-      {/* Avatar URL */}
-      <div>
-        <label
-          htmlFor="avatar"
-          className="
-            mb-2 block text-sm font-medium
-            text-gray-700 dark:text-gray-300
-          "
-        >
-          Avatar URL
-        </label>
+      
+      {/* Avatar */}
+     <div>
+       <label htmlFor="avatar" className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+          Avatar
+       </label>
 
-        <input
-          id="avatar"
-          type="text"
-          {...register("avatar")}
-          className="
-            w-full rounded-xl border
-            border-gray-200 bg-white
-            px-4 py-2.5 text-sm
-            text-gray-800 outline-none
-            transition
-            focus:border-green-500
-            focus:ring-2 focus:ring-green-500/20
-            dark:border-gray-700
-            dark:bg-gray-950
-            dark:text-gray-200
-          "
-          placeholder="Enter avatar URL"
-        />
+  <div className="flex items-center gap-4">
+    {preview ? (
+      <img src={preview} alt="Avatar preview" className="h-20 w-20 rounded-fullobject-cover border border-gray-200 dark:border-gray-700"/>
+    ) : (
+      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-100 text-sm text-gray-400 dark:bg-gray-800">
+        No image
       </div>
+    )}
+
+    <div className="flex items-center gap-2">
+      <label
+        htmlFor="avatar"
+        className="cursor-pointer rounded-xl bg-green-600 px-4 py-2.5 text-sm font-medium text-white
+          transition hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600"
+      >
+        Upload Image
+      </label>
+
+      {preview && (
+        <button
+          type="button"
+          onClick={removeImage}
+          className="cursor-pointer rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-600 transition
+            hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+        >
+          Remove
+        </button>
+      )}
+
+      <input
+        id="avatar"
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(event) =>
+          handleImageChange(event.target.files?.[0] ?? null)
+        }
+      />
+    </div>
+  </div>
+</div>
 
       {/* Actions */}
       <div
-        className="
-          flex justify-end gap-3
-          border-t border-gray-100 pt-5
-          dark:border-gray-800
-        "
+        className="flex justify-end gap-3 border-t border-gray-100 pt-5 dark:border-gray-800"
       >
         <button
           type="button"

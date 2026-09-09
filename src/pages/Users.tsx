@@ -11,6 +11,7 @@ import { fetchUsers } from "../features/users/usersSlice";
 
 import useUserFilters from "../hooks/useUserFilters";
 import usePagination from "../hooks/usePagination";
+import UserModal from "../components/users/UserModal";
 
 
 
@@ -186,7 +187,11 @@ if (error && users.length === 0) {
     <UsersPagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage}/>
   </>
 )}
-            
+
+
+{isModalOpen && (<UserModal onSubmit={() => {}} onClose={() => setIsModalOpen(false)}/>)}
+
+
       
     </div>
   );

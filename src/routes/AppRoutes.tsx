@@ -7,6 +7,7 @@ import ProjectDetails from "../components/projects/ProjectDetails/ProjectDetails
 import Tasks from "../pages/Tasks";
 import Users from "../pages/Users";
 import Profile from "../pages/Profile";
+import Login from "../pages/Login";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,9 @@ function AppRoutes() {
 
           <Route path="/profile" element={<Profile />} />
         </Route>
+
+
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

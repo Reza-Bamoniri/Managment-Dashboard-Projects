@@ -5,9 +5,10 @@ type UsersTableProps = {
   users: User[];
   onEdit: (user: User) => void;
   onDelete: (user: User) => void;
+  isDeleting: boolean;
 };
 
-function UsersTable({ users, onEdit, onDelete }: UsersTableProps) {
+function UsersTable({ users, onEdit, onDelete, isDeleting }: UsersTableProps) {
   return (
     <section
       className="
@@ -43,7 +44,7 @@ function UsersTable({ users, onEdit, onDelete }: UsersTableProps) {
           </thead>
 
           <tbody>
-             {users.map((user) => (<UserRow key={user.id} user={user} onEdit={onEdit} onDelete={onDelete}/>))}
+             {users.map((user) => (<UserRow key={user.id} user={user} onEdit={onEdit} onDelete={onDelete} isDeleting={isDeleting}/>))}
           </tbody>
         </table>
       </div>

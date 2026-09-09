@@ -39,6 +39,7 @@ function Users() {
   handleSubmit,
   handleDelete,
   isSubmitting,
+  isDeleting,
 } = useUserManagement();
 
 
@@ -194,7 +195,7 @@ if (error && users.length === 0) {
   </section>
 ) : (
   <>
-    <UsersTable users={paginatedUsers} onEdit={openEditModal} onDelete={handleDelete} />
+    <UsersTable users={paginatedUsers} onEdit={openEditModal} onDelete={handleDelete} isDeleting={isDeleting} />
 
     <UsersPagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage}/>
   </>

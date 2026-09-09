@@ -27,6 +27,8 @@ function useUserManagement() {
 
   const updating = useAppSelector((state) => state.users.updating);
 
+  const deleting = useAppSelector((state) => state.users.deleting);
+
   const isSubmitting = creating || updating;
 
   const openCreateModal = () => {
@@ -119,6 +121,7 @@ function useUserManagement() {
     handleSubmit,
     isSubmitting,
     handleDelete,
+    isDeleting: deleting,
   };
 }
 

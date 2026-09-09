@@ -43,8 +43,7 @@ const ProjectDetails = () => {
   const handleDelete = async () => {
     if (!project) return;
 
-    const isDarkMode =
-      document.documentElement.classList.contains("dark");
+    const isDarkMode = document.documentElement.classList.contains("dark");
 
     const result = await Swal.fire({
       title: "Delete project?",

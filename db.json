@@ -207,12 +207,12 @@
       "id": "3"
     },
     {
-      "id": "4",
       "name": "Sophia Miller",
       "email": "sophia@example.com",
       "role": "UI/UX Designer",
+      "status": "active",
       "avatar": "",
-      "status": "inactive"
+      "id": "4"
     },
     {
       "name": "Olivia Davis",

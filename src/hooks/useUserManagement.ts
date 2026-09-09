@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {createUserThunk, deleteUserThunk, updateUserThunk} from "../features/users/usersSlice";
 
 import type { User } from "../types/user";
@@ -13,6 +13,7 @@ function useUserManagement() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const loading = useAppSelector((state) => state.users.loading);
 
   const openCreateModal = () => {
     setSelectedUser(null);
@@ -100,6 +101,7 @@ function useUserManagement() {
     openEditModal,
     closeModal,
     handleSubmit,
+    loading,
     handleDelete
   };
 }

@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
+
 import type { User } from "../../types/user";
 
 import {
@@ -12,14 +17,24 @@ import {
 type UsersState = {
   users: User[];
   selectedUser: User | null;
+
   loading: boolean;
+  creating: boolean;
+  updating: boolean;
+  deleting: boolean;
+
   error: string | null;
 };
 
 const initialState: UsersState = {
   users: [],
   selectedUser: null,
+
   loading: false,
+  creating: false,
+  updating: false,
+  deleting: false,
+
   error: null,
 };
 
@@ -28,6 +43,7 @@ export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
   async () => {
     const users = await getUsers();
+
     return users;
   }
 );
@@ -37,6 +53,7 @@ export const fetchUserById = createAsyncThunk(
   "users/fetchUserById",
   async (id: string) => {
     const user = await getUserById(id);
+
     return user;
   }
 );
@@ -46,6 +63,7 @@ export const createUserThunk = createAsyncThunk(
   "users/createUser",
   async (user: Omit<User, "id">) => {
     const newUser = await createUser(user);
+
     return newUser;
   }
 );
@@ -61,6 +79,7 @@ export const updateUserThunk = createAsyncThunk(
     user: Omit<User, "id">;
   }) => {
     const updatedUser = await updateUserApi(id, user);
+
     return updatedUser;
   }
 );
@@ -70,12 +89,14 @@ export const deleteUserThunk = createAsyncThunk(
   "users/deleteUser",
   async (id: string) => {
     await deleteUserApi(id);
+
     return id;
   }
 );
 
 const usersSlice = createSlice({
   name: "users",
+
   initialState,
 
   reducers: {
@@ -107,7 +128,10 @@ const usersSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
+      // =========================
       // Fetch Users
+      // =========================
+
       .addCase(fetchUsers.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -123,7 +147,10 @@ const usersSlice = createSlice({
         state.error = "Failed to fetch users";
       })
 
+      // =========================
       // Fetch User By ID
+      // =========================
+
       .addCase(fetchUserById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -139,30 +166,36 @@ const usersSlice = createSlice({
         state.error = "Failed to fetch user";
       })
 
+      // =========================
       // Create User
+      // =========================
+
       .addCase(createUserThunk.pending, (state) => {
-        state.loading = true;
+        state.creating = true;
         state.error = null;
       })
 
       .addCase(createUserThunk.fulfilled, (state, action) => {
-        state.loading = false;
+        state.creating = false;
         state.users.push(action.payload);
       })
 
       .addCase(createUserThunk.rejected, (state) => {
-        state.loading = false;
+        state.creating = false;
         state.error = "Failed to create user";
       })
 
+      // =========================
       // Update User
+      // =========================
+
       .addCase(updateUserThunk.pending, (state) => {
-        state.loading = true;
+        state.updating = true;
         state.error = null;
       })
 
       .addCase(updateUserThunk.fulfilled, (state, action) => {
-        state.loading = false;
+        state.updating = false;
 
         const index = state.users.findIndex(
           (user) => user.id === action.payload.id
@@ -174,18 +207,21 @@ const usersSlice = createSlice({
       })
 
       .addCase(updateUserThunk.rejected, (state) => {
-        state.loading = false;
+        state.updating = false;
         state.error = "Failed to update user";
       })
 
+      // =========================
       // Delete User
+      // =========================
+
       .addCase(deleteUserThunk.pending, (state) => {
-        state.loading = true;
+        state.deleting = true;
         state.error = null;
       })
 
       .addCase(deleteUserThunk.fulfilled, (state, action) => {
-        state.loading = false;
+        state.deleting = false;
 
         state.users = state.users.filter(
           (user) => user.id !== action.payload
@@ -193,7 +229,7 @@ const usersSlice = createSlice({
       })
 
       .addCase(deleteUserThunk.rejected, (state) => {
-        state.loading = false;
+        state.deleting = false;
         state.error = "Failed to delete user";
       });
   },

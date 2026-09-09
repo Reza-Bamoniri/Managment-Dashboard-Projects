@@ -32,16 +32,29 @@ function Users() {
     clearFilters,
   } = useUserFilters(users);
 
-
   const {
-  currentPage,
-  totalPages,
-  paginatedItems: paginatedUsers,
-  setCurrentPage,
-} = usePagination(filteredUsers, 5);
+    currentPage,
+    totalPages,
+    paginatedItems: paginatedUsers,
+    setCurrentPage,
+  } = usePagination(filteredUsers, 5);
 
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    setCurrentPage(1);
+  };
 
+  const handleStatusChange = (
+    value: "all" | "active" | "inactive"
+  ) => {
+    setStatus(value);
+    setCurrentPage(1);
+  };
 
+  const handleClearFilters = () => {
+    clearFilters();
+    setCurrentPage(1);
+  };
 
   return (
     <div className="space-y-6">
@@ -52,8 +65,8 @@ function Users() {
       <UserFilters
         search={search}
         status={status}
-        onSearchChange={setSearch}
-        onStatusChange={setStatus}
+        onSearchChange={handleSearchChange}
+        onStatusChange={handleStatusChange}
       />
 
       {filteredUsers.length === 0 ? (
@@ -83,7 +96,7 @@ function Users() {
 
           <button
             type="button"
-            onClick={clearFilters}
+            onClick={handleClearFilters}
             className="
               mt-5 cursor-pointer rounded-xl
               border border-gray-200 bg-white
@@ -103,7 +116,11 @@ function Users() {
         <>
           <UsersTable users={paginatedUsers} />
 
-          <UsersPagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+          <UsersPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </>
       )}
     </div>

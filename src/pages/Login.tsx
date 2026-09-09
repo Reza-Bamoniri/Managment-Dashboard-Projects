@@ -1,6 +1,16 @@
 import { FiLock, FiMail } from "react-icons/fi";
+import useLogin from "../hooks/useLogin";
 
 function Login() {
+
+  const {
+  register,
+  handleSubmit,
+  errors,
+  handleLogin,
+} = useLogin();
+
+
   return (
     <main
       className="
@@ -46,7 +56,7 @@ function Login() {
             </p>
           </div>
 
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSubmit(handleLogin)} >
             {/* Email */}
             <div>
               <label
@@ -70,22 +80,13 @@ function Login() {
                 <input
                   id="email"
                   type="email"
+                  {...register("email")}
                   placeholder="Enter your email"
-                  className="
-                    w-full rounded-xl
-                    border border-white/20
-                    bg-white/10
-                    py-3 pl-10 pr-4
-                    text-sm text-white
-                    outline-none
-                    placeholder:text-white/40
-                    transition
-                    focus:border-white/50
-                    focus:bg-white/15
-                    focus:ring-2
-                    focus:ring-white/20
-                  "
+                  className=" w-full rounded-xl border border-white/20 bg-white/10 py-3 pl-10 pr-4
+                     text-sm text-white outline-none placeholder:text-white/40 transition
+                    focus:border-white/50 focus:bg-white/15 focus:ring-2 focus:ring-white/20"
                 />
+               {errors.email && (<p className="mt-1 text-sm text-red-400">{errors.email.message}</p>)}
               </div>
             </div>
 
@@ -111,23 +112,14 @@ function Login() {
 
                 <input
                   id="password"
+                  {...register("password")}
                   type="password"
                   placeholder="Enter your password"
-                  className="
-                    w-full rounded-xl
-                    border border-white/20
-                    bg-white/10
-                    py-3 pl-10 pr-4
-                    text-sm text-white
-                    outline-none
-                    placeholder:text-white/40
-                    transition
-                    focus:border-white/50
-                    focus:bg-white/15
-                    focus:ring-2
-                    focus:ring-white/20
-                  "
+                  className="w-full rounded-xl border border-white/20 bg-white/10 py-3 pl-10 pr-4
+                    text-sm text-white outline-none placeholder:text-white/40 transition
+                    focus:border-white/50 focus:bg-white/15 focus:ring-2 focus:ring-white/20"
                 />
+                {errors.password && (<p className="mt-1 text-sm text-red-400">{errors.password.message}</p>)}
               </div>
             </div>
 
@@ -143,13 +135,7 @@ function Login() {
 
               <button
                 type="button"
-                className="
-                  cursor-pointer
-                  text-sm font-medium
-                  text-white
-                  transition
-                  hover:text-white/70
-                "
+                className="cursor-pointer text-sm font-medium text-white transition hover:text-white/70"
               >
                 Forgot password?
               </button>
@@ -158,18 +144,8 @@ function Login() {
             {/* Login */}
             <button
               type="submit"
-              className="
-                w-full cursor-pointer
-                rounded-xl
-                bg-white
-                px-5 py-3
-                text-sm font-semibold
-                text-gray-900
-                shadow-lg
-                transition
-                hover:bg-gray-100
-                active:scale-[0.98]
-              "
+              className="w-full cursor-pointer rounded-xl bg-white px-5 py-3 text-sm font-semibold
+                text-gray-900 shadow-lg transition hover:bg-gray-100 active:scale-[0.98]"
             >
               Login
             </button>

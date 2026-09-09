@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import UsersHeader from "../components/users/UsersHeader";
 import UserStats from "../components/users/UserStats";
@@ -12,14 +12,15 @@ import { fetchUsers } from "../features/users/usersSlice";
 import useUserFilters from "../hooks/useUserFilters";
 import usePagination from "../hooks/usePagination";
 
+
+
+
 function Users() {
   const dispatch = useAppDispatch();
 
-  const {
-  users,
-  loading,
-  error,
-} = useAppSelector((state) => state.users);
+  const {users, loading, error,} = useAppSelector((state) => state.users);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -57,6 +58,14 @@ function Users() {
     clearFilters();
     setCurrentPage(1);
   };
+
+
+  const handleAddUser = () => {
+  setIsModalOpen(true);
+};
+
+
+
 
   if (loading && users.length === 0) {
   return (
@@ -117,7 +126,7 @@ if (error && users.length === 0) {
 
   return (
     <div className="space-y-6">
-      <UsersHeader />
+       <UsersHeader onAddUser={handleAddUser} /> 
 
       <UserStats />
 

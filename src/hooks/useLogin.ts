@@ -3,6 +3,7 @@ import { loginUserThunk } from "../features/auth/authSlice";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router";
 
 const loginSchema = z.object({
   email: z
@@ -19,9 +20,8 @@ export type LoginFormData = z.infer<typeof loginSchema>;
 function useLogin() {
   const dispatch = useAppDispatch();
 
-  const { loading, error } = useAppSelector(
-    (state) => state.auth
-  );
+  const { loading, error } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -36,12 +36,14 @@ function useLogin() {
   });
 
   const handleLogin = async (data: LoginFormData) => {
-    try {
-      await dispatch(loginUserThunk(data)).unwrap();
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  };
+  try {
+    await dispatch(loginUserThunk(data)).unwrap();
+
+    navigate("/");
+  } catch (error) {
+    console.error("Login failed:", error);
+  }
+};
 
   return {
     register,

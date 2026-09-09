@@ -4,12 +4,15 @@ import AppRoutes from "./routes/AppRoutes";
 import { useEffect } from "react";
 import { useAppDispatch } from "./store/hooks";
 import { restoreSession, logout } from "./features/auth/authSlice";
+import { fetchUsers } from "./features/users/usersSlice";
 
 function App() {
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(fetchUsers());
+
     const userId = localStorage.getItem("userId");
     const loginTime = localStorage.getItem("loginTime");
 

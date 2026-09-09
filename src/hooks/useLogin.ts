@@ -1,3 +1,5 @@
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { loginUserThunk } from "../features/auth/authSlice";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,6 +17,12 @@ const loginSchema = z.object({
 export type LoginFormData = z.infer<typeof loginSchema>;
 
 function useLogin() {
+  const dispatch = useAppDispatch();
+
+  const { loading, error } = useAppSelector(
+    (state) => state.auth
+  );
+
   const {
     register,
     handleSubmit,
@@ -27,8 +35,12 @@ function useLogin() {
     },
   });
 
-  const handleLogin = (data: LoginFormData) => {
-    console.log(data);
+  const handleLogin = async (data: LoginFormData) => {
+    try {
+      await dispatch(loginUserThunk(data)).unwrap();
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return {
@@ -36,6 +48,8 @@ function useLogin() {
     handleSubmit,
     errors,
     handleLogin,
+    loading,
+    error,
   };
 }
 

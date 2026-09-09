@@ -9,14 +9,12 @@ type UserModalProps = {
   user?: User | null;
   onSubmit: (data: UserFormData) => void;
   onClose: () => void;
+  isSubmitting: boolean;
 };
 
-function UserModal({
-  user,
-  onSubmit,
-  onClose,
-}: UserModalProps) {
-  const isEditMode = Boolean(user);
+function UserModal({ user, onSubmit, onClose, isSubmitting }: UserModalProps) {
+  
+    const isEditMode = Boolean(user);
 
   return (
     <div
@@ -65,11 +63,7 @@ function UserModal({
         </div>
 
         {/* Form */}
-        <UserForm
-          user={user}
-          onSubmit={onSubmit}
-          onCancel={onClose}
-        />
+        <UserForm user={user} onSubmit={onSubmit} onCancel={onClose} isSubmitting={isSubmitting}/>
       </div>
     </div>
   );

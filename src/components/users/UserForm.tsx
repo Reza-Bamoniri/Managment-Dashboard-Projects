@@ -37,6 +37,7 @@ type UserFormProps = {
   user?: User | null;
   onSubmit: (data: UserFormData) => void;
   onCancel: () => void;
+  isSubmitting: boolean;
 };
 
 const roles: UserRole[] = [
@@ -51,11 +52,7 @@ const roles: UserRole[] = [
   "Business Analyst",
 ];
 
-function UserForm({
-  user,
-  onSubmit,
-  onCancel,
-}: UserFormProps) {
+function UserForm({ user, onSubmit, onCancel, isSubmitting}: UserFormProps) {
   const {
     register,
     handleSubmit,
@@ -263,16 +260,12 @@ function UserForm({
       >
         <button
           type="button"
+          disabled={isSubmitting}
           onClick={onCancel}
           className="
-            cursor-pointer rounded-xl
-            border border-gray-200
-            px-4 py-2.5 text-sm font-medium
-            text-gray-600 transition
-            hover:bg-gray-100
-            dark:border-gray-700
-            dark:text-gray-300
-            dark:hover:bg-gray-800
+            cursor-pointer rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium
+            text-gray-600 transition hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300
+            dark:hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50
           "
         >
           Cancel
@@ -280,17 +273,13 @@ function UserForm({
 
         <button
           type="submit"
+          disabled={isSubmitting}
           className="
-            cursor-pointer rounded-xl
-            bg-green-600 px-5 py-2.5
-            text-sm font-semibold text-white
-            transition hover:bg-green-700
-            dark:bg-green-500
-            dark:hover:bg-green-600
-          "
-        >
-          {user ? "Update User" : "Create User"}
-        </button>
+            cursor-pointer rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white
+            transition hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+          {isSubmitting ? user ? "Updating..." : "Creating..." : user ? "Update User" : "Create User"}
+       </button>
       </div>
     </form>
   );

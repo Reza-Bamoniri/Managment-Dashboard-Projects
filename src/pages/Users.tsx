@@ -38,6 +38,7 @@ function Users() {
   closeModal,
   handleSubmit,
   handleDelete,
+  isSubmitting,
 } = useUserManagement();
 
 
@@ -200,7 +201,7 @@ if (error && users.length === 0) {
 )}
 
 
-{isModalOpen && (<UserModal user={selectedUser} onSubmit={handleSubmit} onClose={closeModal}/>)}
+{isModalOpen && (<UserModal user={selectedUser} onSubmit={handleSubmit} onClose={closeModal} isSubmitting={isSubmitting}/>)}
 
 
       

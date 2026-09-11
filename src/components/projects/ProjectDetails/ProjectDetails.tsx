@@ -28,6 +28,7 @@ const ProjectDetails = () => {
   error,
   addMember,
   users,
+  removeMember,
 } = useProjectDetails();
 
 
@@ -118,6 +119,7 @@ const ProjectDetails = () => {
         manager={projectManager}
         onAddMember={addMember}
         allUsers={users}
+        onRemoveMember={removeMember}
       />
 
       <ProjectTasks tasks={projectTasks} />

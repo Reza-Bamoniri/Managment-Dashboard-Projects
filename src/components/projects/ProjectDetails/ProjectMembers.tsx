@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { User } from "../../../types/user";
+import { FiTrash2 } from "react-icons/fi";
 
 
 type ProjectMembersProps = {
@@ -7,9 +8,10 @@ type ProjectMembersProps = {
   allUsers: User[];
   manager?: User;
   onAddMember: (userId: string) => Promise<void>;
+  onRemoveMember: (userId: string) => Promise<void>;
 };
 
-function ProjectMembers({users, allUsers, onAddMember}: ProjectMembersProps) {
+function ProjectMembers({users, allUsers, onAddMember, onRemoveMember}: ProjectMembersProps) {
 
 
   const [isAdding, setIsAdding] = useState(false);
@@ -141,6 +143,18 @@ const handleAddMember = async (userId: string) => {
                   {user.role}
                 </p>
               </div>
+
+
+              <button
+                 type="button"
+                 onClick={() => onRemoveMember(user.id)}
+                 aria-label={`Remove ${user.name}`}
+                 className="ml-auto shrink-0 cursor-pointer rounded-lg p-2 text-red-500 transition hover:bg-red-100 hover:text-red-700 dark:hover:bg-red-950/50"
+              >
+               <FiTrash2 size={17} />
+             </button>
+
+
             </div>
           ))}
         </div>

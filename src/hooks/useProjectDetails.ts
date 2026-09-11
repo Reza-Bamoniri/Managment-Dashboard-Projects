@@ -6,6 +6,7 @@ import { fetchUsers } from "../features/users/usersSlice";
 import { fetchTasks } from "../features/tasks/tasksSlice";
 import { fetchComments } from "../features/comments/commentsSlice";
 import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 function useProjectDetails() {
   const { id } = useParams<{ id: string }>();
@@ -128,6 +129,63 @@ const projectComments = selectedProject
 
 
 
+const removeMember = async (userId: string) => {
+  if (!selectedProject) return;
+
+  const user = users.find((user) => user.id === userId);
+
+  if (!user) return;
+
+  const isDarkMode =
+    document.documentElement.classList.contains("dark");
+
+  const result = await Swal.fire({
+    title: "Remove member?",
+    text: `Are you sure you want to remove ${user.name} from this project?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Remove",
+    cancelButtonText: "Cancel",
+    reverseButtons: true,
+    background: isDarkMode ? "#111827" : "#ffffff",
+    color: isDarkMode ? "#e5e7eb" : "#1f2937",
+    buttonsStyling: false,
+    customClass: {
+      confirmButton:
+        "cursor-pointer rounded-xl bg-red-600 px-5 py-2.5 ml-3 text-sm font-semibold text-white hover:bg-red-700",
+      cancelButton:
+        "cursor-pointer ml-2 rounded-xl bg-gray-200 px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700",
+    },
+  });
+
+  if (!result.isConfirmed) return;
+
+  try {
+    await dispatch(
+      updateProjectThunk({
+        id: selectedProject.id,
+        project: {
+          name: selectedProject.name,
+          description: selectedProject.description,
+          status: selectedProject.status,
+          progress: selectedProject.progress,
+          deadline: selectedProject.deadline,
+          managerId: selectedProject.managerId,
+          memberIds: selectedProject.memberIds.filter(
+            (id) => id !== userId
+          ),
+        },
+      })
+    ).unwrap();
+
+    toast.success("Member removed successfully.");
+  } catch (error) {
+    console.error("Failed to remove member:", error);
+    toast.error("Failed to remove member.");
+  }
+};
+
+
 
 
 
@@ -141,6 +199,7 @@ const projectComments = selectedProject
   error,
   addMember,
   users,
+  removeMember,
 };
 }
 

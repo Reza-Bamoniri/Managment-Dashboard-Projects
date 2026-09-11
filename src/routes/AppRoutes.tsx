@@ -9,6 +9,7 @@ import Users from "../pages/Users";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
+import CreateComment from "../pages/CreateComment";
 
 function AppRoutes() {
   return (
@@ -28,7 +29,7 @@ function AppRoutes() {
 
           <Route path="/users" element={<Users />} />
 
-          <Route path="/comment" element={<div>Notifications</div>} />
+          <Route path="/comment" element={<CreateComment />} />
 
           <Route path="/profile" element={<Profile />} />
         </Route>

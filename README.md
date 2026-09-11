@@ -1,4 +1,3 @@
-````markdown
 # Management Dashboard
 
 A responsive project management dashboard built with **React, TypeScript, Redux Toolkit, and JSON Server**.
@@ -19,7 +18,7 @@ https://managment-dashboard-projects.onrender.com
 
 ## 📸 Preview
 
-![Management Dashboard Preview](./public/img-demo.png)
+![Management Dashboard Preview](./screenshots/img-demo.png)
 
 ---
 
@@ -87,52 +86,46 @@ https://managment-dashboard-projects.onrender.com
 
 ## 📂 Project Structure
 
-```text
-src/
-├── components/
-│   ├── comments/
-│   ├── layout/
-│   ├── projects/
-│   ├── tasks/
-│   └── users/
-│
-├── features/
-│   ├── auth/
-│   ├── comments/
-│   ├── notifications/
-│   ├── projects/
-│   ├── tasks/
-│   └── users/
-│
-├── hooks/
-│
-├── pages/
-│   ├── Home/
-│   ├── Projects/
-│   ├── ProjectDetails/
-│   ├── Tasks/
-│   ├── Users/
-│   ├── Profile/
-│   └── Login/
-│
-├── services/
-│
-├── store/
-│
-├── types/
-│
-├── App.tsx
-└── main.tsx
-````
+    src/
+    ├── components/
+    │   ├── comments/
+    │   ├── layout/
+    │   ├── projects/
+    │   ├── tasks/
+    │   └── users/
+    │
+    ├── features/
+    │   ├── auth/
+    │   ├── comments/
+    │   ├── notifications/
+    │   ├── projects/
+    │   ├── tasks/
+    │   └── users/
+    │
+    ├── hooks/
+    │
+    ├── pages/
+    │   ├── Home/
+    │   ├── Projects/
+    │   ├── ProjectDetails/
+    │   ├── Tasks/
+    │   ├── Users/
+    │   ├── Profile/
+    │   └── Login/
+    │
+    ├── services/
+    ├── store/
+    ├── types/
+    │
+    ├── App.tsx
+    └── main.tsx
 
 ---
 
 ## 🔑 Demo Login
 
-```text
-Email: rezabri806@gmail.com
-Password: 123456
-```
+    Email: rezabri806@gmail.com
+    Password: 123456
 
 ---
 
@@ -140,21 +133,15 @@ Password: 123456
 
 Clone the repository:
 
-```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-```
+    git clone <YOUR_GITHUB_REPOSITORY_URL>
 
 Navigate to the project:
 
-```bash
-cd "Managment Dashboard"
-```
+    cd "Managment Dashboard"
 
 Install dependencies:
 
-```bash
-npm install
-```
+    npm install
 
 ---
 
@@ -162,9 +149,7 @@ npm install
 
 Create a `.env` file in the project root:
 
-```env
-VITE_API_URL=http://localhost:3000
-```
+    VITE_API_URL=http://localhost:3000
 
 For production, the API URL points to the deployed Render backend.
 
@@ -174,15 +159,11 @@ For production, the API URL points to the deployed Render backend.
 
 Start JSON Server:
 
-```bash
-npx json-server db.json
-```
+    npx json-server db.json
 
 The API will be available at:
 
-```text
-http://localhost:3000
-```
+    http://localhost:3000
 
 ---
 
@@ -190,9 +171,7 @@ http://localhost:3000
 
 Start the development server:
 
-```bash
-npm run dev
-```
+    npm run dev
 
 Then open the local URL provided by Vite.
 
@@ -200,15 +179,13 @@ Then open the local URL provided by Vite.
 
 ## 🏗️ Production Build
 
-```bash
-npm run build
-```
+Build the project:
+
+    npm run build
 
 Preview the production build:
 
-```bash
-npm run preview
-```
+    npm run preview
 
 ---
 
@@ -218,13 +195,11 @@ The application communicates with a REST API using Axios.
 
 Main resources:
 
-```text
-/projects
-/tasks
-/users
-/notifications
-/comments
-```
+    /projects
+    /tasks
+    /users
+    /notifications
+    /comments
 
 The API base URL is controlled through the `VITE_API_URL` environment variable.
 
@@ -234,14 +209,14 @@ The API base URL is controlled through the `VITE_API_URL` environment variable.
 
 The dashboard was designed with a focus on:
 
-* Responsive layouts
-* Mobile-friendly navigation
-* Dark and light themes
-* Consistent green visual identity
-* Reusable UI components
-* Clear loading and error states
-* User-friendly confirmations
-* Accessible interactive elements
+- Responsive layouts
+- Mobile-friendly navigation
+- Dark and light themes
+- Consistent green visual identity
+- Reusable UI components
+- Clear loading and error states
+- User-friendly confirmations
+- Accessible interactive elements
 
 ---
 
@@ -249,21 +224,21 @@ The dashboard was designed with a focus on:
 
 Through this project I practiced:
 
-* Building scalable React applications
-* TypeScript with React
-* Redux Toolkit and global state management
-* REST API integration
-* CRUD operations
-* Authentication and session handling
-* Form handling and validation
-* React Router
-* Custom Hooks
-* Component-based architecture
-* Responsive UI development
-* Dark mode implementation
-* API error handling
-* Pagination and filtering
-* Deployment with Vercel and Render
+- Building scalable React applications
+- TypeScript with React
+- Redux Toolkit and global state management
+- REST API integration
+- CRUD operations
+- Authentication and session handling
+- Form handling and validation
+- React Router
+- Custom Hooks
+- Component-based architecture
+- Responsive UI development
+- Dark mode implementation
+- API error handling
+- Pagination and filtering
+- Deployment with Vercel and Render
 
 ---
 
@@ -279,13 +254,13 @@ The frontend is connected to the GitHub repository, so new changes pushed to the
 
 Possible future improvements include:
 
-* More advanced authentication
-* Role-based permissions
-* Real-time notifications
-* Advanced project analytics
-* Better API/database solution
-* More advanced task management
-* Improved performance and code splitting
+- More advanced authentication
+- Role-based permissions
+- Real-time notifications
+- Advanced project analytics
+- Better API/database solution
+- More advanced task management
+- Improved performance and code splitting
 
 ---
 
@@ -294,6 +269,3 @@ Possible future improvements include:
 **Reza Bamoniri**
 
 Frontend Developer focused on building modern, responsive, and maintainable web applications with React and TypeScript.
-
----
-

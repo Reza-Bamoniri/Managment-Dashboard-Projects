@@ -19,14 +19,16 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
 
   const {
-    project,
-    projectMembers,
-    projectManager,
-    projectTasks,
-    projectComments,
-    loading,
-    error,
-  } = useProjectDetails();
+  project,
+  projectMembers,
+  projectManager,
+  projectTasks,
+  projectComments,
+  loading,
+  error,
+  addMember,
+  users,
+} = useProjectDetails();
 
 
 
@@ -114,6 +116,8 @@ const ProjectDetails = () => {
       <ProjectMembers
         users={projectMembers}
         manager={projectManager}
+        onAddMember={addMember}
+        allUsers={users}
       />
 
       <ProjectTasks tasks={projectTasks} />

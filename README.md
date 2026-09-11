@@ -1,73 +1,299 @@
-# React + TypeScript + Vite
+````markdown
+# Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive project management dashboard built with **React, TypeScript, Redux Toolkit, and JSON Server**.
 
-Currently, two official plugins are available:
+This project was created as a portfolio project to practice building a real-world frontend application with CRUD operations, API integration, state management, authentication flow, responsive UI, dark mode, and reusable components.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
 
-## React Compiler
+**Frontend:**  
+https://managment-dashboard-projects.vercel.app
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Backend API:**  
+https://managment-dashboard-projects.onrender.com
 
-## Expanding the ESLint configuration
+> The backend is powered by JSON Server and is deployed separately on Render.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📸 Preview
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+![Management Dashboard Preview](./public/img-demo.png)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## ✨ Features
+
+- 🔐 Login and session management
+- 📊 Dashboard with statistics and charts
+- 📁 Project management
+  - Create projects
+  - Edit projects
+  - Delete projects
+  - View project details
+  - Add and remove project members
+- ✅ Task management
+- 👥 Team member management
+- 💬 Comment management
+- 🔔 Notifications
+- 🔎 Global search
+- 🔍 Filtering and pagination
+- 👤 User profile management
+- 🖼️ Profile avatar management
+- ⚙️ Account and appearance settings
+- 🌙 Dark / Light mode
+- 📱 Fully responsive design
+- ✅ Form validation
+- ⏳ Loading states
+- ⚠️ Error states
+- 📭 Empty states
+- 🔔 Toast notifications
+- ⚡ REST API integration
+- 🗃️ Global state management with Redux Toolkit
+
+---
+
+## 🛠️ Technologies
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- React Router
+- Redux Toolkit
+- React Redux
+- Axios
+- React Hook Form
+- Zod
+- Tailwind CSS
+- Recharts
+- React Icons
+- Sonner
+- SweetAlert2
+
+### Backend
+
+- JSON Server
+- REST API
+
+### Deployment
+
+- Vercel — Frontend
+- Render — Backend
+
+---
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/
+│   ├── comments/
+│   ├── layout/
+│   ├── projects/
+│   ├── tasks/
+│   └── users/
+│
+├── features/
+│   ├── auth/
+│   ├── comments/
+│   ├── notifications/
+│   ├── projects/
+│   ├── tasks/
+│   └── users/
+│
+├── hooks/
+│
+├── pages/
+│   ├── Home/
+│   ├── Projects/
+│   ├── ProjectDetails/
+│   ├── Tasks/
+│   ├── Users/
+│   ├── Profile/
+│   └── Login/
+│
+├── services/
+│
+├── store/
+│
+├── types/
+│
+├── App.tsx
+└── main.tsx
+````
+
+---
+
+## 🔑 Demo Login
+
+```text
+Email: rezabri806@gmail.com
+Password: 123456
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Installation
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Clone the repository:
+
+```bash
+git clone <YOUR_GITHUB_REPOSITORY_URL>
 ```
+
+Navigate to the project:
+
+```bash
+cd "Managment Dashboard"
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## 🔧 Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+For production, the API URL points to the deployed Render backend.
+
+---
+
+## 🗄️ Run the Backend
+
+Start JSON Server:
+
+```bash
+npx json-server db.json
+```
+
+The API will be available at:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## 💻 Run the Frontend
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Then open the local URL provided by Vite.
+
+---
+
+## 🏗️ Production Build
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+---
+
+## 🔄 API
+
+The application communicates with a REST API using Axios.
+
+Main resources:
+
+```text
+/projects
+/tasks
+/users
+/notifications
+/comments
+```
+
+The API base URL is controlled through the `VITE_API_URL` environment variable.
+
+---
+
+## 🎨 UI & UX
+
+The dashboard was designed with a focus on:
+
+* Responsive layouts
+* Mobile-friendly navigation
+* Dark and light themes
+* Consistent green visual identity
+* Reusable UI components
+* Clear loading and error states
+* User-friendly confirmations
+* Accessible interactive elements
+
+---
+
+## 📚 What I Practiced
+
+Through this project I practiced:
+
+* Building scalable React applications
+* TypeScript with React
+* Redux Toolkit and global state management
+* REST API integration
+* CRUD operations
+* Authentication and session handling
+* Form handling and validation
+* React Router
+* Custom Hooks
+* Component-based architecture
+* Responsive UI development
+* Dark mode implementation
+* API error handling
+* Pagination and filtering
+* Deployment with Vercel and Render
+
+---
+
+## 🚀 Deployment
+
+The frontend is deployed on **Vercel** and the JSON Server backend is deployed on **Render**.
+
+The frontend is connected to the GitHub repository, so new changes pushed to the repository are automatically deployed to Vercel.
+
+---
+
+## 📌 Future Improvements
+
+Possible future improvements include:
+
+* More advanced authentication
+* Role-based permissions
+* Real-time notifications
+* Advanced project analytics
+* Better API/database solution
+* More advanced task management
+* Improved performance and code splitting
+
+---
+
+## 👨‍💻 Author
+
+**Reza Bamoniri**
+
+Frontend Developer focused on building modern, responsive, and maintainable web applications with React and TypeScript.
+
+---
+

@@ -21,6 +21,13 @@ export type CommentFormData = {
 function useCommentManagement() {
   const dispatch = useAppDispatch();
 
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+const COMMENTS_PER_PAGE = 10;
+
+
+
   const [selectedComment, setSelectedComment] =
     useState<Comment | null>(null);
 
@@ -43,6 +50,7 @@ function useCommentManagement() {
   const projects = useAppSelector(
     (state) => state.projects.projects
   );
+
 
   useEffect(() => {
   dispatch(fetchComments());
@@ -164,12 +172,39 @@ function useCommentManagement() {
     }
   };
 
+
+
+  const totalPages = Math.ceil(
+  comments.length / COMMENTS_PER_PAGE
+);
+
+const paginatedComments = comments.slice(
+  (currentPage - 1) * COMMENTS_PER_PAGE,
+  currentPage * COMMENTS_PER_PAGE
+);
+
+
+const handlePageChange = (page: number) => {
+  setCurrentPage(page);
+};
+
+
+
+
+
+
+
+
+
   return {
-  comments,
+  comments: paginatedComments,
   projects,
   loading,
   error,
   selectedComment,
+  currentPage,
+  totalPages,
+  handlePageChange,
   getProjectName,
   openEditComment,
   closeEditComment,

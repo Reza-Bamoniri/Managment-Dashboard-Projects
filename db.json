@@ -293,7 +293,7 @@
   "comments": [
     {
       "text": "The new design looks great.",
-      "projectId": "toO6A3p11I0",
+      "projectId": "JaoH2lSpdiw",
       "userId": "2",
       "createdAt": "2026-09-06T11:00:00",
       "id": "1"
@@ -339,6 +339,41 @@
       "userId": "1",
       "createdAt": "2026-09-11T13:00:57.870Z",
       "id": "i57fAthgbgI"
+    },
+    {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque In egestas erat imperdiet sed euismod nisi porta lorem mollis",
+      "projectId": "JaoH2lSpdiw",
+      "userId": "1",
+      "createdAt": "2026-09-11T13:06:29.876Z",
+      "id": "W-ZaBVk5fBg"
+    },
+    {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque In egestas erat imperdiet sed euismod nisi porta lorem mollis",
+      "projectId": "toO6A3p11I0",
+      "userId": "1",
+      "createdAt": "2026-09-11T13:06:46.341Z",
+      "id": "YBhrDbymY9w"
+    },
+    {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "projectId": "Nv8d5iuVmUo",
+      "userId": "1",
+      "createdAt": "2026-09-11T13:07:12.926Z",
+      "id": "U46IPI843rw"
+    },
+    {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "projectId": "Nv8d5iuVmUo",
+      "userId": "1",
+      "createdAt": "2026-09-11T13:07:25.848Z",
+      "id": "5SHINyks2CQ"
+    },
+    {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      "projectId": "7JD8V9tjnoU",
+      "userId": "1",
+      "createdAt": "2026-09-11T13:07:37.568Z",
+      "id": "yUwmm8SlTRo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

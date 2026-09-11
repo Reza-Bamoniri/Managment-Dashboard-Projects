@@ -15,6 +15,9 @@ function CreateComment() {
   openEditComment,
   closeEditComment,
   selectedComment,
+  currentPage,
+  totalPages,
+  handlePageChange
 } = useCommentManagement();
 
   
@@ -35,11 +38,14 @@ function CreateComment() {
      />
 
       <CommentsTable
-        comments={comments}
-        getProjectName={getProjectName}
-        onDelete={handleDelete}
-        onEdit={openEditComment}
-      />
+         comments={comments}
+         getProjectName={getProjectName}
+         onDelete={handleDelete}
+         onEdit={openEditComment}
+         currentPage={currentPage}
+         totalPages={totalPages}
+         onPageChange={handlePageChange}
+/>
     </div>
   );
 }

@@ -1,14 +1,28 @@
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import type { Comment } from "../../../types/comment";
+import CommentsPagination from "./CommentsPagination";
+
 
 type CommentsTableProps = {
   comments: Comment[];
   getProjectName: (projectId: string) => string;
   onDelete: (comment: Comment) => void;
   onEdit: (comment: Comment) => void;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
 };
 
-function CommentsTable({comments, getProjectName, onDelete, onEdit}: CommentsTableProps) {
+function CommentsTable({comments,
+  getProjectName,
+  onDelete,
+  onEdit,
+  currentPage,
+  totalPages,
+  onPageChange,}: CommentsTableProps) {
+
+    
+
   return (
     <div className="overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-900">
       <div className="overflow-x-auto">
@@ -84,6 +98,12 @@ function CommentsTable({comments, getProjectName, onDelete, onEdit}: CommentsTab
           </tbody>
         </table>
       </div>
+
+      <CommentsPagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={onPageChange}
+/>
     </div>
   );
 }

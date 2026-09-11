@@ -1,24 +1,36 @@
 import CommentHeader from "../components/comments/CommentHeader";
 import CommentForm from "../components/comments/CommentForm";
 import CommentsTable from "../components/comments/commentsTable/CommentsTable";
-import type { Comment } from "../types/comment";
+import useCommentManagement from "../hooks/useCommentManagement";
+import { useAppSelector } from "../store/hooks";
 
 function CreateComment() {
-  const comments: Comment[] = [];
+  const {
+    comments,
+    getProjectName,
+    handleCreate,
+    handleDelete,
+    openEditComment,
+  } = useCommentManagement();
 
-  const getProjectName = (projectId: string) => {
-    return projectId;
-  };
+  const projects = useAppSelector(
+    (state) => state.projects.projects
+  );
 
   return (
     <div className="space-y-6">
       <CommentHeader />
 
-      <CommentForm />
+      <CommentForm
+        projects={projects}
+        onSubmit={handleCreate}
+      />
 
       <CommentsTable
         comments={comments}
         getProjectName={getProjectName}
+        onDelete={handleDelete}
+        onEdit={openEditComment}
       />
     </div>
   );

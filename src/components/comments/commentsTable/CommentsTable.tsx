@@ -4,12 +4,11 @@ import type { Comment } from "../../../types/comment";
 type CommentsTableProps = {
   comments: Comment[];
   getProjectName: (projectId: string) => string;
+  onDelete: (comment: Comment) => void;
+  onEdit: (comment: Comment) => void;
 };
 
-function CommentsTable({
-  comments,
-  getProjectName,
-}: CommentsTableProps) {
+function CommentsTable({comments, getProjectName, onDelete, onEdit}: CommentsTableProps) {
   return (
     <div className="overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-900">
       <div className="overflow-x-auto">
@@ -63,6 +62,7 @@ function CommentsTable({
                   <div className="flex justify-end gap-2">
                     <button
                       type="button"
+                      onClick={() => onEdit(comment)}
                       aria-label="Edit comment"
                       className="cursor-pointer rounded-lg p-2 text-green-600 transition hover:bg-green-50 hover:text-green-700 dark:hover:bg-green-900/30"
                     >
@@ -71,6 +71,7 @@ function CommentsTable({
 
                     <button
                       type="button"
+                      onClick={() => onDelete(comment)}
                       aria-label="Delete comment"
                       className="cursor-pointer rounded-lg p-2 text-red-500 transition hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/30"
                     >

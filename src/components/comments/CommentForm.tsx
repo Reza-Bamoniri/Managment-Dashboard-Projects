@@ -1,4 +1,47 @@
-function CommentForm() {
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import type { CommentFormData } from "../../hooks/useCommentManagement";
+
+const commentSchema = z.object({
+  projectId: z.string().min(1, "Please select a project"),
+  text: z
+    .string()
+    .min(1, "Comment cannot be empty")
+    .max(500, "Comment must be less than 500 characters"),
+});
+
+type CommentFormProps = {
+  projects: {
+    id: string;
+    name: string;
+  }[];
+  onSubmit: (data: CommentFormData) => Promise<void>;
+};
+
+function CommentForm({
+  projects,
+  onSubmit,
+}: CommentFormProps) {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<CommentFormData>({
+    resolver: zodResolver(commentSchema),
+    defaultValues: {
+      projectId: "",
+      text: "",
+    },
+  });
+
+  const handleFormSubmit = async (data: CommentFormData) => {
+    await onSubmit(data);
+    reset();
+  };
+
   return (
     <div className="rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-900">
       <div className="mb-5">
@@ -11,7 +54,10 @@ function CommentForm() {
         </p>
       </div>
 
-      <form className="space-y-5">
+      <form
+        onSubmit={handleSubmit(handleFormSubmit)}
+        className="space-y-5"
+      >
         {/* Project */}
         <div>
           <label
@@ -23,16 +69,25 @@ function CommentForm() {
 
           <select
             id="project"
+            {...register("projectId")}
             className="w-full cursor-pointer rounded-xl border-0 bg-gray-100 px-4 py-3 text-sm text-gray-900 outline-none ring-1 ring-gray-200 transition focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white dark:ring-gray-700"
-            defaultValue=""
           >
             <option value="" disabled>
               Select a project
             </option>
 
-            <option value="1">Website Redesign</option>
-            <option value="2">Mobile App</option>
+            {projects.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.name}
+              </option>
+            ))}
           </select>
+
+          {errors.projectId && (
+            <p className="mt-1.5 text-sm text-red-500">
+              {errors.projectId.message}
+            </p>
+          )}
         </div>
 
         {/* Comment */}
@@ -48,17 +103,33 @@ function CommentForm() {
             id="comment"
             rows={5}
             placeholder="Write your comment..."
+            {...register("text")}
             className="w-full resize-none rounded-xl border-0 bg-gray-100 px-4 py-3 text-sm text-gray-900 outline-none ring-1 ring-gray-200 transition placeholder:text-gray-400 focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white dark:ring-gray-700 dark:placeholder:text-gray-500"
           />
+
+          <div className="mt-1.5 flex justify-between">
+            {errors.text ? (
+              <p className="text-sm text-red-500">
+                {errors.text.message}
+              </p>
+            ) : (
+              <span />
+            )}
+
+            <span className="text-xs text-gray-400 dark:text-gray-500">
+              Maximum 500 characters
+            </span>
+          </div>
         </div>
 
         {/* Submit */}
         <div className="flex justify-end">
           <button
             type="submit"
-            className="cursor-pointer rounded-xl bg-linear-to-r from-lime-400 to-green-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:scale-[1.02] hover:shadow-xl"
+            disabled={isSubmitting}
+            className="cursor-pointer rounded-xl bg-linear-to-r from-lime-400 to-green-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:scale-[1.02] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Create Comment
+            {isSubmitting ? "Creating..." : "Create Comment"}
           </button>
         </div>
       </form>

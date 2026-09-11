@@ -25,7 +25,17 @@ export const updateUser = async (
   id: string,
   user: UpdateUser
 ): Promise<User> => {
-  const response = await api.put<User>(`/users/${id}`, user);
+  const currentUser = await getUserById(id);
+
+  const updatedUser = {
+    ...currentUser,
+    ...user,
+  };
+
+  const response = await api.put<User>(
+    `/users/${id}`,
+    updatedUser
+  );
 
   return response.data;
 };

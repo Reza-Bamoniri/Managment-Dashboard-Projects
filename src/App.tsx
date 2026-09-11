@@ -25,6 +25,7 @@ function App() {
     const isSessionValid =
       Date.now() - Number(loginTime) < SESSION_DURATION;
 
+
     if (isSessionValid) {
       dispatch(restoreSession(userId));
     } else {
@@ -48,3 +49,5 @@ function App() {
 }
 
 export default App;
+
+

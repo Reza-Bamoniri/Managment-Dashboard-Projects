@@ -1,4 +1,6 @@
 import { NavLink } from "react-router";
+import useTheme from "../hooks/useTheme";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -15,6 +17,10 @@ const navigationItems = [
 ];
 
 function Sidebar({ isOpen, onClose }: SidebarProps) {
+
+  const { isDarkMode, toggleTheme } = useTheme();
+
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -74,6 +80,35 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
             ))}
           </ul>
         </nav>
+
+        <button
+          type="button"
+          
+          aria-label="Toggle theme"
+          className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition"
+          >
+            <div className="flex items-center gap-3">
+              {isDarkMode ? (
+                <FiMoon className="text-lg text-gray-600 dark:text-gray-300" />
+              ) : (
+                <FiSun className="text-lg text-gray-100 dark:text-gray-300" />
+              )}
+           
+              <span className="text-sm font-medium text-gray-100 dark:text-gray-300">
+                Theme
+              </span>
+            </div>
+
+            <div onClick={toggleTheme}
+              className={`relative cursor-pointer h-6 w-11 rounded-full transition ${
+                   isDarkMode ? "bg-green-600" : "bg-gray-300 dark:bg-gray-700" }`}
+            >
+              <div
+                className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-md transition-transform ${
+                  isDarkMode ? "translate-x-6" : "translate-x-1"}`}
+              />
+            </div>
+       </button>
 
         {/* Bottom */}
         <div className="p-4">

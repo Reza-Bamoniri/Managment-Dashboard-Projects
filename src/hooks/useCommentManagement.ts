@@ -11,6 +11,7 @@ import {
 } from "../features/comments/commentsSlice";
 
 import type { Comment } from "../types/comment";
+import { fetchProjects } from "../features/projects/projectsSlice";
 
 export type CommentFormData = {
   projectId: string;
@@ -44,8 +45,9 @@ function useCommentManagement() {
   );
 
   useEffect(() => {
-    dispatch(fetchComments());
-  }, [dispatch]);
+  dispatch(fetchComments());
+  dispatch(fetchProjects());
+}, [dispatch]);
 
   const getProjectName = (projectId: string) => {
     const project = projects.find(
@@ -63,62 +65,69 @@ function useCommentManagement() {
     setSelectedComment(null);
   };
 
-  const handleCreate = async (data: CommentFormData) => {
-    if (!userId) {
-      toast.error("You must be logged in to create a comment");
-      return;
-    }
+  const handleCreate = async (
+  data: CommentFormData
+): Promise<boolean> => {
+  if (!userId) {
+    toast.error("You must be logged in to create a comment");
+    return false;
+  }
 
-    try {
-      await dispatch(
-        createCommentThunk({
-          text: data.text,
-          projectId: data.projectId,
-          userId,
-          createdAt: new Date().toISOString(),
-        })
-      ).unwrap();
+  try {
+    await dispatch(
+      createCommentThunk({
+        text: data.text,
+        projectId: data.projectId,
+        userId,
+        createdAt: new Date().toISOString(),
+      })
+    ).unwrap();
 
-      toast.success("Comment created successfully");
-    } catch (error) {
-      console.error("Failed to create comment:", error);
-      toast.error("Failed to create comment");
-    }
-  };
+    toast.success("Comment created successfully");
+    return true;
+  } catch (error) {
+    console.error("Failed to create comment:", error);
+    toast.error("Failed to create comment");
+    return false;
+  }
+};
 
   const handleUpdate = async (
-    id: string,
-    data: CommentFormData
-  ) => {
-    const existingComment = comments.find(
-      (comment) => comment.id === id
-    );
+  id: string,
+  data: CommentFormData
+): Promise<boolean> => {
+  const existingComment = comments.find(
+    (comment) => comment.id === id
+  );
 
-    if (!existingComment) {
-      toast.error("Comment not found");
-      return;
-    }
+  if (!existingComment) {
+    toast.error("Comment not found");
+    return false;
+  }
 
-    try {
-      await dispatch(
-        updateCommentThunk({
-          id,
-          comment: {
-            text: data.text,
-            projectId: data.projectId,
-            userId: existingComment.userId,
-            createdAt: existingComment.createdAt,
-          },
-        })
-      ).unwrap();
+  try {
+    await dispatch(
+      updateCommentThunk({
+        id,
+        comment: {
+          text: data.text,
+          projectId: data.projectId,
+          userId: existingComment.userId,
+          createdAt: existingComment.createdAt,
+        },
+      })
+    ).unwrap();
 
-      toast.success("Comment updated successfully");
-      closeEditComment();
-    } catch (error) {
-      console.error("Failed to update comment:", error);
-      toast.error("Failed to update comment");
-    }
-  };
+    toast.success("Comment updated successfully");
+    closeEditComment();
+
+    return true;
+  } catch (error) {
+    console.error("Failed to update comment:", error);
+    toast.error("Failed to update comment");
+    return false;
+  }
+};
 
   const handleDelete = async (comment: Comment) => {
     const isDarkMode =
@@ -156,17 +165,18 @@ function useCommentManagement() {
   };
 
   return {
-    comments,
-    loading,
-    error,
-    selectedComment,
-    getProjectName,
-    openEditComment,
-    closeEditComment,
-    handleCreate,
-    handleUpdate,
-    handleDelete,
-  };
+  comments,
+  projects,
+  loading,
+  error,
+  selectedComment,
+  getProjectName,
+  openEditComment,
+  closeEditComment,
+  handleCreate,
+  handleUpdate,
+  handleDelete,
+};
 }
 
 export default useCommentManagement;

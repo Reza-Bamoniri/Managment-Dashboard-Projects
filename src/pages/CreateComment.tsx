@@ -2,29 +2,37 @@ import CommentHeader from "../components/comments/CommentHeader";
 import CommentForm from "../components/comments/CommentForm";
 import CommentsTable from "../components/comments/commentsTable/CommentsTable";
 import useCommentManagement from "../hooks/useCommentManagement";
-import { useAppSelector } from "../store/hooks";
+
 
 function CreateComment() {
   const {
-    comments,
-    getProjectName,
-    handleCreate,
-    handleDelete,
-    openEditComment,
-  } = useCommentManagement();
+  comments,
+  projects,
+  getProjectName,
+  handleCreate,
+  handleUpdate,
+  handleDelete,
+  openEditComment,
+  closeEditComment,
+  selectedComment,
+} = useCommentManagement();
 
-  const projects = useAppSelector(
-    (state) => state.projects.projects
-  );
+  
 
   return (
     <div className="space-y-6">
       <CommentHeader />
 
       <CommentForm
-        projects={projects}
-        onSubmit={handleCreate}
-      />
+          projects={projects}
+          selectedComment={selectedComment}
+          onSubmit={
+            selectedComment
+              ? (data) => handleUpdate(selectedComment.id, data)
+              : handleCreate
+            }
+          onCancelEdit={closeEditComment}
+     />
 
       <CommentsTable
         comments={comments}

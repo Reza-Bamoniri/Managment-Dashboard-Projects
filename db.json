@@ -292,25 +292,25 @@
   ],
   "comments": [
     {
-      "id": "1",
       "text": "The new design looks great.",
+      "projectId": "toO6A3p11I0",
       "userId": "2",
-      "projectId": null,
-      "createdAt": "2026-09-06T11:00:00"
+      "createdAt": "2026-09-06T11:00:00",
+      "id": "1"
     },
     {
-      "id": "2",
       "text": "I have finished the initial layout.",
+      "projectId": "7JD8V9tjnoU",
       "userId": "4",
-      "projectId": null,
-      "createdAt": "2026-09-06T10:30:00"
+      "createdAt": "2026-09-06T10:30:00",
+      "id": "2"
     },
     {
-      "id": "3",
       "text": "Can we review the navbar before Friday?",
+      "projectId": "otGD75giEkI",
       "userId": "1",
-      "projectId": null,
-      "createdAt": "2026-09-06T09:45:00"
+      "createdAt": "2026-09-06T09:45:00",
+      "id": "3"
     },
     {
       "id": "4",
@@ -325,6 +325,20 @@
       "userId": "3",
       "projectId": "2",
       "createdAt": "2026-09-05T14:10:00"
+    },
+    {
+      "text": "it is ok.",
+      "projectId": "Nv8d5iuVmUo",
+      "userId": "1",
+      "createdAt": "2026-09-11T13:00:31.795Z",
+      "id": "UxuGXi-lOXQ"
+    },
+    {
+      "text": "there is a problem.",
+      "projectId": "scRkvsUpK3Y",
+      "userId": "1",
+      "createdAt": "2026-09-11T13:00:57.870Z",
+      "id": "i57fAthgbgI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

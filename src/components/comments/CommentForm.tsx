@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import type { CommentFormData } from "../../hooks/useCommentManagement";
+import type { Comment } from "../../types/comment";
 
 const commentSchema = z.object({
   projectId: z.string().min(1, "Please select a project"),
@@ -17,40 +19,59 @@ type CommentFormProps = {
     id: string;
     name: string;
   }[];
-  onSubmit: (data: CommentFormData) => Promise<void>;
+  selectedComment: Comment | null;
+  onSubmit: (data: CommentFormData) => Promise<boolean>;
+  onCancelEdit: () => void;
 };
 
-function CommentForm({
-  projects,
-  onSubmit,
-}: CommentFormProps) {
+function CommentForm({projects, onSubmit, selectedComment, onCancelEdit}: CommentFormProps) {
   const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<CommentFormData>({
-    resolver: zodResolver(commentSchema),
-    defaultValues: {
+  register,
+  handleSubmit,
+  reset,
+  formState: { errors, isSubmitting },
+} = useForm<CommentFormData>({
+  resolver: zodResolver(commentSchema),
+  defaultValues: {
+    projectId: "",
+    text: "",
+  },
+});
+
+
+useEffect(() => {
+  if (selectedComment) {
+    reset({
+      projectId: selectedComment.projectId,
+      text: selectedComment.text,
+    });
+  } else {
+    reset({
       projectId: "",
       text: "",
-    },
-  });
+    });
+  }
+}, [selectedComment, reset]);
+
+
 
   const handleFormSubmit = async (data: CommentFormData) => {
-    await onSubmit(data);
+  const success = await onSubmit(data);
+
+  if (success) {
     reset();
-  };
+  }
+};
 
   return (
     <div className="rounded-2xl bg-white p-6 shadow-2xl dark:bg-gray-900">
       <div className="mb-5">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Create Comment
+          {selectedComment ? "Edit Comment" : "Create Comment"}
         </h2>
 
         <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Add a new comment to one of your projects.
+          {selectedComment ? "Update the selected comment." : "Add a new comment to one of your projects."}
         </p>
       </div>
 
@@ -123,18 +144,30 @@ function CommentForm({
         </div>
 
         {/* Submit */}
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="cursor-pointer rounded-xl bg-linear-to-r from-lime-400 to-green-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:scale-[1.02] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {isSubmitting ? "Creating..." : "Create Comment"}
-          </button>
+              
+              <div className="flex justify-end gap-3">
+  {selectedComment && (
+            <button
+              type="button"
+              onClick={onCancelEdit}
+              className="cursor-pointer rounded-xl bg-gray-200 px-6 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+            >
+              Cancel
+            </button>
+     )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="cursor-pointer rounded-xl bg-linear-to-r from-lime-400 to-green-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:scale-[1.02] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {isSubmitting ? selectedComment ? "Updating..." : "Creating..." : selectedComment ? "Update Comment" : "Create Comment"}
+              </button>
         </div>
+
       </form>
     </div>
-  );
-}
+    );
+  }
 
 export default CommentForm;

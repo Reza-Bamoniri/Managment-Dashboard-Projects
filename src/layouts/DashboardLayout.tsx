@@ -10,12 +10,13 @@ function DashboardLayout() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <Sidebar
         isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
+        onClose={() => setIsSidebarOpen((prv) => !prv)}
       />
 
       <div className="lg:pl-64">
         <Header
-          onMenuClick={() => setIsSidebarOpen(true)}
+          onMenuClick={() => setIsSidebarOpen((prv) => !prv)}
+          isMenuOpen={isSidebarOpen}
         />
 
         <main className="min-h-[calc(100vh-5rem)] p-4 sm:p-6">
